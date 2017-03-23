@@ -5,6 +5,8 @@ Use materializeCSS throughout the project. Make sure you use these links while m
 CSS : https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css
 ` <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet" type="text/css"> `
 
+jQuery: ` <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> `
+
 JS  : https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js
 ` <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script> `
 
