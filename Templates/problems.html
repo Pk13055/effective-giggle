@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Problem </title>
+	<link href="materialize/css/materialize.min.css" type="text/css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="materialize/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+	  body {
+	    display: flex;
+	    min-height: 100vh;
+	    flex-direction: column;
+	  }
+
+	  main {
+	    flex: 1 0 auto;
+	  }
+	</style>
+</head>
+<body>
+	<header>
+		<nav class="teal darken-4">
+	    	<div class="nav-wrapper">
+	      		<a href="#!" class="brand-logo"><span class="flow-text">WebSite Name</span></a>
+	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
+	      		<ul class="right hide-on-med-and-down">
+			        <li> <a href="#">Profile</a>  </li>
+			        <li> <a href="#">Problems</a>  </li>
+			        <li> <a href="#">Logout</a>  </li>
+			        <li> <a href="#">Sign Up</a>  </li>
+	      		</ul>
+		    	<ul class="side-nav" id="mobile-display">
+			        <li> <a href="#">Profile</a>  </li>
+			        <li> <a href="#">Problems</a>  </li>
+			        <li> <a href="#">Logout</a>  </li>
+			        <li> <a href="#">Sign Up</a>  </li>
+		      	</ul>
+	    	</div>
+		</nav>
+	</header>
+	<main>
+		<div class="container">
+			<div class="row">
+				<h4 class="flow-text"> Problem 78 - Djkastra's Algo</h4>
+				<div class="divider"></div>
+			</div>
+			<div class="row">
+				<div class="chip"> Brute</div>
+				<div class="chip"> Graph Theory </div>
+				<div class="chip"> Advanced </div>
+			</div>
+			<div class="row">
+				<p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in recodehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+				</p>
+				<div class="divider"></div>
+				<div class="col s12 card-panel z-depth-2">
+					<h5 class="flow-text"> Constraints </h5>
+					<p class="flow-text">
+						<code> 1 <= N <= 10<sup>5</sup> </code> <br>
+						<code> 1 <= M <= 5 </code>
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="divider"></div>
+			</div>
+			<div class="row">
+				<h5 class="flow-text"> Test Cases</h5>
+			</div>
+			<div class="row">
+				<div class="col s12 m4 card-panel">
+					<h6 class="flow-text"> Input </h6>
+					<pre>10 12 
+12 12 44 34
+43 34 23 23
+23 34 445 54644
+654 46564 456456 456
+23 32</pre>
+					<h6 class="flow-text"> Output</h6>
+					<pre>YES
+NO
+YES
+YES
+YES
+</pre>
+				</div>
+				<div class="col s12 m4 card-panel">
+					<h6 class="flow-text"> Input </h6>
+					<pre>10 12 
+12 12 44 34
+43 34 23 23
+23 34 445 54644
+654 46564 456456 456
+23 32</pre>
+					<h6 class="flow-text"> Output</h6>
+					<pre>YES
+NO
+YES
+YES
+YES
+</pre>
+				</div>
+				<div class="col s12 m4 card-panel">
+					<h6 class="flow-text"> Input </h6>
+					<pre>10 12 
+12 12 44 34
+43 34 23 23
+23 34 445 54644
+654 46564 456456 456
+23 32</pre>
+					<h6 class="flow-text"> Output</h6>
+					<pre>YES
+NO
+YES
+YES
+YES
+</pre>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="divider"></div>
+			</div>
+			<div class="row">
+				<div class="col s12 card small z-depth-2">
+					<div class="card-content">
+						<h5 class="flow-text"> Upload Solution</h5>
+						<form action="#" enctype="multipart" method="POST">
+						<div class="col s12">
+							<!-- Iterate through languages here  -->
+							<p class="col s12 m3">
+								<input name="language" type="radio" id="C"> 
+								<label for="C"> C</label>
+							</p>
+							<p class="col s12 m3">
+								<input name="language" type="radio" id="C++"> 
+								<label for="C++"> C++</label>
+							</p>	
+							<p class="col s12 m3">
+								<input name="language" type="radio" id="python2"> 
+								<label for="python2"> Python2</label>
+							</p>	
+							<p class="col s12 m3">
+								<input name="language" type="radio" id="python3"> 
+								<label for="python3"> Python3</label>
+							</p>
+						</div>
+						<div class="col s12">
+							<div class="file-field input-field">
+	                      		<div class="btn teal darken-2">
+	                        		<span><i class="material-icons">code</i></span>
+	                        		<input type="file">
+		                      	</div>
+	                      		<div class="file-path-wrapper">
+	                        		<input class="file-path validate" type="text">
+	                      		</div>
+	                    	</div>
+						</div>
+						</form>
+					</div>
+					<div class="card-action right-align">
+						<button type="submit" class="btn waves-effect waves-light">Submit!</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<footer class="page-footer teal darken-4">
+			<div class="container" style="width:100%">
+				<div class="row">
+					<div class="col s12 m6">
+						<div class="card small">
+							  <div class="collection with-header">
+	        					<div class="collection-header active"><h5 class="flow-text">Creators</h5></div>
+						        <a class="collection-item flow-text">Shubh M</a>
+						        <a class="collection-item flow-text">Pranay G</a>
+						        <a class="collection-item flow-text">Neha M</a>
+						        <a class="collection-item flow-text">Pratik K</a>
+	      					</div>
+						</div>
+					</div>
+					<div class="col s12 m6">
+						<div class="card-panel teal darken-3">
+							<span class="flow-text"> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"</span>
+						</div>
+					</div>
+				</div>	
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					<span class="left flow-text"> Copyright &copy; 2017</span>
+					<span class="right flow-text">WebSite Name </span>
+				</div>
+			</div>
+	</footer>	
+</body>
+</html>
