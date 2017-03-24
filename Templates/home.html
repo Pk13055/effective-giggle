@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Home Page - Website Name  </title>
+	<meta charset="utf-8">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" type="text/css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+	  body {
+	    display: flex;
+	    min-height: 100vh;
+	    flex-direction: column;
+	  }
+
+	  main {
+	    flex: 1 0 auto;
+	  }
+	</style>
+</head>
+<body>
+	<header>
+		<nav class="teal darken-4">
+	    	<div class="nav-wrapper">
+	      		<a href="#!" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
+	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
+	      		<ul class="right hide-on-med-and-down">
+			        <li> <a href="#">Profile</a>  </li>
+			        <li> <a href="#">Problems</a>  </li>
+			        <li> <a href="#">Logout</a>  </li>
+			        <li> <a href="#">Sign Up</a>  </li>
+	      		</ul>
+		    	<ul class="side-nav" id="mobile-display">
+			        <li> <a href="#">Profile</a>  </li>
+			        <li> <a href="#">Problems</a>  </li>
+			        <li> <a href="#">Logout</a>  </li>
+			        <li> <a href="#">Sign Up</a>  </li>
+		      	</ul>
+	    	</div>
+		</nav>
+	</header>
+	<main class=" teal lighten-1">
+		<div class="container">
+			<div class="row">
+				<form method="POST" action="" class="input-field col s12">
+						<input type="text" max="200" id="search" placeholder="Search for question by name, code, tags" class="col s11">
+						<button type="submit" class="btn col s1 teal darken-3"><i class="material-icons">search</i></button>
+				</form>
+			</div>
+
+
+
+			<div class="row">
+					<h3 class="left-align flow-text"> New Problems </h3>
+			</div>
+			<!-- Problems uploaded within the first few days -->
+			<!-- Will Always contain the latest  -->
+			<div class="row">
+				<!-- Iterate block  -->
+				<div class="col s12 m3 l4">
+					<div class="card small">
+						<div class="card-content">
+								<h5 class="flow-text card-title activator"> Problem 1 - The First One </h5>
+								<a class="waves-effect waves-dark btn grey darken-2" href="#">
+									<i class="material-icons left"> code </i>
+									Attempt
+								</a>
+						</div>
+						<div class="card-action">
+							<div class="chip"> DP </div>
+							<div class="chip"> Greedy </div>
+							<div class="chip"> Graph </div>
+							<div class="chip"> Shortest Path </div>
+						</div>
+						<div class="card-reveal">
+							<span class="card-title"> Problem 5 - The First One </span>
+							<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
+							<a class="waves-effect waves-dark btn grey darken-2" href="#">
+									<i class="material-icons left"> code </i>
+									Attempt
+								</a>
+						</div>
+					</div>
+				</div>
+				<!-- End block here  -->
+				<div class="col s12 m3 l4">
+					<div class="card small">
+						<div class="card-content">
+								<h5 class="flow-text card-title activator"> Problem 2 - The First One </h5>
+								<a class="waves-effect waves-dark btn grey darken-2" href="#">
+									<i class="material-icons left"> code </i>
+									Attempt
+								</a>
+						</div>
+						<div class="card-action">
+							<div class="chip"> Greedy </div>
+							<div class="chip"> DP </div>
+						</div>
+						<div class="card-reveal">
+							<span class="card-title"> Problem 5 - The First One </span>
+							<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
+							<a class="waves-effect waves-dark btn grey darken-2" href="#">
+									<i class="material-icons left"> code </i>
+									Attempt
+								</a>
+						</div>
+					</div>
+				</div>
+				<div class="col s12 m3 l4">
+					<div class="card small">
+						<div class="card-content">
+								<h5 class="flow-text card-title activator"> Problem 3 - The First One </h5>
+								<a class="waves-effect waves-dark btn grey darken-2" href="#">
+									<i class="material-icons left"> code </i>
+									Attempt
+								</a>
+						</div>
+						<div class="card-action">
+							<div class="chip"> DP </div>
+							<div class="chip"> Brute </div>
+						</div>
+						<div class="card-reveal">
+							<span class="card-title"> Problem 3 - The First One </span>
+							<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
+							<a class="waves-effect waves-dark btn grey darken-2" href="#">
+									<i class="material-icons left"> code </i>
+									Attempt
+								</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="divider"></div>
+
+
+			<div class="row">
+				<h3 class="left-align flow-text"> Other Problems </h3>
+			</div>
+			<!-- Contains the other problems with pagination -->
+			
+			<!-- Using normal pagination -->
+			<!-- <div class="row center-align">
+				<div class="col s12 m6 offset-m3">
+					<ul class="pagination">
+						<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+						<li class="waves-effect waves-light" id="li-1"><a href="#tab-1" onclick="change(1);"">1</a></li>	
+						<li class="waves-effect waves-light" id="li-2"><a href="#tab-2" onclick="change(2);">2</a></li>	
+						<li class="waves-effect waves-light" id="li-3"><a href="#tab-3" onclick="change(3);">3</a></li>	
+						<li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+					</ul>
+				</div>
+				<script>
+					var change = function(current) {
+						var n = 5;
+						for(var i = 1; i <= 3; i++)
+							if(i != current) {
+								$("#li-" + i).removeClass("active");
+								$("#tab-" + i).hide();
+							}
+						$("#tab-" + current).show();
+						$("li-" + current).addClass("active");
+					}
+				</script>
+			</div> -->
+
+			<!-- Using tabs  -->
+			<!-- <div class="row">
+				<ul class="tabs" id="pages">
+					<li class="tab col s4"><a href="#tab-1">1</a></li>	
+					<li class="tab col s4"><a href="#tab-2">2</a></li>	
+					<li class="tab col s4"><a href="#tab-3">3</a></li>	
+				</ul>
+			</div> -->
+
+			<!-- Content  -->
+			<div class="row">
+				<div id="tab-1" class="col s12">
+					<div class="col s12 m3 l4">
+						<div class="card small">
+							<div class="card-content">
+								<h5 class="flow-text card-title activator"> Problem 1 - The First One </h5>
+								<a class="waves-effect waves-dark btn grey darken-2" href="#">
+									<i class="material-icons left"> code </i>
+									Attempt
+								</a>
+							</div>
+							<div class="card-action">
+								<div class="chip"> DP </div>
+								<div class="chip"> Greedy </div>
+								<div class="chip"> Graph </div>
+								<div class="chip"> Shortest Path </div>
+							</div>
+							<div class="card-reveal">
+								<span class="card-title"> Problem 5 - The First One </span>
+								<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
+								<a class="waves-effect waves-dark btn grey darken-2" href="#">
+									<i class="material-icons left"> code </i>
+									Attempt
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m3 l4">
+						<div class="card small">
+							<div class="card-content">
+									<h5 class="flow-text card-title activator"> Problem 1 - The First One </h5>
+									<a class="waves-effect waves-dark btn grey darken-2" href="#">
+										<i class="material-icons left"> code </i>
+										Attempt
+									</a>
+							</div>
+							<div class="card-action">
+								<div class="chip"> DP </div>
+								<div class="chip"> Greedy </div>
+								<div class="chip"> Graph </div>
+								<div class="chip"> Shortest Path </div>
+							</div>
+							<div class="card-reveal">
+								<span class="card-title"> Problem 5 - The First One </span>
+								<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
+								<a class="waves-effect waves-dark btn grey darken-2" href="#">
+										<i class="material-icons left"> code </i>
+										Attempt
+									</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="tab-2" class="col s12">
+					<div class="col s12 m3 l4">
+						<div class="card small">
+							<div class="card-content">
+									<h5 class="flow-text card-title activator"> Problem 2 - The First One </h5>
+									<a class="waves-effect waves-dark btn grey darken-2" href="#">
+										<i class="material-icons left"> code </i>
+										Attempt
+									</a>
+							</div>
+							<div class="card-action">
+								<div class="chip"> DP </div>
+								<div class="chip"> Greedy </div>
+								<div class="chip"> Graph </div>
+								<div class="chip"> Shortest Path </div>
+							</div>
+							<div class="card-reveal">
+								<span class="card-title"> Problem 5 - The First One </span>
+								<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
+								<a class="waves-effect waves-dark btn grey darken-2" href="#">
+										<i class="material-icons left"> code </i>
+										Attempt
+									</a>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m3 l4">
+						<div class="card small">
+							<div class="card-content">
+									<h5 class="flow-text card-title activator"> Problem 2 - The First One </h5>
+									<a class="waves-effect waves-dark btn grey darken-2" href="#">
+										<i class="material-icons left"> code </i>
+										Attempt
+									</a>
+							</div>
+							<div class="card-action">
+								<div class="chip"> DP </div>
+								<div class="chip"> Greedy </div>
+								<div class="chip"> Graph </div>
+								<div class="chip"> Shortest Path </div>
+							</div>
+							<div class="card-reveal">
+								<span class="card-title"> Problem 5 - The First One </span>
+								<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
+								<a class="waves-effect waves-dark btn grey darken-2" href="#">
+										<i class="material-icons left"> code </i>
+										Attempt
+									</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="tab-3" class="col s12">
+					<div class="col s12 m3 l4">
+						<div class="card small">
+							<div class="card-content">
+									<h5 class="flow-text card-title activator"> Problem 3 - The First One </h5>
+									<a class="waves-effect waves-dark btn grey darken-2" href="#">
+										<i class="material-icons left"> code </i>
+										Attempt
+									</a>
+							</div>
+							<div class="card-action">
+								<div class="chip"> DP </div>
+								<div class="chip"> Greedy </div>
+								<div class="chip"> Graph </div>
+								<div class="chip"> Shortest Path </div>
+							</div>
+							<div class="card-reveal">
+								<span class="card-title"> Problem 5 - The First One </span>
+								<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
+								<a class="waves-effect waves-dark btn grey darken-2" href="#">
+										<i class="material-icons left"> code </i>
+										Attempt
+									</a>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m3 l4">
+						<div class="card small">
+							<div class="card-content">
+									<h5 class="flow-text card-title activator"> Problem 3 - The First One </h5>
+									<a class="waves-effect waves-dark btn grey darken-2" href="#">
+										<i class="material-icons left"> code </i>
+										Attempt
+									</a>
+							</div>
+							<div class="card-action">
+								<div class="chip"> DP </div>
+								<div class="chip"> Greedy </div>
+								<div class="chip"> Graph </div>
+								<div class="chip"> Shortest Path </div>
+							</div>
+							<div class="card-reveal">
+								<span class="card-title"> Problem 5 - The First One </span>
+								<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
+								<a class="waves-effect waves-dark btn grey darken-2" href="#">
+										<i class="material-icons left"> code </i>
+										Attempt
+									</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<ul class="tabs grey lighten-2" id="pages">
+					<li class="tab col s4"><a href="#tab-1">1</a></li>	
+					<li class="tab col s4"><a href="#tab-2">2</a></li>	
+					<li class="tab col s4"><a href="#tab-3">3</a></li>	
+				</ul>
+			</div>
+		</div>
+	</main>
+	<footer class="page-footer teal darken-4">
+			<div class="container" style="width:100%">
+				<div class="row">
+					<div class="col s12 m6">
+						  <div class="collection with-header">
+        					<div class="collection-header active"><h5 class="flow-text">Creators</h5></div>
+					        <a class="collection-item flow-text">Shubh M</a>
+					        <a class="collection-item flow-text">Pranay G</a>
+					        <a class="collection-item flow-text">Neha M</a>
+					        <a class="collection-item flow-text">Pratik K</a>
+      					</div>
+					</div>
+					<div class="col s12 m6">
+						<div class="card-panel teal darken-3">
+							<span class="flow-text"> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"</span>
+						</div>
+					</div>
+				</div>	
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					<span class="left flow-text"> Copyright &copy; 2017</span>
+					<span class="right flow-text">WebSite Name </span>
+				</div>
+			</div>
+	</footer>
+</body>
+</html>
