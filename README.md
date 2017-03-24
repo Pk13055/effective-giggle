@@ -13,3 +13,9 @@ JS  : https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.m
 
 The structure will be uploaded soon. Fork your own copies and push changes to them and submit a PR for merging into the final project.
 The layouts have been uploaded in the group; template work can be started. 
+
+Templates completed so far:
+
+- Homepage
+- Problem Page
+
