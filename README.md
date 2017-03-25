@@ -1,8 +1,6 @@
-# Project Assignment 
+# Project Assignment (DO NOT MERGE WITHOUT REVIEW) 
 
-<<<<<<< HEAD
-Use materializeCSS throughout the project. Make sure you use these links while making the templates.
-=======
+## Use materializeCSS throughout the project. Make sure you use these links while making the templates.
 # IT IS ESSENTIAL YOU KNOW THE DIFFERENCE BETWEEN s6 and m6 col widths
 ## Note that the page is divided into a container, which is then divided into 12-columns
 ## s12 => On a small (mobile) display, the content will be full width (12 of 12)
@@ -11,7 +9,6 @@ Use materializeCSS throughout the project. Make sure you use these links while m
 
 Use materializeCSS throughout the project. Make sure you use these links while making the templates.
 Copy the ` template.html ` onto your PC and work in it to have less issues later on. DO NOT MAKE CHANGES outside of the container
->>>>>>> 915f397e24964f5de20ece09ad1264ec456f8c7e
 
 CSS : https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css
 ` <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet" type="text/css"> `
@@ -29,4 +26,5 @@ Templates completed so far:
 
 - Homepage
 - Problem Page
-
+- Login Page
+- Signup Page

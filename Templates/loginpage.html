@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Login </title>
+	<meta charset="utf-8">
+	<link href="../materialize/css/materialize.min.css" type="text/css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="../materialize/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+	  body {
+	    display: flex;
+	    min-height: 100vh;
+	    flex-direction: column;
+	  }
+
+	  main {
+	    flex: 1 0 auto;
+	  }
+	</style>
+</head>
+<body class="teal">
+	<header>
+		<nav class="teal darken-4">
+	    	<div class="nav-wrapper">
+	      		<a href="#!" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
+	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
+	      		<ul class="right hide-on-med-and-down">
+			        <li> <a href="#">Profile</a>  </li>
+			        <li> <a href="#">Problems</a>  </li>
+			        <li> <a href="#">Logout</a>  </li>
+			        <li> <a href="#">Sign Up</a>  </li>
+	      		</ul>
+		    	<ul class="side-nav" id="mobile-display">
+			        <li> <a href="#">Profile</a>  </li>
+			        <li> <a href="#">Problems</a>  </li>
+			        <li> <a href="#">Logout</a>  </li>
+			        <li> <a href="#">Sign Up</a>  </li>
+		      	</ul>
+	    	</div>
+		</nav>
+	</header>
+	<main>
+		<div class="container">
+			<div class="row card medium">
+				<form class="col s12 m6 offset-m3">
+					<div class="card-content">
+					<div class="row">
+					<h5 class=" card-title flow-text"> Login </h5>
+					</div>
+					<div class="row input-field">
+						<i class="material-icons prefix">account_circle</i>
+						<input id="icon_prefix" type="text" class="validate">
+						<label for="icon_prefix">User Name/Email</label>
+					</div>
+					<div class="row input-field">	
+						<i class="material-icons prefix">https</i>
+						<input id="https" type="password" class="validate">
+						<label for="https">Password</label>
+					</div>
+					</div>
+					<div class="card-action">
+					<div class ="row">
+						<div class="right">
+							<button class="btn waves-effect waves-dark teal lighten-2" type="submit" name="action">Login
+								<i class="material-icons right">send</i>
+							</button>
+						</div>
+					</div>
+					</div>
+				</form>
+			</div>
+		</div>	
+	</main>
+	<footer class="page-footer teal darken-4">
+			<div class="container" style="width:100%">
+				<div class="row">
+					<div class="col s12 m6">
+						<div class="card small">
+							  <div class="collection with-header">
+	        					<div class="collection-header active"><h5 class="flow-text">Creators</h5></div>
+						        <a class="collection-item flow-text">Shubh M</a>
+						        <a class="collection-item flow-text">Pranay G</a>
+						        <a class="collection-item flow-text">Neha M</a>
+						        <a class="collection-item flow-text">Pratik K</a>
+	      					</div>
+						</div>
+					</div>
+					<div class="col s12 m6">
+						<div class="card-panel teal darken-3">
+							<span class="flow-text"> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"</span>
+						</div>
+					</div>
+				</div>	
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					<span class="left flow-text"> Copyright &copy; 2017</span>
+					<span class="right flow-text">WebSite Name </span>
+				</div>
+			</div>
+	</footer>
+</body>
+</html>
