@@ -18,7 +18,9 @@ jQuery: ` <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery
 JS  : https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js
 ` <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script> `
 
+ICONS : ` <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">`
 
+(Materialize has been hosted in the repo itself; use it for convienience; You would still need to include jQuery and Icons for everything to work properly.)
 The structure will be uploaded soon. Fork your own copies and push changes to them and submit a PR for merging into the final project.
 The layouts have been uploaded in the group; template work can be started. 
 
