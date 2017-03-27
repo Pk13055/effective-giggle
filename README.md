@@ -32,3 +32,26 @@ Templates completed so far:
 - Signup Page
 - Admin Profile
 - User Profile
+
+# Writeup 
+
+## Users:
+
+- Solver: User can browse/search through problems, submit solutions to problems, view his stats, etc.
+- Setter: Admin can set problems; keep record of all problems submitted.
+
+## Entities:
+
+- Home - Problem page with display of problems according to tags, and date uploaded.
+- Profile page - View submissions/uploads alongwith textual and graphical statistics about submissions
+- Problem page - Contains information about said problem, along with display of few testcases and a solution upload section.
+
+## Features:
+
+- Users can either register as a solver or setter.
+- User can browse through problems, search by tags or name, and attempt.
+- Submissions can be made in C, C++, python2, python3.
+- No API used; checking done from stratch. 
+- Supports error messages, syntax errors, TLE, SEG fault
+- Admin can upload solution in either C or C++
+- Both users are provided with a variety of statistics to evaluate their performance 
