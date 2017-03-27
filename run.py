@@ -36,9 +36,13 @@ def signup():
 def login():
 	return render_template('Forms/loginpage.html')
 
-@app.route('/problem/<code>')
+@app.route('/problems/<code>')
 def problem(code):
 	return render_template('Main/problems.html', title = code)
 
+
+@app.route('/comments/<code>')
+def comments(code):
+	return render_template('Main/comments.html', title = code)
 if __name__ == '__main__':
 	main()

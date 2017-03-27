@@ -1,6 +1,15 @@
-{% extends 'final/base.html' %}
+{% extends 'base.html' %}
 {% block heading %} Signup {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
+{% block scripts %}
+	<script>
+	    $(document).ready(function() {
+	      $('select').material_select();
+	    });
+	</script>
+	{{ super() }}
+{% endblock %}
+
 {% block content %}
 		<div class="container">
 			<div class="row">

@@ -43,24 +43,50 @@ Run the following command in your terminal
 - User Profile
 
 # Writeup 
+- Users:
+ - Solver: 
+ 	- User can browse/search through problems, submit solutions to problems, view his stats, etc.
+ 	- User can add various fields like profile picture,location,email id and organization,
+ - Setter: Admin can set problem statements, what language is that problem available in, time limit for each language, sample input/output files.
+ - Both users are presented with conciliated statistics regarding their problems, submissions, status, etc.
 
-## Users:
+- Entities:
+ -User:
+ 	- Each User has a username, password, rating, number of problems solved, score and type(solver, setter)
+ 	- Certain user properties depend on the type of user, ie, solver or setter
+ -Problem:
+ 	- Each problem has a statement, sample input, sample output, language, solution, topic tags
 
-- Solver: User can browse/search through problems, submit solutions to problems, view his stats, etc.
-- Setter: Admin can set problems; keep record of all problems submitted.
+- Main Pages:
+ - Home - Problem page with display of problems according to tags, and date uploaded.
+ - Profile page - View submissions/uploads alongwith textual and graphical statistics about submissions
+ - Problem page - Contains information about said problem, along with display of few testcases and a solution upload section.
+ - Editorial Page - this contains the solution/hints for the particular problem along with a section for users to discuss their queries.
 
-## Entities:
+- Features:
+ - Users can either register as a solver or setter.
+ - User can browse through problems, search by tags or name, and attempt.
+ - User can solve/set problems in any of the allowed/supported languages (domain = C, C++, python2, python3)
+ - Supports error messages, syntax errors, TLE, SEG fault
+ - User can search problems by tags 
 
-- Home - Problem page with display of problems according to tags, and date uploaded.
-- Profile page - View submissions/uploads alongwith textual and graphical statistics about submissions
-- Problem page - Contains information about said problem, along with display of few testcases and a solution upload section.
+ - Submissions can be made in any of the allowed languages (domain =  C, C++, python2, python3)
+ - No API used; checking done from stratch. (no need to mention this)
+ - Admin can upload solution in either C or C++ (replace)
 
-## Features:
+ - Both users are provided with a variety of statistics to evaluate their performance.
+ 	- Users:
+ 		- Number of WA
+ 		- Number of AC
+ 		- Number of TLE
+ 		- Number of submissions
+ 		- Efficiency
+ 		- Ranking 
+ 		- (note that this is per problem as well as in total per user)
+ 		- Data is presented in the form of (downloadable) charts and a histogram
 
-- Users can either register as a solver or setter.
-- User can browse through problems, search by tags or name, and attempt.
-- Submissions can be made in C, C++, python2, python3.
-- No API used; checking done from stratch. 
-- Supports error messages, syntax errors, TLE, SEG fault
-- Admin can upload solution in either C or C++
-- Both users are provided with a variety of statistics to evaluate their performance 
+ 	- Admins:
+ 		- Total of people who submitted 
+ 		- WA, TLE, AC per problem submitted
+ 		- Admin can add various details about his profile like organization,email id,location,profile picture.
+ 		- Add tags to the problem for easy search by the user who is solving these types of problem. 
