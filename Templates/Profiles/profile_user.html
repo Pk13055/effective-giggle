@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> User Page </title>
+	<title> Profile - User </title>
 	<meta charset="utf-8">
 
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/heatmap.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-
-	<meta charset="utf-8">
 	<link href="../materialize/css/materialize.min.css" type="text/css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="../materialize/js/materialize.min.js"></script>
@@ -17,8 +15,8 @@
 	
 </head>
 <body class="teal lighten-2">
-<script src="./graph.js"></script>
 	
+	<script src="graph.js"></script>
 	<header>
 		<nav class="teal darken-4">
 	    	<div class="nav-wrapper">
@@ -39,45 +37,36 @@
 	    	</div>
 		</nav>
 	</header>
-
-	<main >
-		
-	<div class="container">
+	<main>
+		<div class="container">
 			<div class="row card">
 				<div class="card-content">
 					<div class="col s12 m4">
 						<img src="http://lorempixel.com/400/400" alt="" class="circle responsive-img">
-					
 					</div>
-					
 					<div class="col s12 m8">
 						<ul class="collection">
-					    
 					    <li class="collection-item center-align">
 					      <span class="title flow-text">Name</span>
 					    </li>
-
 					    <li class="collection-item avatar">
 					      <i class="material-icons circle green">account_circle</i>
 					      <span class="flow-text title">Username</span>
 					      <p>user123
 					      </p>
 					    </li>
-
 					    <li class="collection-item avatar">
 					      <i class="material-icons circle red">email</i>
 					      <span class="flow-text title">Email</span>
 					      <p>username@gmail.com
 					      </p>
 					    </li>
-
 						<li class="collection-item avatar">
 					      <i class="material-icons circle green">functions</i>
 					      <span class="flow-text title">Institute/Organization</span>
 					      <p>IIIT
 					      </p>
 					    </li>
-
 						<li class="collection-item avatar">
 					      <i class="material-icons circle green">location_on</i>
 					      <span class="flow-text title">Location</span>
@@ -89,58 +78,65 @@
 					</div>
 				</div>
 			</div>
-		
-		<div class="card white row m12 s12 z-depth-2"> 
-				
-				<table class="m12 s12 bordered striped responsive-table">
-				<thead>
-						<tr>
-							<td>Id</td>
-							<td>Problem</td>
-							<td>Date</td>
-							<td>Verdict</td>
-							<td>Lang</td>
-						</tr>
-				</thead>				
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td><a href=#>Life</a> </td>
-						<td>00/00/0000</td>
-						<td class=" light-green accent-3">Accepted</td>
-						<td>Python</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td><a href=#>DIG</a></td>
-						<td>12.23.1234</td>
-						<td class="red">Wrong Answer</td>
-						<td>C++</td>
-					</tr>
+			<div class="card row z-depth-2"> 
+				<div class="card-content">
+					<h3 class="card-title">Problem Statistics</h3>
+					<div class="divider"></div>
+					<table class="highlight responsive-table centered">
+						<thead>
+							<tr>
+								<th>Submission Date</th>
+								<th>Problem</th>
+								<th>Language</th>
+								<th>Verdict</th>
+							</tr>
+						</thead>				
+						<tbody>
+							<tr>
+								<td>23-04-2016 12:34:43 +5:30 UTC</td>
+								<td>Djikstra's Algorithm</td>
+								<td>C</td>
+								<td class="red-text text-darken-2">Wrong Answer</td>
+							</tr>
+							<tr>
+								<td>23-04-2016 12:50:43 +5:30 UTC</td>
+								<td>Life</td>
+								<td>C++</td>
+								<td class="yellow-text text-darken-2">TLE</td>
+							</tr>
 
-					<tr>
-						<td>3</td>
-						<td><a href=#>Minimum Spanning Trees</a></td>
-						<td>31/12/1198</td>
-						<td class="red">Time Limit exceeded</td>
-						<td>C</td>
-					</tr>
-
-				</tbody>	
-				</table>
-			
-		</div>
- 		
- 		<div class=" z-depth-2 row white card" >
-		
-		<div id="container1" class="white col m5 s12 " style="height: 400px; min-width: 310px; max-width: 800px; margin: 0 auto"></div>
-
-		<div id="container2" class="white col  m7 s12 " style="height: 400px; min-width: 310px; max-width: 800px; margin: 0 auto"></div>
-		</div>
-</div>	
-</main>
-
-<footer class="page-footer teal darken-4">
+							<tr>
+								<td>23-04-2016 13:23:43 +5:30 UTC</td>
+								<td>An Easy Solution</td>
+								<td>C++</td>
+								<td class="green-text text-darken-2">Accepted</td>
+							</tr>
+						</tbody>	
+					</table>
+				</div>
+				<div class="card-action center-align">
+					<ul class="pagination">
+					    <li class="disabled"><i class="material-icons">chevron_left</i></li>
+					    <li class="waves-effect"><a href="#!">1</a></li>
+					    <li class="waves-effect"><a href="#!">2</a></li>
+					    <li class="waves-effect"><a href="#!">3</a></li>
+					    <li class="waves-effect"><a href="#!">4</a></li>
+					    <li class="waves-effect"><a href="#!">5</a></li>
+					    <li class="disabled"><i class="material-icons">chevron_right</i></li>
+					</ul>
+				</div>
+			</div>
+	 		<div class="row card z-depth-2 hide-on-small-and-down">
+	 			<div class="card-content">
+	 			<h3 class="card-title">User Statistics</h3>
+	 			<div class="divider"></div>
+					<div id="container1" class="col m6 s12 " style="height: 400px; min-width: 400px; max-width: 800px; margin: 0 auto"></div>
+					<div id="container2" class="col m6 s12 " style="height: 400px; min-width: 400px; max-width: 800px; margin: 0 auto"></div>
+	 			</div>
+			</div>
+			</div>	
+		</main>
+		<footer class="page-footer teal darken-4">
 			<div class="container" style="width:100%">
 				<div class="row">
 					<div class="col s12 m6">
@@ -167,7 +163,7 @@
 					<span class="right flow-text">WebSite Name </span>
 				</div>
 			</div>
-</footer>	
+		</footer>	
 
 </body>
 </html>
