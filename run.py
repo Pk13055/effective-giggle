@@ -14,7 +14,7 @@ def main():
 
 @app.errorhandler(404)
 def page_exist(e):
-	return render_template('error.html'), 404
+	return render_template('error.html', error = e), 404
 
 @app.route('/')
 def home():

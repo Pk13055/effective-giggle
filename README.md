@@ -41,6 +41,7 @@ Run the following command in your terminal
 - Signup Page
 - Admin Profile
 - User Profile
+- Comments 
 
 # Writeup 
 - Users:
