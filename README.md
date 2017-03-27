@@ -30,3 +30,5 @@ Templates completed so far:
 - Problem Page
 - Login Page
 - Signup Page
+- Admin Profile
+- User Profile
