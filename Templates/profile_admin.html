@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<title>Profile</title>
+		<title>Profile - Admin</title>
 	<meta charset="utf-8">
 	<link href="../materialize/css/materialize.min.css" type="text/css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -229,7 +229,57 @@ filehandle = open(filename, "w")
 				</form>
 			</div>
 			<div class="row card">
-				<span> Hello </span>
+				<div class="card-content">
+					<h3 class="card-title"> Problem Statistics </h3>
+					<div class="divider"></div>
+					<table class="highlight centered responsive-table">
+						<thead>
+							<tr>
+								<th>Problem</th>
+								<th>Attempted</th>
+								<th>Solved</th>
+								<th>Wrong Answer</th>
+								<th>TLE</th>
+								<th>Efficiency</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>P4</td>
+								<td>1023</td>
+								<td>56</td>
+								<td>543</td>
+								<td>102</td>
+								<td>5%</td>
+							</tr>
+							<tr>
+								<td>P4</td>
+								<td>1023</td>
+								<td>56</td>
+								<td>543</td>
+								<td>102</td>
+								<td>5%</td>
+							</tr><tr>
+								<td>P4</td>
+								<td>1023</td>
+								<td>56</td>
+								<td>543</td>
+								<td>102</td>
+								<td>5%</td>
+							</tr><tr>
+								<td>P4</td>
+								<td>1023</td>
+								<td>56</td>
+								<td>543</td>
+								<td>102</td>
+								<td>5%</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-action left-align">
+					<button class="btn waves-effect waves-light"> Export as *.xlsx</button>
+				</div>
 			</div>
 		</div>
 	</main>
