@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title>Profile</title>
+	<meta charset="utf-8">
+	<link href="../materialize/css/materialize.min.css" type="text/css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="../materialize/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+	  body {
+	    display: flex;
+	    min-height: 100vh;
+	    flex-direction: column;
+	  }
+	  main {
+	    flex: 1 0 auto;
+	  }
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.chips').material_chip();
+			$('.chips-placeholder').material_chip({
+				placeholder: 'Enter a tag',
+				secondaryPlaceholder: '+Tag',
+				});
+			$('.chips-autocomplete').material_chip({
+				autoCompleteOptions: {
+					data: {
+						'DP': null,
+						'Brute': null,
+						'Graph': null
+					},
+					limit: Infinity,
+					minLength: 1
+				}
+			});
+		});
+		var renderTags = function() {
+			var tags = $('.chips').material_chip('data');
+			stringValue = []
+			for(var y in tags) { stringValue.push(tags[y].tag) }
+			stringValue = stringValue.join()
+			$('#tags').val(stringValue);
+		};
+	</script>
+</head>
+<body class="teal lighten-4">
+	<header>
+		<nav class="teal darken-4">
+	    	<div class="nav-wrapper">
+	      		<a href="#!" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
+	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
+	      		<ul class="right hide-on-med-and-down">
+			        <li> <a href="#">Profile</a>  </li>
+			        <li> <a href="#">Problems</a>  </li>
+			        <li> <a href="#">Logout</a>  </li>
+			        <li> <a href="#">Sign Up</a>  </li>
+	      		</ul>
+		    	<ul class="side-nav" id="mobile-display">
+			        <li> <a href="#">Profile</a>  </li>
+			        <li> <a href="#">Problems</a>  </li>
+			        <li> <a href="#">Logout</a>  </li>
+			        <li> <a href="#">Sign Up</a>  </li>
+		      	</ul>
+	    	</div>
+		</nav>
+	</header>
+	<main>
+		<div class="container">
+			<div class="row card-panel">
+				<div class="col s12 m4">
+					<h5 class="flow-text"> Name </h5>
+					<div class="divider"></div>
+					<img src="http://lorempixel.com/200/200">
+					<div class="divider"></div>
+					<h5 class="flow-text"> Username</h5>
+				</div>
+				<div class="col s12 m8">
+					<ul class="collection">
+						<li class="collection-item avatar">
+							<i class="material-icons circle">home</i>
+							<span class="title">Location</span>
+							<p class="flow-text">Hyderabad, Telengana</p>
+						</li>
+						<li class="collection-item avatar">
+							<i class="material-icons circle">email</i>
+							<span class="title">Email</span>
+							<p class="flow-text">john@example.com</p>
+						</li>
+						<li class="collection-item avatar">
+							<i class="material-icons circle">school</i>
+							<span class="title">Institute/Organization</span>
+							<p class="flow-text">Internation Institute of Information Technology</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row card">
+				<form method="POST" action="">
+				<div class="card-content">
+					<div class="card-title"> Upload Problem</div>
+					<div class="input-field">
+						<label>Problem Title</label>
+						<input type="text" maxlength="100" class="validate" name="title">
+					</div>
+					<div class="input-field">
+						<label> Add Tags</label>
+						<div class="chips chips-autocomplete"></div>
+						<input type="hidden" name="tags" id="tags">
+					</div>
+				</div>
+				<div class="card-tabs">
+					<ul class="tabs tabs-fixed-width">
+						<li class="tab"><a href="#text">Upload Problem Text</a></li>
+						<li class="tab"><a href="#generator">Upload Generator</a></li>
+						<li class="tab"><a href="#solution">Upload Problem Solution</a></li>
+					</ul>	
+				</div>
+				<div class="card-content">
+					<div id="text">
+						<div class="file-field input-field">
+                      		<div class="col s11 file-path-wrapper">
+                        		<input class="file-path validate" type="text">
+                      		</div>
+                      		<div class="btn col s1 teal darken-3">
+                        		<span>File</span>
+                        		<input type="file" name="text_file">
+                      		</div>
+                    	</div>
+                    	<div class="divider"></div>
+                    	<span class="flow-text"> Guidelines </span>
+                    	<ul class="collection">
+                    		<li class="collection-item"> Upload file <strong>strictly</strong> of type <em>.txt</em></li>
+                    		<li class="collection-item">Your file must have headings for different sections for the parser to be able to extract the required data</li>
+                    		<li class="collection-item">You MUST follows the order given below</li>
+                    		<li class="collection-item">First section MUST be called 'Introduction' </li>
+                    		<li class="collection-item">Second section MUST be called 'Constraints'</li>
+                    		<li class="collection-item">Third Section MUST be called 'Test Cases'</li>
+                    		<li class="collection-item">Within this section, every test case MUST have headings 'Input' AND 'Output'</li>
+                    		<li class="collection-item">
+                    			<pre class="grey lighten-3">
+                    			<code>
+Heading 
+Introduction
+&lt; introduction here &gt;
+Constraints
+&lt; contraints here &gt;
+Test Cases 
+Input
+&lt; input here &gt; 
+Output
+&lt; output here &gt; 
+Input
+&lt; input here &gt; 
+Output
+&lt; output here &gt; 
+Input
+&lt; input here &gt; 
+Output
+&lt; output here &gt; 
+                    			</code>
+                    			</pre>
+                    		</li>
+                    	</ul>
+					</div>
+					<div id="generator">
+						<div class="file-field input-field">
+                      		<div class="col s11 file-path-wrapper">
+                        		<input class="file-path validate" type="text">
+                      		</div>
+                      		<div class="btn col s1 teal darken-3">
+                        		<span>File</span>
+                        		<input type="file" name="generator_file">
+                      		</div>
+                    	</div>
+                      	<div class="divider"></div>
+                  		<span class="flow-text">Guidelines</span>
+                  		<ul class="collection">
+                  			<li class="collection-item">Upload file <strong>strictly</strong> of type <em>.py</em></li>
+                  			<li class="collection-item">File should be <em>python3</em> and up</li>
+                  			<li class="collection-item">Use the sys module and make sure testoutput is to file</li>
+                  			<li class="collection-item">File name for the output file will be provided through CLI</li>
+                  			<li class="collection-item">
+                  				<pre class="grey lighten-3">
+                  					<code>
+import sys
+filename = sys.argv[1]
+filehandle = open(filename, "w")
+&lt; insert the test generation here &gt;
+                  					</code>
+                  				</pre>
+                  			</li>
+                  		</ul>
+					</div>
+					<div id="solution">
+						<div class="file-field input-field">
+                      		<div class="col s11 file-path-wrapper">
+                        		<input class="file-path validate" type="text">
+                      		</div>
+                      		<div class="btn col s1 teal darken-3">
+                        		<span>File</span>
+                        		<input type="file" name="solution_file">
+                      		</div>
+                    	</div>
+                    	<span class="flow-text">Solution Language</span>
+                    		<p>
+                      			<input name="solution_language" type="radio" id="C" />
+                      			<label for="C" class="flow-text">C</label>
+                			</p>
+                			<p>
+                      			<input name="solution_language" type="radio" id="C++" />
+                      			<label for="C++">C++</label>
+                    		</p>
+                    	<br>
+						<div class="divider"></div>
+						<br>
+						<span class="flow-text">Guidelines</span>
+						<ul class="collection">
+							<li class="collection-item">Make sure the solution is EITHER in C OR C++</li>
+							<li class="collection-item">Solution must output to STDOUT</li>
+							<li class="collection-item">Solution must use only valid standard libraries</li>
+						</ul>
+					</div>
+				</div>
+				<div class="card-action right-align">
+					<button class="btn waves-effect waves-light" type="submit" onclick="renderTags();"> Submit!</button>
+				</div>
+				</form>
+			</div>
+			<div class="row card">
+				<span> Hello </span>
+			</div>
+		</div>
+	</main>
+	<footer class="page-footer teal darken-4">
+			<div class="container" style="width:100%">
+				<div class="row">
+					<div class="col s12 m6">
+						<div class="card small">
+							  <div class="collection with-header">
+	        					<div class="collection-header active"><h5 class="flow-text">Creators</h5></div>
+						        <a class="collection-item flow-text">Shubh M</a>
+						        <a class="collection-item flow-text">Pranay G</a>
+						        <a class="collection-item flow-text">Neha M</a>
+						        <a class="collection-item flow-text">Pratik K</a>
+	      					</div>
+						</div>
+					</div>
+					<div class="col s12 m6">
+						<div class="card-panel teal darken-3">
+							<span class="flow-text"> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"</span>
+						</div>
+					</div>
+				</div>	
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					<span class="left flow-text"> Copyright &copy; 2017</span>
+					<span class="right flow-text">WebSite Name </span>
+				</div>
+			</div>
+	</footer>
+</body>
+</html>
