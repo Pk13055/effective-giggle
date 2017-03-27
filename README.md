@@ -24,7 +24,16 @@ ICONS : ` <link href="https://fonts.googleapis.com/icon?family=Material+Icons" r
 The structure will be uploaded soon. Fork your own copies and push changes to them and submit a PR for merging into the final project.
 The layouts have been uploaded in the group; template work can be started. 
 
-Templates completed so far:
+
+# How to Run
+
+Run the following command in your terminal
+
+` python2.7 run.py <port> `
+
+(Specify your desired port, or keep blank for the default (8000))
+
+# Templates completed so far:
 
 - Homepage
 - Problem Page

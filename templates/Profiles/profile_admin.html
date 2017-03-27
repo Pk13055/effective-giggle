@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-		<title>Profile - Admin</title>
-	<meta charset="utf-8">
-	<link href="../materialize/css/materialize.min.css" type="text/css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script src="../materialize/js/materialize.min.js"></script>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<style>
-	  body {
-	    display: flex;
-	    min-height: 100vh;
-	    flex-direction: column;
-	  }
-	  main {
-	    flex: 1 0 auto;
-	  }
-	</style>
+{% extends 'final/base.html' %}
+{% block heading %} Profile {% endblock %}
+{% block title %} {{ super() }} {% endblock %}
+{% block scripts %}
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('.chips').material_chip();
@@ -44,29 +29,9 @@
 			$('#tags').val(stringValue);
 		};
 	</script>
-</head>
-<body class="teal lighten-4">
-	<header>
-		<nav class="teal darken-4">
-	    	<div class="nav-wrapper">
-	      		<a href="#!" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
-	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
-	      		<ul class="right hide-on-med-and-down">
-			        <li> <a href="#">Profile</a>  </li>
-			        <li> <a href="#">Problems</a>  </li>
-			        <li> <a href="#">Logout</a>  </li>
-			        <li> <a href="#">Sign Up</a>  </li>
-	      		</ul>
-		    	<ul class="side-nav" id="mobile-display">
-			        <li> <a href="#">Profile</a>  </li>
-			        <li> <a href="#">Problems</a>  </li>
-			        <li> <a href="#">Logout</a>  </li>
-			        <li> <a href="#">Sign Up</a>  </li>
-		      	</ul>
-	    	</div>
-		</nav>
-	</header>
-	<main>
+	{{ super() }}
+{% endblock %}
+{% block content %}
 		<div class="container">
 			<div class="row card-panel">
 				<div class="col s12 m4">
@@ -282,34 +247,4 @@ filehandle = open(filename, "w")
 				</div>
 			</div>
 		</div>
-	</main>
-	<footer class="page-footer teal darken-4">
-			<div class="container" style="width:100%">
-				<div class="row">
-					<div class="col s12 m6">
-						<div class="card small">
-							  <div class="collection with-header">
-	        					<div class="collection-header active"><h5 class="flow-text">Creators</h5></div>
-						        <a class="collection-item flow-text">Shubh M</a>
-						        <a class="collection-item flow-text">Pranay G</a>
-						        <a class="collection-item flow-text">Neha M</a>
-						        <a class="collection-item flow-text">Pratik K</a>
-	      					</div>
-						</div>
-					</div>
-					<div class="col s12 m6">
-						<div class="card-panel teal darken-3">
-							<span class="flow-text"> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"</span>
-						</div>
-					</div>
-				</div>	
-			</div>
-			<div class="footer-copyright">
-				<div class="container">
-					<span class="left flow-text"> Copyright &copy; 2017</span>
-					<span class="right flow-text">WebSite Name </span>
-				</div>
-			</div>
-	</footer>
-</body>
-</html>
+{% endblock %}
