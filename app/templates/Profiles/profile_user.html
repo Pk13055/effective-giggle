@@ -7,8 +7,11 @@
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	{{ super() }}
 {% endblock %}
-{% block content %}
+{% block body_scripts %}
 	<script src="graph.js"></script>
+	{{super()}}
+{% endblock %}
+{% block content %}
 		<div class="container">
 			<div class="row card">
 				<div class="card-content">
