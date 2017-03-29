@@ -10,6 +10,7 @@
 				secondaryPlaceholder: '+Tag',
 				});
 			$('.chips-autocomplete').material_chip({
+				//check if we can pass data here for autocompletion
 				autoCompleteOptions: {
 					data: {
 						'DP': null,
@@ -62,7 +63,7 @@
 				</div>
 			</div>
 			<div class="row card">
-				<form method="POST" action="">
+				<form method="POST" action="/setter/{{admin}}" enctype="multipart/form-data">
 				<div class="card-content">
 					<div class="card-title"> Upload Problem</div>
 					<div class="input-field">
@@ -85,13 +86,13 @@
 				<div class="card-content">
 					<div id="text">
 						<div class="file-field input-field">
-                      		<div class="col s11 file-path-wrapper">
-                        		<input class="file-path validate" type="text">
-                      		</div>
-                      		<div class="btn col s1 teal darken-3">
-                        		<span>File</span>
-                        		<input type="file" name="text_file">
-                      		</div>
+					      	<div class="btn teal darken-3">
+					        	<span>File</span>
+					        	<input type="file" name="problem_text">
+					      	</div>
+					      	<div class="file-path-wrapper">
+					        	<input class="file-path validate" type="text">
+					      	</div>
                     	</div>
                     	<div class="divider"></div>
                     	<span class="flow-text"> Guidelines </span>
@@ -131,28 +132,36 @@ Output
 					</div>
 					<div id="generator">
 						<div class="file-field input-field">
-                      		<div class="col s11 file-path-wrapper">
-                        		<input class="file-path validate" type="text">
-                      		</div>
-                      		<div class="btn col s1 teal darken-3">
-                        		<span>File</span>
-                        		<input type="file" name="generator_file">
-                      		</div>
-                    	</div>
+					      	<div class="btn teal darken-3">
+					        	<span>File</span>
+					        	<input type="file" name="test_file">
+					      	</div>
+					      	<div class="file-path-wrapper">
+					        	<input class="file-path validate" type="text">
+					      	</div>
+					    </div>
                       	<div class="divider"></div>
                   		<span class="flow-text">Guidelines</span>
                   		<ul class="collection">
-                  			<li class="collection-item">Upload file <strong>strictly</strong> of type <em>.py</em></li>
-                  			<li class="collection-item">File should be <em>python3</em> and up</li>
-                  			<li class="collection-item">Use the sys module and make sure testoutput is to file</li>
-                  			<li class="collection-item">File name for the output file will be provided through CLI</li>
+                  			<li class="collection-item">Upload file <strong>strictly</strong> of type <em>.txt</em></li>
+                  			<li class="collection-item">Make sure the file follows the given format</li>
+                  			<li class="collection-item">Make sure the problem given matches the test case handling.</li>
                   			<li class="collection-item">
                   				<pre class="grey lighten-3">
                   					<code>
-import sys
-filename = sys.argv[1]
-filehandle = open(filename, "w")
-&lt; insert the test generation here &gt;
+Input
+&lt; insert the input &gt;
+Output 
+&lt; insert the output &gt;
+Input
+&lt; insert the input &gt;
+Output 
+&lt; insert the output &gt;
+Input
+&lt; insert the input &gt;
+Output 
+&lt; insert the output &gt;
+
                   					</code>
                   				</pre>
                   			</li>
@@ -160,21 +169,21 @@ filehandle = open(filename, "w")
 					</div>
 					<div id="solution">
 						<div class="file-field input-field">
-                      		<div class="col s11 file-path-wrapper">
-                        		<input class="file-path validate" type="text">
-                      		</div>
-                      		<div class="btn col s1 teal darken-3">
-                        		<span>File</span>
-                        		<input type="file" name="solution_file">
-                      		</div>
-                    	</div>
+					      	<div class="btn teal darken-3">
+					        	<span>File</span>
+					        	<input type="file" name="problem_solution">
+					      	</div>
+					      	<div class="file-path-wrapper">
+					        	<input class="file-path validate" type="text">
+					      	</div>
+					    </div>
                     	<span class="flow-text">Solution Language</span>
                     		<p>
-                      			<input name="solution_language" type="radio" id="C" />
+                      			<input name="solution_language" type="radio" id="C" value="C"/>
                       			<label for="C" class="flow-text">C</label>
                 			</p>
                 			<p>
-                      			<input name="solution_language" type="radio" id="C++" />
+                      			<input name="solution_language" type="radio" id="C++" value="C++"/>
                       			<label for="C++">C++</label>
                     		</p>
                     	<br>
