@@ -5,7 +5,7 @@ from app import db, models
 
 problem = Blueprint('problem', __name__)
 
-@problem.route('/pr@oblems/<code>', methods = ['GET', 'POST'])
+@problem.route('/problems/<code>', methods = ['GET', 'POST'])
 def problem_render(code):
 	if request.method == 'GET':
 		return render_template('Main/problems.html', title = code)
