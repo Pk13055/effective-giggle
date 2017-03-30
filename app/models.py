@@ -55,8 +55,25 @@ class Problem(db.Model):
 
 
 	def __repr__(self):
-		"<Problem { 'title' : %s,  'uid' : %s, 'upload_date' : %s, 'tags' : %s } >" % (self.title, self.uid, self.upload_date, self.tags)
-		return True
+		return "<Problem { 'title' : %s,  'uid' : %s, 'upload_date' : %s, 'tags' : %s } >" % (self.title, self.uid, self.upload_date, self.tags)
+
+	def getIdentifiers(self):
+		return { 'title' : self.title, 'tags' : self.tags, 'upload_date' : self.upload_date }
+
+	def getAssocFiles(self):
+		return { 'problem_location' : self.problem_location, 'io_location' : self.io_location, 
+					'editorial_location' : self.editorial_location, 'solution_location' : self.solution_location, 
+					'solution_language' : self.solution_language
+				}
+
+	def getStats(self):
+		return {  'total_submissions' : self.total_submissions, 'accepted' : self.accepted, 
+					'wrong_answer' : self.wrong_answer, 'tle' : self.tle				
+				}
+
+	def getTimeStamp(self):
+		return datetime.datetime.strptime(self.upload_date, "%Y-%m-%d %H:%M:%S.%f")
+
 
 
 # Every user (solver/setter) will be of this type
@@ -118,17 +135,23 @@ class Submission(db.Model):
 class Comment(db.Model):
 	__tablename__ = 'comments'
 	id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-	comment_timestamp = db.Column(db.DateTime)
+	uid = db.Column(db.String(255), nullable = False, unique = True)
+	comment_timestamp = db.Column(db.String(255), nullable = False)
 	
 	# basic info about the comment 
 	user_id = db.Column(db.String(255), nullable = False)
 	problem_id = db.Column(db.String(255), nullable = False)
 	body = db.Column(db.String(400), nullable = False)
 
-	def __init__(self):
-		# insert the assignments here 
-		pass
+	def __init__(self, user_id, problem_id, body):
+		self.user_id = user_id
+		self.problem_id = problem_id
+		self.body = body
+		self.comment_timestamp = datetime.datetime.today().isoformat(' ')
+		self.uid = hashlib.sha1(self.comment_timestamp).hexdigest()
 
 	def __repr__(self):
-		# return a readable expression here; this will be called while debugging
-		return True
+		return "<Comment { 'uid' : %s, 'user_id' : %s, 'problem_id' : %s, 'comment_timestamp' : %s } >" % (self.uid, self.user_id, self.problem_id, self.comment_timestamp)
+
+	def getTimeStamp(self):
+		return datetime.datetime.strptime(self.upload_date, "%Y-%m-%d %H:%M:%S.%f")
