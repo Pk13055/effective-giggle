@@ -2,9 +2,16 @@
 # If you access to a particular model please import it as:
 #  from models import <class name> 
 
+
+# imports for the db handling
 from app import db
 from flask_sqlalchemy import SQLAlchemy
 
+
+# custom imports required for tasks
+import datetime, time
+import hashlib
+ 
 # Every problem will be of this type
 class Problem(db.Model):
 	__tablename__ = 'problems'
@@ -13,15 +20,16 @@ class Problem(db.Model):
 	id = db.Column(db.Integer, primary_key = True, autoincrement = True) 
 	uid = db.Column(db.String(255), unique = True, nullable = False)
 	title = db.Column(db.String(30), nullable = False)
+	tags = db.Column(db.String(255))
 	
 	# basic info about the problem
-	upload_date = db.Column(db.DateTime)
+	upload_date = db.Column(db.String(255), nullable = False)
 	solution_language = db.Column(db.String(10), nullable = False)
 	total_submissions = db.Column(db.Integer)
 	accepted = db.Column(db.Integer)
 	wrong_answer = db.Column(db.Integer)
 	tle = db.Column(db.Integer)
-	
+
 	# file locations associated with the problem
 	problem_location = db.Column(db.String(300), nullable = False)
 	io_location = db.Column(db.String(300), nullable = False)
@@ -29,12 +37,25 @@ class Problem(db.Model):
 	editorial_location = db.Column(db.String(300), nullable = False)
 	
 
-	def __init__(self):
-		# insert the assignments here 
-		pass
+	def __init__(self, title, tags, problem_location, io_location, solution_language, solution_location, editorial_location):
+		
+		# data given by the user
+		self.title = title
+		self.tags = tags
+		self.problem_location = problem_location
+		self.io_location = io_location
+		self.solution_language = solution_language
+		self.editorial_location = editorial_location
+		self.solution_location = solution_location
+		
+		# intialized data from backend
+		self.total_submissions = self.accepted = self.wrong_answer = self.tle = 0
+		self.upload_date = datetime.datetime.today().isoformat(' ')
+		self.uid = hashlib.sha1(self.upload_date).hexdigest()
+
 
 	def __repr__(self):
-		# return a readable expression here; this will be called while debugging
+		"<Problem { 'title' : %s,  'uid' : %s, 'upload_date' : %s, 'tags' : %s } >" % (self.title, self.uid, self.upload_date, self.tags)
 		return True
 
 
