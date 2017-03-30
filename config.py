@@ -3,11 +3,17 @@ DEBUG = True
 
 # Define the application directory
 import os
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
+
+# Defining the upload criterion for the various files uploaded by the user
+UPLOAD_FOLDER = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'filedb'))
+ALLOWED_EXTENSIONS = set(['.jpg', '.jpeg', '.png'] + ['.cpp', '.c', '.py'] + ['.txt'])
+
 
 # Define the database - we are working with
 # SQLite for this example
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'safe.db')
 DATABASE_CONNECT_OPTIONS = {}
 
 # Application threads. A common general assumption is
