@@ -160,6 +160,19 @@ class User(db.Model):
 			'profile_location':self.profile_location,
 		}
 
+	def getIdentifiers(self):
+		return { 'title' : self.title, 'email' : self.email,'role':self.role,'ranking':self.ranking,'rank_value':self.rank_value}
+
+	def getAssocFiles(self):
+		return { 'location' : self.location, 
+				 'institute' : self.institute, 'solution_location' : self.solution_location, 
+				}
+
+	def getStats(self):
+		return {  'total_submissions' : self.total_submissions, 'accepted' : self.accepted, 
+					'wrong_answer' : self.wrong_answer, 'tle' : self.tle,				
+				}
+
 	def __repr__(self):
 		# return a readable expression here; this will be called while debugging
 		"<User { 'username' : %s,  'uid' : %s, 'role' : %s, 'submissions' : %d } >" % (self.username, self.uid, self.role, self.total_submissions)		
@@ -198,6 +211,15 @@ class Submission(db.Model):
 			'submission_timestamp':self.submission_timestamp,		
 		}
 
+
+	def getIdentifiers(self):
+		return { 'user_id' : self.user_id, 'problem_id' : self.problem_id,}
+
+	def getStats(self):
+		return {  'status' : self.status,'lang':self.submission_language,}
+
+	def getTimeStamp(self):
+		return datetime.datetime.strptime(self.submission_timestamp, "%Y-%m-%d %H:%M:%S.%f")
 
 	def __repr__(self):
 		# return a readable expression here; this will be called while debugging
