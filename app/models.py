@@ -56,25 +56,6 @@ class Problem(db.Model):
 		self.uid = hashlib.sha1(self.upload_date).hexdigest()
 
 
-	def to_dict(self):
-		return {
-			'id':self.id,
-			'title':self.title,
-			'tags':self.tags,
-			'problem_location':self.problem_location,
-			'io_location':self.io_location, 
-			'solution':self.solution_language,
-			'editorial_location':self.editorial_location,
-			'solution_location':self.solution_location,
-			'total_submissions':self.total_submissions,
-			'accepted':self.accepted,
-			'wrong_answer':self.wrong_answer,
-			'tle':self.tle,
-			'upload_date':self.upload_date,
-			'uid':self.uid 
-		}
-
-
 	def __repr__(self):
 		return "<Problem { 'title' : %s,  'uid' : %s, 'upload_date' : %s, 'tags' : %s } >" % (self.title, self.uid, self.upload_date, self.tags)
 
@@ -117,55 +98,30 @@ class User(db.Model):
 	wrong_answer = db.Column(db.Integer)
 	tle = db.Column(db.Integer)
 	ranking = db.Column(db.String(40), nullable = False, default = "Newbie") 
-	rank_value=db.Column(db.Integer,nullable=False,default="1500")
+	rank_value = db.Column(db.Integer, nullable = False, default = 1500)
+	
 	# file locations associated with the user
 	profile_location = db.Column(db.String(255))
 
 
-	def __init__(self,username,email,role,password,institute,location,total_submissions,accepted,wrong_answer,tle,ranking,profile_location):
-		# basic details are initialized here 
-		self.username=username
-		self.email=email
-		self.role=role
-		self.institute=institute
-		self.location=location
-		self.total_submissions=total_submissions
-		self.accepted=accepted
-		self.wrong_answer=wrong_answer
-		self.tle=tle
-		self.ranking=ranking
-		self.rank_value=rank_value
-		self.profile_location=profile_location
-		self.uid = hashlib.sha1(self.upload_date).hexdigest()
+	def __init__(self, username, email, password, institute, location, role, profile_location):
+		self.username = username
+		self.email = email
+		self.institute = institute
+		self.location = location
+		self.profile_location = profile_location
+		self.role = role
+		self.total_submissions = self.accepted = self.wrong_answer = self.tle = 0
+		self.uid = hashlib.sha1(datetime.datetime.today().isoformat(' ')).hexdigest()
+		self.password = generate_password_hash(password)
 
-		#salted hash
-		self.password=generate_password_hash(password)
 
 	def check_password_hash(self,password):
 		return check_password_hash(self.password,password)
 
-	def to_dict(self):
-		return {
-			'username':self.username,
-			'email':self.email,
-			'role':self.role,
-			'institute':self.institute,
-			'location':self.location,
-			'total_submissions':self.total_submissions,
-			'accepted':self.accepted,
-			'wrong_answer':self.wrong_answer,
-			'tle':self.tle,
-			'ranking':self.ranking,
-			'rank_value':self.rank_value,
-			'profile_location':self.profile_location,
-		}
-
 	def getIdentifiers(self):
-		return { 'title' : self.title, 'email' : self.email,'role':self.role,'ranking':self.ranking,'rank_value':self.rank_value}
-
-	def getAssocFiles(self):
-		return { 'location' : self.location, 
-				 'institute' : self.institute, 'solution_location' : self.solution_location, 
+		return { 'username' : self.username, 'email' : self.email, 'role':self.role,
+					'ranking' : self.ranking, 'rank_value' : self.rank_value
 				}
 
 	def getStats(self):
@@ -174,9 +130,8 @@ class User(db.Model):
 				}
 
 	def __repr__(self):
-		# return a readable expression here; this will be called while debugging
-		"<User { 'username' : %s,  'uid' : %s, 'role' : %s, 'submissions' : %d } >" % (self.username, self.uid, self.role, self.total_submissions)		
-		return True
+		return "<User { 'username' : %s,  'uid' : %s, 'role' : %s, 'submissions' : %d } >" % (self.username, self.uid, self.role, self.total_submissions)
+
 
 # Every problem submission will be of this type
 class Submission(db.Model):
@@ -184,6 +139,7 @@ class Submission(db.Model):
 	
 	# search using these values
 	id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+	uid = db.Column(db.String(255), nullable = False)
 	submission_timestamp = db.Column(db.String(255),nullable=False)
 	
 	# basic info about the submission
@@ -193,25 +149,16 @@ class Submission(db.Model):
 	submission_language = db.Column(db.String(40), nullable = False)
 
 	def __init__(self,status,user_id,problem_id,submission_language):
-		# insert the assignments here 
-		self.status=status
-		self.user_id=user_id
-		self.problem_id=problem_id
-		self.submission_language=submission_language
-		
-		self.submission_timestamp=datetime.datetime.today().isoformat(' ')
+		self.status = status
+		self.user_id = user_id
+		self.problem_id = problem_id
+		self.submission_language = submission_language
+		self.submission_timestamp = datetime.datetime.today().isoformat(' ')
+		self.uid = hashlib.sha1(self.submission_timestamp).hexdigest()
 
-
-	def to_dict(self):
-		return {
-			'id':self.id,
-			'user_id':self.user_id,
-			'problem_id':self.problem_id,
-			'submission_language':self.submission_language,
-			'submission_timestamp':self.submission_timestamp,		
-		}
-
-
+	def __repr__(self):
+		return "<Submission { 'user_id' : %d, 'problem_id' : %d,  'lang' : %s,  'time' : %s } >" % (self.user_id,self.problem_id,self.submission_language,self.submission_timestamp)
+	
 	def getIdentifiers(self):
 		return { 'user_id' : self.user_id, 'problem_id' : self.problem_id,}
 
@@ -221,10 +168,6 @@ class Submission(db.Model):
 	def getTimeStamp(self):
 		return datetime.datetime.strptime(self.submission_timestamp, "%Y-%m-%d %H:%M:%S.%f")
 
-	def __repr__(self):
-		# return a readable expression here; this will be called while debugging
-		"<Submission {user_id:%d problem_id:%d lang:%s time:%s } >" % (self.user_id,self.problem_id,self.submission_language,self.submission_timestamp)
-		return True
 
 # Every editorial comment will be of this type
 class Comment(db.Model):
@@ -247,6 +190,13 @@ class Comment(db.Model):
 
 	def __repr__(self):
 		return "<Comment { 'uid' : %s, 'user_id' : %s, 'problem_id' : %s, 'comment_timestamp' : %s } >" % (self.uid, self.user_id, self.problem_id, self.comment_timestamp)
+
+	def getStats(self):
+		return {
+					'user_id' : self.user_id,
+					'problem_id' : self.problem_id,
+					'comment_timestamp' : self.comment_timestamp
+				}
 
 	def getTimeStamp(self):
 		return datetime.datetime.strptime(self.comment_timestamp, "%Y-%m-%d %H:%M:%S.%f")
