@@ -154,4 +154,4 @@ class Comment(db.Model):
 		return "<Comment { 'uid' : %s, 'user_id' : %s, 'problem_id' : %s, 'comment_timestamp' : %s } >" % (self.uid, self.user_id, self.problem_id, self.comment_timestamp)
 
 	def getTimeStamp(self):
-		return datetime.datetime.strptime(self.upload_date, "%Y-%m-%d %H:%M:%S.%f")
+		return datetime.datetime.strptime(self.comment_timestamp, "%Y-%m-%d %H:%M:%S.%f")

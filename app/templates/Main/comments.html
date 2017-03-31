@@ -37,34 +37,17 @@
 			<div class="card-title flow-text">Comments</div>
 			<div class="divider"></div>
 			<div class="collection">
+				{% for comment in comments %}
 				<a class="collection-item avatar black-text">
-					<img src="http://lorempixel.com/200/200" alt="image" class="circle">
-					<span class="title flow-text">Name</span>
+					<img src="{{ comment.profile_pic }}" alt="image" class="circle">
+					<span class="title flow-text">{{comment.name}}</span>
 					<p>
-						12-03-2016 12:34 +5:30 UTC
+						{{ comment.timestamp }}
 						<div class="divider"></div>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						{{ comment.body }}
 					</p>
 				</a>
-				<a class="collection-item avatar black-text">
-					<img src="http://lorempixel.com/200/200" alt="image" class="circle">
-					<span class="title flow-text">Name</span>
-					<p>
-						12-03-2016 12:34 +5:30 UTC
-						<div class="divider"></div>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</p>
-				</a>
+				{% endfor %}
 				<a class="collection-item avatar black-text">
 					<img src="http://lorempixel.com/200/200" alt="image" class="circle">
 					<span class="title flow-text">Name</span>
@@ -94,14 +77,15 @@
 		</div>
 	</div>
 	<div class="row card teal lighten-5">
-		<form>
+		<form action="/comments/{{ title }}" method = "POST">
 			<div class="card-content">
 				<div class="card-title span-text">Add Comment</div>
 				<div class="divider"></div><br>
 				<div class="row input-field">
 					<i class="material-icons prefix">mode_edit</i>
-					<textarea id="icon_prefix2" class="materialize-textarea" name="comment"></textarea>
+					<textarea id="icon_prefix2" class="materialize-textarea" name="body"></textarea>
 					<label for="icon_prefix2">Write something here...</label>
+					<input type="hidden" name="user_id" value="{{ user_id }}">
 				</div>
 			</div>
 			<div class="card-action right-align">
