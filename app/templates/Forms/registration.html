@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<form class="col s12 m6 offset-m3" method="POST" action="/signup">
+				<form class="col s12 m6 offset-m3" method="POST" action="/signup" enctype = "multipart/form-data">
 					<div class="row">
 						<div class="input-field">
 							<i class="material-icons prefix">account_circle</i>
@@ -89,11 +89,11 @@
 						<label>Please upload a photo</label>
 						<div class="file-field input-field">
 							<div class="btn">
-								<input type="file">
+								<input type="file" name ="upload">
 								<span>UPLOAD</span>
 							</div>
 							<div class="file-path-wrapper">
-								<input class="file-path validate" type="text">
+								<input class="file-path validate" type="text" name="picpath">
 						  	</div>
 						</div>
 					</div>

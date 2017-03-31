@@ -97,8 +97,8 @@ class User(db.Model):
 	accepted = db.Column(db.Integer)
 	wrong_answer = db.Column(db.Integer)
 	tle = db.Column(db.Integer)
-	ranking = db.Column(db.String(40), nullable = False, default = "Newbie") 
-	rank_value=db.Column(db.Integer, nullable = False, default = "1500")
+	# ranking = db.Column(db.String(40), nullable = False, default = "Newbie") 
+	# rank_value=db.Column(db.Integer, nullable = False, default = "1500")
 	
 	# file locations associated with the user
 	profile_location = db.Column(db.String(255))
@@ -119,10 +119,10 @@ class User(db.Model):
 	def check_password_hash(self,password):
 		return check_password_hash(self.password,password)
 
-	def getIdentifiers(self):
-		return { 'username' : self.username, 'email' : self.email, 'role':self.role,
-					'ranking' : self.ranking, 'rank_value' : self.rank_value
-				}
+	# def getIdentifiers(self):
+	# 	return { 'username' : self.username, 'email' : self.email, 'role':self.role,
+	# 				 'ranking' : self.ranking, 'rank_value' : self.rank_value
+	# 			}
 
 	def getStats(self):
 		return {  'total_submissions' : self.total_submissions, 'accepted' : self.accepted, 
