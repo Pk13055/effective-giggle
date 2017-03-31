@@ -45,4 +45,4 @@ def signup():
 			db.session.commit()
 		except IntegrityError as e:
 			return jsonify(success=False, message="This email already exists"), 400		
-		return helper.makeNewUser(request.form)
+		return render_template('Forms/loginpage.html')
