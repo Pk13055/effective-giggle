@@ -14,13 +14,28 @@ def home_render():
 	if request.method == 'GET':
 		return render_template('Main/home.html')
 
-@home.route('/signin', methods = ['POST', 'GET'])
+@home.route('/signin', methods = ['POST','GET'])
 def signin():
 	if request.method == 'GET':
 		return render_template('Forms/loginpage.html')
 	elif request.method == 'POST':
-		return helper.makeJSON(request.form['email'], request.form['username'], request.form['password'])
+		try:
+			email = request.form['email']
+			password=request.form['password']
+			
+		except KeyError as e:
+			return jsonify(success=False,message="%s doesnt exist")% e.args,400
 
+		user=User.query.filter(User.email==email).first()
+		if user is None:
+			return jsonify(success=False,message="Register First"),400
+
+		elif not user.check_password_hash(password):
+			return jsonify(success=False,message="Wrong Password"),400
+		
+		session['user_uid']=user.uid
+		return redirect('/solver/23')
+		
 @home.route('/signup', methods = ['POST', 'GET'])
 def signup():
 	if request.method == 'GET':
