@@ -4,8 +4,7 @@ import random
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from app import db
-from app.models import Comment
-
+from app.models import Comment, Problem, User
 
 for _ in range(int(sys.argv[1])):
 	user_id = randint(1, 10 ** 5)

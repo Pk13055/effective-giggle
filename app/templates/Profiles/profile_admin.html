@@ -36,28 +36,26 @@
 		<div class="container">
 			<div class="row card-panel">
 				<div class="col s12 m4">
-					<h5 class="flow-text"> Name </h5>
+					<h5 class="flow-text">{{ data.username }}</h5>
 					<div class="divider"></div>
-					<img src="http://lorempixel.com/200/200">
-					<div class="divider"></div>
-					<h5 class="flow-text"> Username</h5>
+					<img src="{{ data.profile_pic }}" alt="{{ data.username }}">
 				</div>
 				<div class="col s12 m8">
 					<ul class="collection">
 						<li class="collection-item avatar">
-							<i class="material-icons circle">home</i>
-							<span class="title">Location</span>
-							<p class="flow-text">Hyderabad, Telengana</p>
-						</li>
-						<li class="collection-item avatar">
 							<i class="material-icons circle">email</i>
 							<span class="title">Email</span>
-							<p class="flow-text">john@example.com</p>
+							<p class="flow-text truncate">{{ data.email }}</p>
+						</li>
+						<li class="collection-item avatar">
+							<i class="material-icons circle">home</i>
+							<span class="title">Location</span>
+							<p class="flow-text truncate">{{ data.location }}</p>
 						</li>
 						<li class="collection-item avatar">
 							<i class="material-icons circle">school</i>
 							<span class="title">Institute/Organization</span>
-							<p class="flow-text">Internation Institute of Information Technology</p>
+							<p class="flow-text truncate">{{ data.institute }}</p>
 						</li>
 					</ul>
 				</div>
@@ -218,36 +216,16 @@ Output
 							</tr>
 						</thead>
 						<tbody>
+							{% for problem in problems %}
 							<tr>
-								<td>P4</td>
-								<td>1023</td>
-								<td>56</td>
-								<td>543</td>
-								<td>102</td>
-								<td>5%</td>
+								<td class="truncate">{{ problem.title }}</td>
+								<td>{{ problem.attempted }}</td>
+								<td>{{ problem.accepted }}</td>
+								<td>{{ problem.wrong_answer }}</td>
+								<td>{{ problem.tle }}</td>
+								<td> 23% </td>
 							</tr>
-							<tr>
-								<td>P4</td>
-								<td>1023</td>
-								<td>56</td>
-								<td>543</td>
-								<td>102</td>
-								<td>5%</td>
-							</tr><tr>
-								<td>P4</td>
-								<td>1023</td>
-								<td>56</td>
-								<td>543</td>
-								<td>102</td>
-								<td>5%</td>
-							</tr><tr>
-								<td>P4</td>
-								<td>1023</td>
-								<td>56</td>
-								<td>543</td>
-								<td>102</td>
-								<td>5%</td>
-							</tr>
+							{% endfor %}
 						</tbody>
 					</table>
 				</div>

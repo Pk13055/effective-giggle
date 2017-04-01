@@ -23,6 +23,7 @@ class Problem(db.Model):
 	uid = db.Column(db.String(255), unique = True, nullable = False)
 	title = db.Column(db.String(30), nullable = False)
 	tags = db.Column(db.String(255))
+	uploader = db.Column(db.String(255), nullable = False)
 	
 	# basic info about the problem
 	upload_date = db.Column(db.String(255), nullable = False)
@@ -39,11 +40,12 @@ class Problem(db.Model):
 	editorial_location = db.Column(db.String(300), nullable = False)
 	
 
-	def __init__(self, title, tags, problem_location, io_location, solution_language, solution_location, editorial_location):
+	def __init__(self, title, tags, uploader, problem_location, io_location, solution_language, solution_location, editorial_location):
 		
 		# data given by the user
 		self.title = title
 		self.tags = tags
+		self.uploader = uploader
 		self.problem_location = problem_location
 		self.io_location = io_location
 		self.solution_language = solution_language

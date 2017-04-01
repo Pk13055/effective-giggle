@@ -6,6 +6,11 @@ from flask_sqlalchemy import SQLAlchemy
 from app import db
 from app.models import User
 
+try:
+	db.create_all()
+except:
+	pass
+
 email_domain = ['gmail', 'yahoo', 'hotmail', 'reddiff', 'outlook']
 roles = ['user', 'admin']
 for _ in range(int(sys.argv[1])):
@@ -17,4 +22,5 @@ for _ in range(int(sys.argv[1])):
 	role = roles[randint(0,1)]
 	profile_location = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(5)) + '/' + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(randint(4, 10))) + '/' + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(randint(12,45)))
 	db.session.add(User(username, email, password, institute, location, role, profile_location))
+
 db.session.commit()
