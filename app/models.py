@@ -23,6 +23,7 @@ class Problem(db.Model):
 	uid = db.Column(db.String(255), unique = True, nullable = False)
 	title = db.Column(db.String(30), nullable = False)
 	tags = db.Column(db.String(255))
+	uploader = db.Column(db.String(255), nullable = False)
 	
 	# basic info about the problem
 	upload_date = db.Column(db.String(255), nullable = False)
@@ -39,11 +40,12 @@ class Problem(db.Model):
 	editorial_location = db.Column(db.String(300), nullable = False)
 	
 
-	def __init__(self, title, tags, problem_location, io_location, solution_language, solution_location, editorial_location):
+	def __init__(self, title, tags, uploader, problem_location, io_location, solution_language, solution_location, editorial_location):
 		
 		# data given by the user
 		self.title = title
 		self.tags = tags
+		self.uploader = uploader
 		self.problem_location = problem_location
 		self.io_location = io_location
 		self.solution_language = solution_language
@@ -97,8 +99,9 @@ class User(db.Model):
 	accepted = db.Column(db.Integer)
 	wrong_answer = db.Column(db.Integer)
 	tle = db.Column(db.Integer)
-	# ranking = db.Column(db.String(40), nullable = False, default = "Newbie") 
-	# rank_value=db.Column(db.Integer, nullable = False, default = "1500")
+	ranking = db.Column(db.String(40), nullable = False, default = "Newbie") 
+	rank_value = db.Column(db.Integer, nullable = False, default = 1500)
+
 	
 	# file locations associated with the user
 	profile_location = db.Column(db.String(255))
@@ -119,10 +122,10 @@ class User(db.Model):
 	def check_password_hash(self,password):
 		return check_password_hash(self.password,password)
 
-	# def getIdentifiers(self):
-	# 	return { 'username' : self.username, 'email' : self.email, 'role':self.role,
-	# 				 'ranking' : self.ranking, 'rank_value' : self.rank_value
-	# 			}
+	def getIdentifiers(self):
+		return { 'username' : self.username, 'email' : self.email, 'role':self.role,
+					'ranking' : self.ranking, 'rank_value' : self.rank_value
+				}
 
 	def getStats(self):
 		return {  'total_submissions' : self.total_submissions, 'accepted' : self.accepted, 

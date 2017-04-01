@@ -8,12 +8,17 @@ import user_maker
 user = Blueprint('user', __name__)
 
 @user.route('/setter/<code>', methods = ['GET', 'POST'])
-# @requires_auth
 def admin_route(code):
 	if request.method == 'GET':
-		return render_template('Profiles/profile_admin.html', admin = code)
+		data = user_maker.getData(code)
+		if data:
+			problems = user_maker.getProblems(code)
+			return render_template('Profiles/profile_admin.html', admin = code, data = data, problems = problems)
+		else:
+			redirect("/", code = 404)
 	elif request.method == 'POST':
-		return user_maker.createProblem(request.form)
+		filenames = user_maker.uploadFiles(request.files, code)
+		return user_maker.createProblem(request.form, code, filenames)
 
 
 @user.route('/solver/<code>', methods = ['GET', 'POST'])
