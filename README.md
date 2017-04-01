@@ -33,6 +33,18 @@ Run the following command in your terminal
 
 (Specify your desired port, or keep blank for the default (8000))
 
+# Generate Database
+
+Run the following files in order 
+
+` python2.7 user_gen.py <no> `
+` python2.7 problem_gen.py <no> `
+` python2.7 comment_gen.py <no> `
+
+* where `<no>` is the number of users/problems/comments you want to generate 
+* you do not need to delete your db copies as they're covered by your =gitignore= 
+
+
 # Templates completed so far:
 
 - Homepage

@@ -18,7 +18,8 @@ def admin_route(code):
 		else:
 			redirect("/", code = 404)
 	elif request.method == 'POST':
-		return user_maker.createProblem(request.form, code)
+		filenames = user_maker.uploadFiles(request.files, code)
+		return user_maker.createProblem(request.form, code, filenames)
 
 
 @user.route('/solver/<code>', methods = ['GET', 'POST'])

@@ -7,12 +7,21 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
 
 # Defining the upload criterion for the various files uploaded by the user
-UPLOAD_FOLDER = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'filedb'))
-ALLOWED_EXTENSIONS = set(['.jpg', '.jpeg', '.png'] + ['.cpp', '.c', '.py'] + ['.txt'])
+
+# dirs for uploads
+UPLOAD_FOLDER_CODE = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'code_solutions'))
+UPLOAD_FOLDER_IMAGE = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'profile_pics'))
+UPLOAD_FOLDER_TEST = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'large_testcase'))
+UPLOAD_FOLDER_PROBLEM = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'problem_questions'))
+
+# extensions
+ALLOWED_EXTENSIONS_IMAGE = set(['.jpg', '.jpeg', '.png'])  
+ALLOWED_EXTENSIONS_CODE  = set(['.cpp', '.c', '.py'])  
+ALLOWED_EXTENSIONS_TEST  = set(['.txt'])
 
 
 # Define the database - we are working with
-# SQLite for this example
+
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'safe.db')
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 DATABASE_CONNECT_OPTIONS = {}
