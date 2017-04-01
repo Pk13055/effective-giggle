@@ -89,5 +89,6 @@ ENV/
 .ropeproject
 
 # Sandbox and tester files
-
 sandbox.html
+safe.db
+
