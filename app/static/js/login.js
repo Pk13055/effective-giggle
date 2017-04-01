@@ -1,11 +1,24 @@
-$("#submit").click(function () {
-    	consol.log("hello")
+		$(function () {
+			$("#submit").click(function () {
+		password=$("#password").val()
+		email=$('#email').val()
 
-    $.ajax({
-    	url:sign
+		console.log(email)
+
+		$.ajax({
+			type:"POST",
+			url:"/signin",
+			// async:false,
+			data:{'email':email,'password':password},
+			success:function(response){
+				window.location.replace(response.redirect);
+
+			},
+
+		})
 
 
-    })
 
-});
-	
+			});
+		});	
+

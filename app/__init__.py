@@ -1,8 +1,10 @@
 # Import flask and template operators
-from flask import Flask, render_template, blueprints
+from flask import Flask, render_template,session, blueprints,jsonify
 
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
+
+from functools import wraps
 
 # Define the WSGI application object
 app = Flask(__name__, static_url_path = '/static')
@@ -18,6 +20,16 @@ db = SQLAlchemy(app)
 @app.errorhandler(404)
 def not_found(error):
     return render_template('error.html', error = error) , 404
+
+
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if 'user_uid' not in session:
+            return jsonify(message="Unauthorized", success=False), 401
+        return f(*args, **kwargs)
+    return decorated
+
 
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.Comments.controllers import comments

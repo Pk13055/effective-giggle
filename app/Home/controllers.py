@@ -34,7 +34,7 @@ def signin():
 			return jsonify(success=False,message="Wrong Password"),400
 		
 		session['user_uid']=user.uid
-		return redirect('/solver/23')
+		return jsonify(redirect='/solver/'+user.uid)
 		
 @home.route('/signup', methods = ['POST', 'GET'])
 def signup():
