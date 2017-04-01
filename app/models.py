@@ -99,6 +99,7 @@ class User(db.Model):
 	tle = db.Column(db.Integer)
 	ranking = db.Column(db.String(40), nullable = False, default = "Newbie") 
 	rank_value = db.Column(db.Integer, nullable = False, default = 1500)
+
 	
 	# file locations associated with the user
 	profile_location = db.Column(db.String(255))

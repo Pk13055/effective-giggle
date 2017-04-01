@@ -3,35 +3,35 @@
 {% block title %} {{ super() }} {% endblock %}
 {% block scripts %}
 	<script>
-	    $(document).ready(function() {
-	      	$('select').material_select();
-	    });
+		$(document).ready(function() {
+			$('select').material_select();
+		});
 	</script>
 	<script>
 		$(function () {
-	        $("#submit").click(function () {
-	            var password = $("#https1").val();
-	            var confirmPassword = $("#https2").val();
-	            if (password != confirmPassword) {
-	                alert("Passwords do not match.");
-	                return false;
-	            }
-	            return true;
-	        });
-	    });	
-	    // var change = function() {
-	    // 	$("#error").hide();
-	    // 	if($("#https1").val() != $("#https2").val()) {
-	    // 		$("#error").hide();
-	    // 		$("#error").val("Passwords do not match ")
-	    // 	}
-	    // };
+			$("#submit").click(function () {
+				var password = $("#https1").val();
+				var confirmPassword = $("#https2").val();
+				if (password != confirmPassword) {
+					alert("Passwords do not match.");
+					return false;
+				}
+				return true;
+			});
+		});	
+		// var change = function() {
+		// 	$("#error").hide();
+		// 	if($("#https1").val() != $("#https2").val()) {
+		// 		$("#error").hide();
+		// 		$("#error").val("Passwords do not match ")
+		// 	}
+		// };
 	</script>
 	{{ super() }}
 {% endblock %}
 {% block color %} white {{ super() }} {% endblock %}
 {% block content %}
-		<div class="container">
+		<div class="container white">
 			<div class="row">
 				<div class="col s12 m6 offset-m3">
 					<h2 class="header center-on-small-only">Sign Up</h2>
@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<form class="col s12 m6 offset-m3" method="POST" action="/signup">
+				<form class="col s12 m6 offset-m3" method="POST" action="/signup" enctype = "multipart/form-data">
 					<div class="row">
 						<div class="input-field">
 							<i class="material-icons prefix">account_circle</i>
@@ -85,6 +85,18 @@
 							<label for="location">Location</label>
 						</div>
 					</div>
+					<div class = "row">
+						<label>Please upload a photo</label>
+						<div class="file-field input-field">
+							<div class="btn">
+								<input type="file" name ="upload">
+								<span>UPLOAD</span>
+							</div>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text" name="picpath">
+						  	</div>
+						</div>
+					</div>
 					<div class="row">
 						<label for="role"> Register As </label>
 						<div class="input-field">
@@ -99,9 +111,9 @@
 						<div class="button-field right">
 							<button class="btn waves-effect waves-dark" type="submit" name="submit" id="submit">Register
 								<i class="material-icons right">send</i>
-  							</button>
-  						</div>		
-  					</div>
+							</button>
+						</div>		
+					</div>
 				</form>	
 			</div>	
 		</div>	
