@@ -3,6 +3,10 @@ from flask import Blueprint, request, render_template, \
 from app import db, models
 from helper import *
 
+from selenium import webdriver
+import urllib
+import urllib2
+
 comments = Blueprint('comments', __name__)
 
 
@@ -16,6 +20,8 @@ def comments_render(code):
 			user = user[0]
 			comment_obj.append({ 'name' : user.username, 'profile_pic' : user.profile_pic, 
 				'timestamp' : comment.comment_timestamp, 'body' : comment.body })
+		driver = webdriver.Firefox()
+		driver.get(driver.getCurrentUrl())
 		logged_in = 34
 		return render_template('Main/comments.html', title = code, comments = comment_obj, user_id = logged_in)
 	elif request.method == 'POST':
