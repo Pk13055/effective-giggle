@@ -7,7 +7,7 @@
 
 		$.ajax({
 			type:"POST",
-			url:"/problems/"+problem.uid,
+			url:"/signin",
 			// async:false,
 			data:{'email':email,'password':password},
 			success:function(response){

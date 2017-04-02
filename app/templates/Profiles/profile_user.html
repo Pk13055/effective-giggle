@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% set role = data.role %}
+{% set user_uid = data.uid %}
+{% set state = 'loggedin' %}
+
 {% block heading %} Profile {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
 {% block scripts %}
@@ -12,6 +16,7 @@
 	{{super()}}
 {% endblock %}
 {% block content %}
+
 		<div class="container">
 			<div class="row card">
 				<div class="card-content">

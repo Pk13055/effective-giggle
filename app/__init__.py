@@ -26,7 +26,7 @@ def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if 'user_uid' not in session:
-            return render_template('Forms/registration.html', error=error), 400
+            return jsonify(success=False, message="Unautharized entry.Login First"), 400
         return f(*args, **kwargs)
     return decorated
 
