@@ -28,10 +28,10 @@ def signin():
 
 		user=User.query.filter(User.email==email).first()
 		if user is None:
-			return jsonify(success=False,message="Register First"),400
+			return jsonify(success=False,message="Register First"),401
 
 		elif not user.check_password_hash(password):
-			return jsonify(success=False,message="Wrong Password"),400
+			return jsonify(success=False,message="Wrong Password"),401
 		
 		session['user_uid']=user.uid
 		return jsonify(redirect='/solver/'+user.uid)

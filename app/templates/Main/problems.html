@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
-{% block heading %} Problem {{ title }} {% endblock %}
+{% block heading %} Problem {{ problem.title }} {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
 {% block content %}
+<p id="uid">{{ problem.uid }}<p> 
 		<div class="container">
 			<div class="row">
-				<h4 class="flow-text"> Problem 78 - Djkastra's Algo</h4>
+				<h4 class="flow-text"> Problem {{ problem.id }} - {{ problem.title}}</h4>
 				<div class="divider"></div>
 			</div>
 			<div class="row">
-				<div class="chip"> Brute</div>
-				<div class="chip"> Graph Theory </div>
-				<div class="chip"> Advanced </div>
+				{% for tag in problem.tags %}
+				<div class="chip"> {{ tag }}</div>
+				{% endfor %}
 			</div>
 			<div class="row">
-				<p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in recodehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-				</p>
+				<p> {{ problem.problem}}
+
 				<div class="divider"></div>
 				<div class="col s12 card-panel z-depth-2">
 					<h5 class="flow-text"> Constraints </h5>
@@ -27,60 +28,27 @@
 			<div class="row">
 				<div class="divider"></div>
 			</div>
+			<!-- <div class="row"> -->
+				
+			<!-- </div> -->
 			<div class="row">
-				<h5 class="flow-text"> Test Cases</h5>
-			</div>
-			<div class="row">
-				<div class="col s12 m4 card-panel">
-					<h6 class="flow-text"> Input </h6>
-					<pre>10 12 
-12 12 44 34
-43 34 23 23
-23 34 445 54644
-654 46564 456456 456
-23 32</pre>
-					<h6 class="flow-text"> Output</h6>
-					<pre>YES
-NO
-YES
-YES
-YES
-</pre>
-				</div>
-				<div class="col s12 m4 card-panel">
-					<h6 class="flow-text"> Input </h6>
-					<pre>10 12 
-12 12 44 34
-43 34 23 23
-23 34 445 54644
-654 46564 456456 456
-23 32</pre>
-					<h6 class="flow-text"> Output</h6>
-					<pre>YES
-NO
-YES
-YES
-YES
-</pre>
-				</div>
-				<div class="col s12 m4 card-panel">
-					<h6 class="flow-text"> Input </h6>
-					<pre>10 12 
-12 12 44 34
-43 34 23 23
-23 34 445 54644
-654 46564 456456 456
-23 32</pre>
-					<h6 class="flow-text"> Output</h6>
-					<pre>YES
-NO
-YES
-YES
-YES
-</pre>
-				</div>
+			<h5 class="flow-text"> Test Cases</h5>
 
+			{% for i in range(3) %}
+				<div class="col s12 m4 card-panel">
+				{% for line in problem.io %}			{% if line =="Input"%}
+								<h6 class="flow-text"> Input </h6>
+						{% elif line=="Output" %}
+								<h6 class="flow-text"> Output </h6>
+						{% else %}
+							<pre> {{ line }} </pre>
+						{% endif %}
+				{% endfor %}
+
+				</div>
+			{% endfor %}
 			</div>
+
 			<div class="row">
 				<div class="divider"></div>
 			</div>
@@ -96,8 +64,8 @@ YES
 								<label for="C"> C</label>
 							</p>
 							<p class="col s12 m3">
-								<input name="language" type="radio" id="C++"> 
-								<label for="C++"> C++</label>
+								<input name="language" type="radio" id="Cpp"> 
+								<label for="Cpp"> C++</label>
 							</p>	
 							<p class="col s12 m3">
 								<input name="language" type="radio" id="python2"> 
@@ -122,7 +90,7 @@ YES
 						</form>
 					</div>
 					<div class="card-action right-align">
-						<button type="submit" class="btn waves-effect waves-light">Submit!</button>
+						<button id="submit"type="submit" class="btn waves-effect waves-light">Submit!</button>
 					</div>
 				</div>
 			</div>

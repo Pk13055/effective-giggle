@@ -1,15 +1,15 @@
 		$(function () {
 			$("#submit").click(function () {
-		password=$("#password").val()
-		email=$('#email').val()
+		
+		problem_uid=$("#uid").val()
 
 		console.log(email)
 
 		$.ajax({
 			type:"POST",
-			url:"/problems/"+problem.uid,
-			// async:false,
-			data:{'email':email,'password':password},
+			url:"/problem/"+problem,
+			async:false,
+			data:{'uid':problem_uid},
 			success:function(response){
 				window.location.replace(response.redirect);
 
@@ -18,7 +18,7 @@
 			error:function(response)
 			{
 				if(confirm(JSON.parse(response.responseText).message))
-				window.location.replace('/signup');
+				window.location.replace('/signin');
 				else{}
 			}
 		})

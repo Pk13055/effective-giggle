@@ -61,7 +61,7 @@ def createProblem(form, code, files):
 
 # Admin function to render the dict data for the given admin
 def getData(code):
-	user = models.User.query.filter(models.User.uid == code, models.User.role == 'admin').first()
+	user = models.User.query.filter(models.User.uid == code).first()
 	if user:
 		user_data = {
 			'username' : user.username,
@@ -87,3 +87,16 @@ def getProblems(code):
 				'tle' : problem.tle
 			})
 	return problem_list
+
+def getProblemSubmitted(code):
+	problems=models.Submission.query.filter(models.Submission.user_id==code).all()
+	problem_list=[]
+	for problem in problems:
+		problem_name=models.Problem.query.filter(models.Problems.uid==problem.uid)
+		problem_list.append({
+			'status':problem.status,
+			'name':problem_name,
+			'time':problem.submission_timestamp,
+			'lang':problem.submission_language,
+			})
+	return problem_list	

@@ -11,14 +11,18 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # dirs for uploads
 UPLOAD_FOLDER_CODE = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'code_solutions'))
 UPLOAD_FOLDER_IMAGE = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'profile_pics'))
-UPLOAD_FOLDER_TEST = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'large_testcase'))
-UPLOAD_FOLDER_PROBLEM = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'problem_questions'))
+UPLOAD_FOLDER_TEST = os.path.abspath(os.path.join(os.sep,BASE_DIR, 'large_testcase'))
+UPLOAD_FOLDER_PROBLEM = os.path.abspath(os.path.join(os.sep,BASE_DIR, 'problem_questions'))
+
+#User submissions
+UPLOAD_FOLDER_SUBMISSION=os.path.abspath(os.path.join(os.sep,BASE_DIR,'user_submission'))
 
 # extensions
 ALLOWED_EXTENSIONS_IMAGE = set(['.jpg', '.jpeg', '.png'])  
 ALLOWED_EXTENSIONS_CODE  = set(['.cpp', '.c', '.py'])  
 ALLOWED_EXTENSIONS_TEST  = set(['.txt'])
 
+ALLOWED_EXTENSIONS_USER  = set(['.c','.cc','.py'])
 
 # Define the database - we are working with
 

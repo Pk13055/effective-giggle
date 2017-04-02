@@ -25,4 +25,8 @@ def admin_route(code):
 @requires_auth
 def user_route(code):
 	if request.method == 'GET':
-		return render_template('Profiles/profile_user.html')
+		data=user_maker.getData(code)
+		#use this to test jinja page 
+		# problems_submitted=[{'status':"Wrong Answer",'name':'42','time':'1/2/12','lang':'C++'},{'status':"Accepted",'name':'Graph','time':'12/21/12','lang':'Python'}]
+		problems_submitted=user_maker.getProblemSubmitted(code)
+		return render_template('Profiles/profile_user.html',data = data,problems=problems_submitted)

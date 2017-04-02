@@ -21,30 +21,25 @@
 					<div class="col s12 m8">
 						<ul class="collection">
 					    <li class="collection-item center-align">
-					      <span class="title flow-text">Name</span>
+					      <span class="title flow-text">{{ data.username }}</span>
 					    </li>
-					    <li class="collection-item avatar">
-					      <i class="material-icons circle green">account_circle</i>
-					      <span class="flow-text title">Username</span>
-					      <p>user123
-					      </p>
-					    </li>
+					    
 					    <li class="collection-item avatar">
 					      <i class="material-icons circle red">email</i>
 					      <span class="flow-text title">Email</span>
-					      <p>username@gmail.com
+					      <p>{{ data.email}}
 					      </p>
 					    </li>
 						<li class="collection-item avatar">
 					      <i class="material-icons circle green">functions</i>
 					      <span class="flow-text title">Institute/Organization</span>
-					      <p>IIIT
+					      <p>{{data.institute}}
 					      </p>
 					    </li>
 						<li class="collection-item avatar">
 					      <i class="material-icons circle green">location_on</i>
 					      <span class="flow-text title">Location</span>
-					      <p>Hydrabad
+					      <p>{{data.location}}
 					      </p>
 					    </li>
 					</ul>
@@ -66,25 +61,38 @@
 							</tr>
 						</thead>				
 						<tbody>
+							{% for problem in problems %}
 							<tr>
-								<td>23-04-2016 12:34:43 +5:30 UTC</td>
-								<td>Djikstra's Algorithm</td>
-								<td>C</td>
-								<td class="red-text text-darken-2">Wrong Answer</td>
-							</tr>
-							<tr>
-								<td>23-04-2016 12:50:43 +5:30 UTC</td>
-								<td>Life</td>
-								<td>C++</td>
-								<td class="yellow-text text-darken-2">TLE</td>
+								<td>{{ problem.time }}</td>
+								<td>{{ problem.name }}</td>
+								<td> {{ problem.lang }}</td>
+								
+								{% if problem.status == "Wrong Answer" %}
+								<td class="red-text text-darken-2">
+									{{ 
+									problem.status}}
+								</td>
+
+								{% elif problem.status == "TLE" %}
+								<td class="black-text text-darken-2">
+									{{ 
+									problem.status}}
+								</td>
+
+
+								{% elif problem.status == "Accepted" %}
+								<td class="green-text text-darken-2">
+									{{ 
+									problem.status}}
+								</td>
+								
+								{% endif%}	
+
+							{% endfor %}
+								
 							</tr>
 
-							<tr>
-								<td>23-04-2016 13:23:43 +5:30 UTC</td>
-								<td>An Easy Solution</td>
-								<td>C++</td>
-								<td class="green-text text-darken-2">Accepted</td>
-							</tr>
+							
 						</tbody>	
 					</table>
 				</div>
