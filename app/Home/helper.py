@@ -2,12 +2,14 @@
 # with the routes in the Home folder, so as to keep routing as minimal as possible
 from app import db, models
 from flask import jsonify
+import config
+
 
 # helper modules required
 from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
 from app.models import User
-
+import os, hashlib, datetime
 
 def makeJSON(email, username, password):
 		role = "admin"
@@ -27,20 +29,6 @@ def makeNewUser(form):
 	return jsonify(obj)
 
 
-def signInUser(request):
-	try:
-		email = request.form['email']
-		password = request.form['password']
-	except KeyError as e:
-		return jsonify(success = False, message = " %s doesnt exist") % e.args, 400
-	user = User.query.filter(User.email == email).first()
-	if user is None:
-		return jsonify(success = False, message = "Register First"), 401
-	elif not user.check_password_hash(password):
-		return jsonify(success = False, message = "Wrong Password"), 401
-	session['user_uid'] = user.uid
-	return jsonify(redirect = '/solver/' + user.uid)
-
 def createUser(request):
 	try:
 		email = request.form["email"]
@@ -49,8 +37,16 @@ def createUser(request):
 		password = request.form["password"]
 		role = request.form["role"]
 		username = request.form["username"]
-		picpath = request.form["picpath"]
-		profile_location = username + picpath
+		
+		file = request.files['file0']
+		filename = file.filename
+		
+		if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in config.ALLOWED_EXTENSIONS_IMAGE:
+			filename = hashlib.sha1(datetime.datetime.today().isoformat(':')).hexdigest() + '.' + filename.rsplit('.', 1)[1].lower()
+			file.save(os.path.join(config.UPLOAD_FOLDER_IMAGE, filename))
+			profile_location = filename
+		else:
+			profile_location = config.STANDARD_IMAGE
 
 	except KeyError as e:
 		return jsonify(success=False, message="%s not sent in the request" % e.args), 400 
@@ -61,4 +57,4 @@ def createUser(request):
 		db.session.commit()
 	except IntegrityError as e:
 		return jsonify(success=False, message="This email already exists"), 400		
-	return render_template('Forms/loginpage.html')	
+	return True

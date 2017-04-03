@@ -17,7 +17,18 @@ def signin():
 	if request.method == 'GET':
 		return render_template('Forms/loginpage.html')
 	elif request.method == 'POST':
-		return helper.signInUser(request)
+		try:
+			email = request.form['email']
+			password = request.form['password']
+		except KeyError as e:
+			return jsonify(success = False, message = " %s doesnt exist") % e.args, 400
+		user = models.User.query.filter(models.User.email == email).first()
+		if user is None:
+			return jsonify(success = False, message = "Register First"), 401
+		elif not user.check_password_hash(password):
+			return jsonify(success = False, message = "Wrong Password"), 401
+		session['user_uid'] = user.uid
+		return jsonify(redirect = '/solver/' + user.uid)
 
 
 @home.route('/logout',methods = ['POST','GET'])
@@ -31,4 +42,8 @@ def signup():
 	if request.method == 'GET':
 		return render_template('Forms/registration.html')
 	elif request.method == 'POST':
-		return helper.createUser(request)
+		result = helper.createmodels.User(request)
+		if result is True:
+			return render_template('Forms/loginpage.html')
+		else:
+			return result

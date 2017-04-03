@@ -6,7 +6,7 @@ import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
 UPLOAD_BASE = os.path.abspath(os.path.join(BASE_DIR, 'uploads'))
-
+STANDARD_IMAGE = 'kitten.jpeg'
 
 # Defining the upload criterion for the various files uploaded by the user
 
