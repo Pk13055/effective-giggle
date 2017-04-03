@@ -7,10 +7,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- <meta charset="utf-8"/> -->
 	{% block title %}
 		<title> {% block heading %} {% endblock %} </title>
 	{% endblock %}
-	<meta charset="utf-8">
+	<meta charset="utf-8" />
 	<link href="{{ url_for('static', filename = 'materialize/css/materialize.min.css') }}" type="text/css" rel="stylesheet">
 	<script src="{{ url_for('static', filename = 'jQuery/tmp/jquery.js') }}"></script>
 	<script src="{{ url_for('static', filename = 'materialize/js/materialize.min.js') }}"></script>
