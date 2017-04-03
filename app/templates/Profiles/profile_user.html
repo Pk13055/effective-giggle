@@ -21,7 +21,7 @@
 			<div class="row card">
 				<div class="card-content">
 					<div class="col s12 m4">
-						<img src="http://lorempixel.com/400/400" alt="" class="circle responsive-img">
+						<img src="{{ data.profile_pic }}" alt="{{ data.username }}" class="circle responsive-img">
 					</div>
 					<div class="col s12 m8">
 						<ul class="collection">
@@ -32,19 +32,19 @@
 					    <li class="collection-item avatar">
 					      <i class="material-icons circle red">email</i>
 					      <span class="flow-text title">Email</span>
-					      <p>{{ data.email}}
+					      <p>{{ data.email }}
 					      </p>
 					    </li>
 						<li class="collection-item avatar">
 					      <i class="material-icons circle green">functions</i>
 					      <span class="flow-text title">Institute/Organization</span>
-					      <p>{{data.institute}}
+					      <p>{{data.institute }}
 					      </p>
 					    </li>
 						<li class="collection-item avatar">
 					      <i class="material-icons circle green">location_on</i>
 					      <span class="flow-text title">Location</span>
-					      <p>{{data.location}}
+					      <p>{{data.location }}
 					      </p>
 					    </li>
 					</ul>

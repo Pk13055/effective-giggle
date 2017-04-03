@@ -5,24 +5,33 @@ DEBUG = True
 import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
+UPLOAD_BASE = os.path.abspath(os.path.join(BASE_DIR, 'uploads'))
+STANDARD_IMAGE = 'kitten.jpeg'
 
 # Defining the upload criterion for the various files uploaded by the user
 
 # dirs for uploads
-UPLOAD_FOLDER_CODE = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'code_solutions'))
-UPLOAD_FOLDER_IMAGE = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'profile_pics'))
-UPLOAD_FOLDER_TEST = os.path.abspath(os.path.join(os.sep,BASE_DIR, 'large_testcase'))
-UPLOAD_FOLDER_PROBLEM = os.path.abspath(os.path.join(os.sep,BASE_DIR, 'problem_questions'))
-
-#User submissions
-UPLOAD_FOLDER_SUBMISSION=os.path.abspath(os.path.join(os.sep,BASE_DIR,'user_submission'))
+UPLOAD_FOLDER_SOLUTION_CODE = os.path.abspath(os.path.join(UPLOAD_BASE, 'solution_codes'))
+UPLOAD_FOLDER_IMAGE = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'profile_pics'))
+UPLOAD_FOLDER_TEST = os.path.abspath(os.path.join(os.sep,UPLOAD_BASE, 'large_testcases'))
+UPLOAD_FOLDER_PROBLEM = os.path.abspath(os.path.join(os.sep,UPLOAD_BASE, 'problem_text'))
+UPLOAD_FOLDER_SUBMISSION= os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'user_submissions'))
+UPLOAD_FOLDER_EDITORIAL = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'problem_editorials'))
 
 # extensions
-ALLOWED_EXTENSIONS_IMAGE = set(['.jpg', '.jpeg', '.png'])  
-ALLOWED_EXTENSIONS_CODE  = set(['.cpp', '.c', '.py'])  
-ALLOWED_EXTENSIONS_TEST  = set(['.txt'])
 
-ALLOWED_EXTENSIONS_USER  = set(['.c','.cc','.py'])
+# for the profile pictue 
+ALLOWED_EXTENSIONS_IMAGE = set(['jpg', 'jpeg', 'png'])  
+# for the code that is submitted by the users
+ALLOWED_EXTENSIONS_CODE  = set(['cpp', 'c', 'py'])  
+# for the code that is uploaded by the admin 
+ALLOWED_EXTENSIONS_SOLUTION_CODE = set(['cpp', 'c'])
+# for the large test case files 
+ALLOWED_EXTENSIONS_TEST  = set(['txt'])
+# for the question that is uploaded
+ALLOWED_EXTENSIONS_PROBLEM  = set(['txt'])
+# for the problem editorial
+ALLOWED_EXTENSIONS_EDITORIAL = set(['txt', 'md'])
 
 # Define the database - we are working with
 

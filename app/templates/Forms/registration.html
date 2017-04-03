@@ -21,13 +21,6 @@
 				return true;
 			});
 		});	
-		// var change = function() {
-		// 	$("#error").hide();
-		// 	if($("#https1").val() != $("#https2").val()) {
-		// 		$("#error").hide();
-		// 		$("#error").val("Passwords do not match ")
-		// 	}
-		// };
 	</script>
 	{{ super() }}
 {% endblock %}
@@ -52,21 +45,21 @@
 					<div class="row">	
 						<div class="input-field">
 							<i class="material-icons prefix">email</i>
-							<input id="email" type="email" class="validate" name="email">
+							<input id="email" type="email" class="validate" name="email" required="true">
 							<label for="email">Email ID</label>
 						</div>
 					</div>
 					<div class="row">	
 						<div class="input-field">
 							<i class="material-icons prefix">https</i>
-							<input id="https1" type="password" class="validate" name="password" >
+							<input id="https1" type="password" class="validate" name="password" required="true">
 							<label for="https1">Password</label>
 						</div>
 					</div>
 					<div class="row">	
 						<div class="input-field">
 							<i class="material-icons prefix">https</i>
-							<input id="https2" type="password" class="validate" name="password_2">
+							<input id="https2" type="password" class="validate" name="password_2" required="true">
 							<label for="https2">Confirm Password</label>
 						</div>
 					</div>
@@ -91,18 +84,18 @@
 						<label>Please upload a photo</label>
 						<div class="file-field input-field">
 							<div class="btn">
-								<input type="file" name ="upload">
+								<input type="file" name="file0">
 								<span>UPLOAD</span>
 							</div>
 							<div class="file-path-wrapper">
-								<input class="file-path validate" type="text" name="picpath">
+								<input class="file-path validate" type="text" required="true">
 						  	</div>
 						</div>
 					</div>
 					<div class="row">
 						<label for="role"> Register As </label>
 						<div class="input-field">
-							<select id="role" name="role">
+							<select id="role" name="role" required="true">
 								<option value="admin"> Admin 
 								</option>
 								<option value="user"> User </option>

@@ -83,6 +83,7 @@
 						<li class="tab"><a href="#text">Upload Problem Text</a></li>
 						<li class="tab"><a href="#generator">Upload Large Testcase</a></li>
 						<li class="tab"><a href="#solution">Upload Problem Solution</a></li>
+						<li class="tab"><a href="#editorial">Upload Problem Editorial</a></li>
 					</ul>	
 				</div>
 				<div class="card-content">
@@ -90,7 +91,7 @@
 						<div class="file-field input-field">
 					      	<div class="btn teal darken-3">
 					        	<span>File</span>
-					        	<input type="file" name="problem_text">
+					        	<input type="file" name="file0" required="true">
 					      	</div>
 					      	<div class="file-path-wrapper">
 					        	<input class="file-path validate" type="text">
@@ -136,7 +137,7 @@ Output
 						<div class="file-field input-field">
 					      	<div class="btn teal darken-3">
 					        	<span>File</span>
-					        	<input type="file" name="test_file">
+					        	<input type="file" name="file1" required="true">
 					      	</div>
 					      	<div class="file-path-wrapper">
 					        	<input class="file-path validate" type="text">
@@ -173,7 +174,7 @@ Output
 						<div class="file-field input-field">
 					      	<div class="btn teal darken-3">
 					        	<span>File</span>
-					        	<input type="file" name="problem_solution">
+					        	<input type="file" name="file2" required="true">
 					      	</div>
 					      	<div class="file-path-wrapper">
 					        	<input class="file-path validate" type="text">
@@ -197,6 +198,24 @@ Output
 							<li class="collection-item">Solution must output to STDOUT</li>
 							<li class="collection-item">Solution must use only valid standard libraries</li>
 						</ul>
+					</div>
+					<div id="editorial">
+						<div class="file-field input-field">
+					      	<div class="btn teal darken-3">
+					        	<span>File</span>
+					        	<input type="file" name="file3" required="true">
+					      	</div>
+					      	<div class="file-path-wrapper">
+					        	<input class="file-path validate" type="text">
+					      	</div>
+					    </div>
+                      	<div class="divider"></div>
+                  		<span class="flow-text">Guidelines</span>
+                  		<ul class="collection">
+                  			<li class="collection-item">Upload file <strong>strictly</strong> of type <em>.txt</em></li>
+                  			<li class="collection-item">Make sure the file follows the given format</li>
+                  			<li class="collection-item">Make sure the editorial explains the problem adequately. There will be <em> no </em> option to update it.</li>
+                  		</ul>
 					</div>
 				</div>
 				<div class="card-action right-align">
@@ -227,7 +246,11 @@ Output
 								<td>{{ problem.accepted }}</td>
 								<td>{{ problem.wrong_answer }}</td>
 								<td>{{ problem.tle }}</td>
-								<td> 23% </td>
+								{% if problem.total_submissions %}
+								<td> {{ problem.accepted / problem.total_submissions * 100 }} </td>
+								{% else %}
+								<td> - </td>
+								{% endif %}
 							</tr>
 							{% endfor %}
 						</tbody>
