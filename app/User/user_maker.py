@@ -42,7 +42,14 @@ def createProblem(form, code, files):
 	# obj contains all the data to build a problem and add to db
 	# finally instead of returning, add the problem and then return 
 	# title, tags, uploader, problem_location, io_location, solution_language, solution_location, editorial_location):
-	return jsonify(obj)
+	# text testcase solutione editorial
+	# return jsonify(obj)
+	try:
+		db.session.add(models.Problem(obj['title'], obj['tags'], obj['uploader'], obj['files'][0], obj['files'][1], obj['solution_language'], obj['files'][2], obj['files'][3]))
+		db.session.commit()
+		return obj
+	except:
+		return None
 
 
 # Admin function to upload the problem assoc files to the server - ADMIN ONLY 
@@ -60,7 +67,7 @@ def uploadFilesAdmin(files):
 
 # get the problem data for the tables of admin page
 def getProblems(code):
-	problems = models.Problem.query.filter(models.Problem.uploader == code).all()
+	problems = models.Problem.query.filter(models.Problem.uploader == code).order_by(models.Problem.id.desc()).all()
 	problem_list = []
 	for problem in problems:
 		problem_list.append({

@@ -8,7 +8,7 @@ import user_maker
 user = Blueprint('user', __name__)
 
 @user.route('/setter/<code>', methods = ['GET', 'POST'])
-@requires_auth
+# @requires_auth
 def admin_route(code):
 	if request.method == 'GET':
 		data = user_maker.getData(code)

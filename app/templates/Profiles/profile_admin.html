@@ -246,7 +246,11 @@ Output
 								<td>{{ problem.accepted }}</td>
 								<td>{{ problem.wrong_answer }}</td>
 								<td>{{ problem.tle }}</td>
-								<td> 23% </td>
+								{% if problem.total_submissions %}
+								<td> {{ problem.accepted / problem.total_submissions * 100 }} </td>
+								{% else %}
+								<td> - </td>
+								{% endif %}
 							</tr>
 							{% endfor %}
 						</tbody>
