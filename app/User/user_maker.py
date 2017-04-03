@@ -2,62 +2,17 @@
 
 from flask import jsonify
 from app import db, models
-import app
+import app, config 
 
 # modules to help across different functions
+import os, hashlib, datetime
 from werkzeug.utils import secure_filename
-import os, config
 
 
 # Cross site function that checks if the uploaded file is valid
-def allowed_file(filename, type):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in config.type
-
-
-# Admin function to upload the problem assoc files to the server
-def uploadFiles(files, code):
-	types = {'problem_text' : "", 'test_file' : "", 'problem_solution' : ""}
-	status = 1
-	for t in types:
-		if t not in files:
-			status = 0
-			break
-	return status
-	try:
-		if status:
-			for _ in types:
-				file = files[_]
-				if file:
-					filename = secure_filename(file.filename)
-					if _ == 'problem_text':
-						f = os.path.join(config.UPLOAD_PROBLEM, filename)
-					elif _ == 'test_file':
-						f = os.path.join(config.UPLOAD_TEST, filename)
-					elif _ == 'problem_solution':
-						f = os.path.join(config.UPLOAD_SOLUTION, filename)
-					types[_] = f
-					file.save(f)
-				else:
-					raise Exception
-			return types
-		else:
-			return False
-	except:
-		return False
-
-
-# Admin function to create a problem object from the submitted form
-def createProblem(form, code, files):
-	obj = {}
-	for x in form:
-		obj[x] = form[x]
-	obj['uploader'] = code
-	try:
-		for x in files:
-			obj[x] = files[x]
-	except:
-		pass
-	return jsonify(obj)
+# specify the type1 as the set of file extensions to check for
+def allowed_file(filename, type1):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in type1
 
 # Admin function to render the dict data for the given admin
 def getData(code):
@@ -75,6 +30,33 @@ def getData(code):
 	else:
 		return {}
 
+# Admin function to create a problem object from the submitted form
+def createProblem(form, code, files):
+	obj = {}
+	for x in form:
+		obj[x] = form[x]
+	obj['uploader'] = code
+	obj['files'] = files
+	# obj contains all the data to build a problem and add to db
+	# finally instead of returning, add the problem and then return 
+	# title, tags, uploader, problem_location, io_location, solution_language, solution_location, editorial_location):
+	return jsonify(obj)
+
+
+# Admin function to upload the problem assoc files to the server - ADMIN ONLY 
+def uploadFilesAdmin(files):
+	exts = [config.ALLOWED_EXTENSIONS_PROBLEM, config.ALLOWED_EXTENSIONS_TEST, config.ALLOWED_EXTENSIONS_SOLUTION_CODE, config.ALLOWED_EXTENSIONS_EDITORIAL]
+	locs = [config.UPLOAD_FOLDER_PROBLEM, config.UPLOAD_FOLDER_TEST, config.UPLOAD_FOLDER_SOLUTION_CODE, config.UPLOAD_FOLDER_EDITORIAL]
+	final_paths = []
+	for _ in range(4):
+		file = files['file' + str(_)]
+		if file and allowed_file(file.filename, exts[_]):
+	            filename = hashlib.sha1(datetime.datetime.today().isoformat(':')).hexdigest() + '.' + file.filename.rsplit('.', 1)[1].lower()
+	            final_paths.append(filename)
+	            file.save(os.path.join(locs[_],final_paths[-1]))
+	return final_paths
+
+# get the problem data for the tables of admin page
 def getProblems(code):
 	problems = models.Problem.query.filter(models.Problem.uploader == code).all()
 	problem_list = []
@@ -88,6 +70,8 @@ def getProblems(code):
 			})
 	return problem_list
 
+
+# problems submitted for the user page
 def getProblemSubmitted(code):
 	problems=models.Submission.query.filter(models.Submission.user_id==code).all()
 	problem_list=[]

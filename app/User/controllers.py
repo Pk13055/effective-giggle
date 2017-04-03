@@ -17,8 +17,9 @@ def admin_route(code):
 		else:
 			redirect("/", code = 404)
 	elif request.method == 'POST':
-		filenames = user_maker.uploadFiles(request.files, code)
-		return user_maker.createProblem(request.form, code, filenames)
+		filenames = user_maker.uploadFilesAdmin(request.files)
+		user_maker.createProblem(request.form, code, filenames)
+		return redirect(url_for('user.admin_route', code = code))
 
 
 @user.route('/solver/<code>', methods = ['GET', 'POST'])
@@ -28,5 +29,5 @@ def user_route(code):
 		data=user_maker.getData(code)
 		#use this to test jinja page 
 		# problems_submitted=[{'status':"Wrong Answer",'name':'42','time':'1/2/12','lang':'C++'},{'status':"Accepted",'name':'Graph','time':'12/21/12','lang':'Python'}]
-		problems_submitted=user_maker.getProblemSubmitted(code)
-		return render_template('Profiles/profile_user.html',data = data,problems=problems_submitted)
+		problems_submitted = user_maker.getProblemSubmitted(code)
+		return render_template('Profiles/profile_user.html',data = data,problems = problems_submitted)
