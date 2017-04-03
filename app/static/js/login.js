@@ -17,6 +17,8 @@
 
 			error:function(response)
 			{
+			console.log(response)
+
 				if(confirm(JSON.parse(response.responseText).message))
 				window.location.replace('/signup');
 				else{}
