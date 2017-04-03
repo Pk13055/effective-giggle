@@ -118,7 +118,6 @@ class User(db.Model):
 		self.uid = hashlib.sha1(datetime.datetime.today().isoformat(' ')).hexdigest()
 		self.password = generate_password_hash(password)
 
-
 	def check_password_hash(self,password):
 		return check_password_hash(self.password,password)
 

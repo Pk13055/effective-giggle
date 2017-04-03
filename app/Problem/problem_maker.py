@@ -37,8 +37,8 @@ def getData(code):
 
 	tag=problem.tags.split(',')
 
-	file=open(config.BASE_DIR+"/app/problem_questions/load.txt","r")
-	io_file=open(config.BASE_DIR+"/app/large_testcase/io.txt","r")
+	file=open(config.BASE_DIR+"/problem_questions/load.txt","r")
+	io_file=open(config.BASE_DIR+"/large_testcase/io.txt","r")
 	io=io_file.read().split("\n")
 	if problem:
 		problem_data = {

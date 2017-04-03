@@ -24,7 +24,9 @@ def getData(code):
 			'location' : user.location,
 			'institute' : user.institute,
 			'uid' : code,
-			'profile_pic' : user.profile_location
+			'profile_pic' : user.profile_location,
+			'role':user.role,
+			'uid':user.uid,
 		}
 		return user_data
 	else:

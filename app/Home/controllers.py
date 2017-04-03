@@ -1,7 +1,7 @@
 import os
 from flask import Blueprint, request, render_template, \
                   flash, g, session, redirect, url_for, jsonify
-from app import db, models 
+from app import db, models,requires_auth 
 import helper
 from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
@@ -32,10 +32,16 @@ def signin():
 
 		elif not user.check_password_hash(password):
 			return jsonify(success=False,message="Wrong Password"),401
-		
 		session['user_uid']=user.uid
 		return jsonify(redirect='/solver/'+user.uid)
-		
+
+
+@home.route('/logout',methods=['POST','GET'])
+@requires_auth
+def logout():
+	session.pop('user_uid')
+	return redirect('/signin')
+			
 @home.route('/signup', methods = ['POST', 'GET'])
 def signup():
 	if request.method == 'GET':

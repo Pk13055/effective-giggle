@@ -8,6 +8,7 @@ import user_maker
 user = Blueprint('user', __name__)
 
 @user.route('/setter/<code>', methods = ['GET', 'POST'])
+@requires_auth
 def admin_route(code):
 	if request.method == 'GET':
 		data = user_maker.getData(code)
@@ -30,4 +31,5 @@ def user_route(code):
 		#use this to test jinja page 
 		# problems_submitted=[{'status':"Wrong Answer",'name':'42','time':'1/2/12','lang':'C++'},{'status':"Accepted",'name':'Graph','time':'12/21/12','lang':'Python'}]
 		problems_submitted = user_maker.getProblemSubmitted(code)
-		return render_template('Profiles/profile_user.html',data = data,problems = problems_submitted)
+		if data:
+			return render_template('Profiles/profile_user.html',data = data,problems = problems_submitted)	

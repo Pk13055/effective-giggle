@@ -1,3 +1,9 @@
+{% if session.user_uid is not defined %}
+{% set state ='loggedout' %}
+{% else %}
+{% set state ='loggedin' %}
+{% endif %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,25 +32,55 @@
 	</style>
 </head>
 <body class="{% block color %}{% endblock %}">
+	<input type="hidden" name="">{{state}}
+
 	<header>
 		<nav class="teal darken-4">
 	    	<div class="nav-wrapper">
 	      	 	<a href="/" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
 	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
 	      		<ul class="right hide-on-med-and-down">
-			        <li> <a href="/solver/23">User Profile</a>  </li>
-			        <li> <a href="/setter/23">Admin Profile</a>  </li>
+
+	      		{% if state=='loggedin' %}
+			        <li> <a href="/solver/{{ user_uid}}">User Profile</a>  </li>
+			        {% if role=="admin" %}
+			        <li> <a href="/setter/{{ user_uid}}">Admin Profile</a>  </li>
+			        {% endif %}
+			    {% endif %}
+
 			        <li> <a href="/">Problems</a>  </li>
-			        <li> <a href="/problems/78">Problem 78</a>  </li>
-			        <li> <a href='/comments/23'>Comments</a></li>
+			        <li> <a href="/problems/23">Problem </a>  </li>
+			        
+			        <li> <a href='/comments/23'>Comments </a></li>
+			   
+			   		{% if state=='loggedout' %}
 			        <li> <a href="/signin">Sign In</a>  </li>
 			        <li> <a href="/signup">Sign Up</a>  </li>
+					{% elif state=='loggedin' %}
+	      			<li> <a href="/logout"> Logout</a>  </li>
+	      			{% endif %}
+
 	      		</ul>
 		    	<ul class="side-nav" id="mobile-display">
-			        <li> <a href="/profile">Profile</a>  </li>
+				{%if state=="loggedin"%}
+			        <li> <a href="/solver/{{ user_uid}}">User Profile</a>  </li>
+			        {% if role=="admin" %}
+			        <li> <a href="/setter/{{ user_uid}}">Admin Profile</a>  </li>
+			        {% endif %}
+			    {% endif %}
+
 			        <li> <a href="/">Problems</a>  </li>
-			        <li> <a href="/signin">Logout</a>  </li>
+			        <li> <a href="/problems/23">Problem </a>  </li>
+			        
+			        <li> <a href='/comments/23'>Comments </a></li>
+			   
+			   		{% if state=="loggedout"%}
+			        <li> <a href="/signin">Sign In</a>  </li>
 			        <li> <a href="/signup">Sign Up</a>  </li>
+					{%elif state=="loggedin"%}
+	      			<li> <a href="/logout"> Logout</a>  </li>
+	      			{% endif%}
+
 		      	</ul>
 	    	</div>
 		</nav>
