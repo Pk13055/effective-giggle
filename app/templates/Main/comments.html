@@ -18,7 +18,11 @@
 		<span class="card-title flow-text"> Editorial </span>
 		<div class="divider"></div>
 		<p>
-			{{ editorial }}
+			{% if check == 'md' %}
+				{{ editorial | safe }}
+			{% else %}
+				{{ editorial }}
+			{% endif %}
 		</p>
 	</div>
 	<div class="row card">
