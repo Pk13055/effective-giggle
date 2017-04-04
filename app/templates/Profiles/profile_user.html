@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% set role = data.role %}
 {% set user_uid = data.uid %}
 {% set state = 'loggedin' %}
 
@@ -12,7 +11,7 @@
 	{{ super() }}
 {% endblock %}
 {% block body_scripts %}
-	<script src="/staticma	/graph.js"></script>
+	<script src="/static/js/graph.js"></script>
 	{{super()}}
 {% endblock %}
 {% block content %}

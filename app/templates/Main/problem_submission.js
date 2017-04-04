@@ -1,4 +1,3 @@
-{% block javascript %}
 	var func=function (user_uid) {
 		
 		if ( $("#user_uid").val() ==='undefined')
@@ -25,4 +24,3 @@
 			}
 		})
 	}
-{% endblock %}

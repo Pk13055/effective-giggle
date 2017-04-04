@@ -61,6 +61,7 @@ def uploadFilesAdmin(files):
 		file = files['file' + str(_)]
 		if file and allowed_file(file.filename, exts[_]):
 	            filename = hashlib.sha1(datetime.datetime.today().isoformat(':')).hexdigest() + '.' + file.filename.rsplit('.', 1)[1].lower()
+	            
 	            final_paths.append(filename)
 	            file.save(os.path.join(locs[_],final_paths[-1]))
 	return final_paths
@@ -85,7 +86,7 @@ def getProblemSubmitted(code):
 	problems=models.Submission.query.filter(models.Submission.user_id==code).all()
 	problem_list=[]
 	for problem in problems:
-		problem_name=models.Problem.query.filter(models.Problems.uid==problem.uid)
+		problem_name=models.Problem.query.filter(models.Problems.id==problem.uid)
 		problem_list.append({
 			'status':problem.status,
 			'name':problem_name,

@@ -1,7 +1,41 @@
 {% extends 'base.html' %}
+
+{% set problem_uid=problem.uid %}
+
 {% block heading %} Problem {{ problem.title }} {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
 {% block content %}
+	{% block javascript %}
+<script type="text/javascript">
+	var func=function (user_uid) {
+		
+		if ( $("#user_uid").val() ==='undefined')
+		{
+			alert("Register First")
+			window.location.replace('/signin')
+		}
+
+		$.ajax({
+			type:"POST",
+			url:"/problems/"+problem_uid,
+			data:{'user_uid':user_uid},
+			success:function(response){
+				window.location.replace(response.redirect);
+
+			},
+
+			error:function(response)
+			{
+				console.log(response)
+				
+			}
+		})
+	}
+</script>
+{% endblock %}
+<input type="hidden" id="problem_uid">{{problem.uid}}
+
+<input type="hidden" id="user_uid">{{session.user_uid}}
 
 		<div class="container">
 			<div class="row">
@@ -80,7 +114,7 @@
 							<div class="file-field input-field">
 	                      		<div class="btn teal darken-2">
 	                        		<span><i class="material-icons">code</i></span>
-	                        		<input type="file">
+	                        		<input type="file" name="file">
 		                      	</div>
 	                      		<div class="file-path-wrapper">
 	                        		<input class="file-path validate" type="text">
@@ -90,7 +124,8 @@
 						</form>
 					</div>
 					<div class="card-action right-align">
-						<button id="submit"type="submit" class="btn waves-effect waves-light">Submit!</button>
+						<input id="submit" type="button" class="btn waves-effect waves-light"
+						onclick=func({{session.user_uid}}) value="Submit!"/>
 					</div>
 				</div>
 			</div>
