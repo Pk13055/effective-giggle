@@ -21,7 +21,7 @@
 			<div class="row card">
 				<div class="card-content">
 					<div class="col s12 m4">
-						<img src="{{ data.profile_pic }}" alt="{{ data.username }}" class="circle responsive-img">
+						<img src="{{ url_for('static', filename = data.profile_pic) }}" alt="{{ data.username }}" class="circle responsive-img">
 					</div>
 					<div class="col s12 m8">
 						<ul class="collection">
