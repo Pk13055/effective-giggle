@@ -17,7 +17,7 @@ UPLOAD_FOLDER_TEST = os.path.abspath(os.path.join(os.sep,UPLOAD_BASE, 'large_tes
 UPLOAD_FOLDER_PROBLEM = os.path.abspath(os.path.join(os.sep,UPLOAD_BASE, 'problem_text'))
 UPLOAD_FOLDER_SUBMISSION= os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'user_submissions'))
 UPLOAD_FOLDER_EDITORIAL = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'problem_editorials'))
-
+UPLOAD_FOLDER_SANDBOX = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, '.sandbox'))
 # extensions
 
 # for the profile pictue 
