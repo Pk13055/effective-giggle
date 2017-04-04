@@ -44,6 +44,22 @@ def getData(code):
 	data = models.Problem.query.filter(models.Problem.uid == code).with_entities(models.Problem.title, models.Problem.editorial_location).first()
 	try:
 		body = open(os.path.join(config.UPLOAD_FOLDER_EDITORIAL, data.editorial_location)).read()
+		body = getMarkdown(body,data.editorial_location)
+		file_ext= data.editorial_location.rsplit('.',1).lower()
+		# file = request.files['file0']
+		# filename = data.editorial_location
+		
 	except:
 		body = "No Editorial available for this problem"
-	return {'title' : data.title, 'editorial_location' : body }
+		file_ext = "txt"
+	return {'title' : code, 'editorial_location' : body, 'check':file_ext}
+
+
+def getMarkdown(body,filename):
+	file_ext= data.editorial_location.rsplit('.',1).lower()
+	if body and '.' in data.editorial_location and data.editorial_location.rsplit('.', 1)[1].lower() in config.ALLOWED_EXTENSIONS_EDITORIAL:
+		if(file_ext=='txt'):
+			body=markdown.markdown(body)
+			return body
+		else:
+			return body
