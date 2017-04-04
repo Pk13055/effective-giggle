@@ -18,17 +18,17 @@ app.config.from_object('config')
 # by modules and controllers
 db = SQLAlchemy(app)
 
-# Sample HTTP error handling
+# HTTP error handling route
 @app.errorhandler(404)
 def not_found(error):
     return render_template('error.html', error = error) , 404
 
-
+# authorization for the logged in state
 def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if 'user_uid' not in session:
-            return jsonify(success=False, message="Unautharized entry.Login First"), 400
+            return jsonify(success=False, message="Unauthorized entry. Login First"), 400
         return f(*args, **kwargs)
     return decorated
 

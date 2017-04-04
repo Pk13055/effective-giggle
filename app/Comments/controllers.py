@@ -14,7 +14,7 @@ def comments_render(code):
 	if request.method == 'GET':
 		comment_obj = helper.getComments(code)
 		title = helper.getData(code)
-		return render_template('Main/comments.html', title = title['title'], comments = comment_obj, editorial = title['editorial_location'])
+		return render_template('Main/comments.html', title = title['title'], comments = comment_obj, editorial = title['editorial_location'], code = code)
 		# return jsonify(comment_obj)
 	elif request.method == 'POST':
 		helper.addComment(request.form, code)

@@ -17,7 +17,7 @@ def homie():
 def home_render(page):
 	if request.method == 'GET':
 		data = helper.makeHome(page)
-		return render_template('Main/home.html', latest_problems = data['latest'], current_page = data['current'], total_pages = data['total'])
+		return render_template('Main/home.html', latest_problems = data['latest'], current_page = data['current'], total_pages = data['total'], current_page_number = int(page))
 		# return jsonify(helper.makeHome(page))
 	elif request.method == 'POST':
 		# add the search functionality here

@@ -104,7 +104,7 @@ class User(db.Model):
 
 	
 	# file locations associated with the user
-	profile_location = db.Column(db.String(255))
+	profile_location = db.Column(db.String(255), default = 'kitten.jpeg')
 
 
 	def __init__(self, username, email, password, institute, location, role, profile_location):

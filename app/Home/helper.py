@@ -83,12 +83,13 @@ def makeData(begin, end, key, PROBLEMS):
 			abstract = open(os.path.join(config.UPLOAD_FOLDER_EDITORIAL, PROBLEMS[i].editorial_location)).read(50)
 		except:
 			abstract = "Click attempt to read more!"
-		
-		if PROBLEMS[i].tags == "":
-			tags = []
-		else:
-			tags = PROBLEMS[i].tags.split(',')[:4]
-		
+		try:
+			if PROBLEMS[i].tags == "":
+				tags = []
+			else:
+				tags = PROBLEMS[i].tags.split(',')[:4]
+		except:
+			break
 		data[key].append({
 			'uid' : PROBLEMS[i].uid,
 			'id' : PROBLEMS[i].id,
