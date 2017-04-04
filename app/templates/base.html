@@ -32,7 +32,7 @@
 	</style>
 </head>
 <body class="{% block color %}{% endblock %}">
-	<input type="hidden" name="">{{state}}
+	<input type="hidden" name="state" value="{{state}}">
 
 	<header>
 		<nav class="teal darken-4">
@@ -40,26 +40,21 @@
 	      	 	<a href="/" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
 	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
 	      		<ul class="right hide-on-med-and-down">
-
-	      		{% if state=='loggedin' %}
-			        <li> <a href="/solver/{{ user_uid}}">User Profile</a>  </li>
-			        {% if role=="admin" %}
-			        <li> <a href="/setter/{{ user_uid}}">Admin Profile</a>  </li>
+	      		{% if state == 'loggedin' %}
+			        <li> <a href="/solver/{{user_uid}}">User Profile</a>  </li>
+			        {% if role == "admin" %}
+			        	<li> <a href="/setter/{{user_uid}}">Admin Profile</a>  </li>
 			        {% endif %}
 			    {% endif %}
-
 			        <li> <a href="/">Problems</a>  </li>
-			        <li> <a href="/problems/23">Problem </a>  </li>
-			        
-			        <li> <a href='/comments/23'>Comments </a></li>
-			   
+			        <li> <a href="/problems/8b4688b29eff96607b1c7f80ded9b25f6b97cca4">Problem </a>  </li>
+			        <li> <a href='/comments/fb1a2104d0242965ea19052e7c89fcdbfcab996b'>Comments </a></li>
 			   		{% if state=='loggedout' %}
-			        <li> <a href="/signin">Sign In</a>  </li>
-			        <li> <a href="/signup">Sign Up</a>  </li>
+		        	<li> <a href="/signin">Sign In</a>  </li>
+		        	<li> <a href="/signup">Sign Up</a>  </li>
 					{% elif state=='loggedin' %}
 	      			<li> <a href="/logout"> Logout</a>  </li>
 	      			{% endif %}
-
 	      		</ul>
 		    	<ul class="side-nav" id="mobile-display">
 				{%if state=="loggedin"%}
@@ -70,10 +65,8 @@
 			    {% endif %}
 
 			        <li> <a href="/">Problems</a>  </li>
-			        <li> <a href="/problems/23">Problem </a>  </li>
-			        
-			        <li> <a href='/comments/23'>Comments </a></li>
-			   
+			        <li> <a href="/problems/8b4688b29eff96607b1c7f80ded9b25f6b97cca4">Problem </a>  </li>
+			        <li> <a href='/comments/fb1a2104d0242965ea19052e7c89fcdbfcab996b'>Comments </a></li>
 			   		{% if state=="loggedout"%}
 			        <li> <a href="/signin">Sign In</a>  </li>
 			        <li> <a href="/signup">Sign Up</a>  </li>
@@ -92,30 +85,33 @@
 	{% endblock %}
 	</main>
 	<footer class="page-footer teal darken-4">
-			<!-- <div class="container" style="width:100%">
+			<div class="container hide-on-med-and-down" style="width:100%">
 				<div class="row">
-					<div class="col s12 m12">
-						  <div class="collection">
-						  	<div class="collection-item"></div>
-						  	<div class="collection-item">
-						  		<div class="chip">
-						  			<img src="http://lorempixel.com/200/200">
-						  			Neha M.
-						  		</div>
-						  		<div class="chip">
-						  			<img src="http://lorempixel.com/200/200">
-						  			Shubh M.
-						  		</div>
-						  		<div class="chip">
-						  			<img src="http://lorempixel.com/200/200">
-						  			Pranay G.
-						  		</div>
-						  		<div class="chip">
-						  			<img src="http://lorempixel.com/200/200">
-						  			Pratik K.
-						  		</div>
-						  	</div>
-						  </div>
+					<div class="col s12 m6">
+						<div class="row">
+							<h4 class="flow-text white-text">Founders</h4>
+						</div>
+						<div class="row">
+							<div class="divider"></div>
+						</div>
+						<div class="row">
+					  		<div class="chip">
+					  			<img src="{{ url_for('static', filename = 'images/founders/neha.jpeg')}}">
+					  			Neha M.
+					  		</div>
+					  		<div class="chip">
+					  			<img src="{{ url_for('static', filename = 'images/founders/shubh.jpeg')}}">
+					  			Shubh M.
+					  		</div>
+					  		<div class="chip">
+					  			<img src="{{ url_for('static', filename = 'images/founders/pranay.jpeg')}}">
+					  			Pranay G.
+					  		</div>
+					  		<div class="chip">
+					  			<img src="{{ url_for('static', filename = 'images/founders/pratik.jpeg')}}">
+					  			Pratik K.
+					  		</div>
+						</div>
 					</div>
 					<div class="col s12 m6">
 						<div class="card-panel teal darken-3">
@@ -123,7 +119,7 @@
 						</div>
 					</div>
 				</div>	
-			</div> -->
+			</div>
 			<div class="footer-copyright">
 				<div class="container">
 					<span class="left flow-text"> Copyright &copy; 2017</span>

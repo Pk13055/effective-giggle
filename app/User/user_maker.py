@@ -24,7 +24,7 @@ def getData(code):
 			'location' : user.location,
 			'institute' : user.institute,
 			'uid' : code,
-			'profile_pic' : '../../uploads/profile_pics/' + user.profile_location,
+			'profile_pic' : '../uploads/profile_pics/' + user.profile_location,
 			'role':user.role,
 			'uid':user.uid,
 		}
