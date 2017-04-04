@@ -5,8 +5,10 @@ from app import db, models
 import app
 
 # modules to help across different functions
+from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
-import os, config
+import os,hashlib,config
+from app.models import Submission
 
 # Admin function to upload the problem assoc files to the server
 def userSubmission(file):
@@ -65,34 +67,14 @@ def getData(code):
 	else:
 		return {}
 
-def allowed_file(filename, type1):
-	return '.' in filename and filename.rsplit('.', 1)[1].lower() in type1
+def createFile(request):
+	file=request.files['file0']
+	filename=file.filename
+	if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in config.ALLOWED_EXTENSIONS_CODE:
+		filename = hashlib.sha1(session.user_uid+datetime.datetime.today().isoformat(':')).hexdigest() + '.' + filename.rsplit('.', 1)[1].lower()
+		file.save(os.path.join(config.UPLOAD_FOLDER_SUBMISSION, filename))
+		return filename		
+	else: 
+		return None   
 
-def uploadFileUser(file):
-	exts = config.ALLOWED_EXTENSIONS_CODE
-	locs = config.UPLOAD_FOLDER_SUBMISSION
-	if file and allowed_file(file.filename, exts):
-		filename = hashlib.sha1(datetime.datetime.today().isoformat(':')).hexdigest() + '.' + file.filename.rsplit('.', 1)[1].lower()
-		file.save(os.path.join(locs,file.filename))
-	else:
-		return "Not allowed"
-
-	return filename
-
-def Submit(form,problem_uid,file):
-	obj = {}
-	# for x in form:
-	# 	obj[x]=form[x]
-	obj['file']=file
-	file_location=config.UPLOAD_FOLDER_SUBMISSION+file
-
-	print(obj)
-	try:
-		sub=models.Submission("Queued",obj['user_uid'],problem_uid,obj['language'],file_location)
-		print(sub)
-		db.session.add(sub)
-		db.session.commit()
-		return obj
-	except:
-		return "Not Added to the database"
 		

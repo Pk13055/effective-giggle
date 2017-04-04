@@ -1,28 +1,29 @@
-{% block javascript %}
-	var func=function (user_uid) {
-		
-		if ( $("#user_uid").val() ==='undefined')
-		{
-			alert("Register First")
-			window.location.replace('/signin')
-		}
+		$(function () {
+			problem_uid=$('#problem_uid').val()
+			console.log(problem_uid)
+
+			$("#submit").click(function () {
 
 		$.ajax({
 			type:"POST",
-			url:"/problem/"+problem_uid,
-			async:false,
-			data:{'user_uid':user_uid},
+			url:"/problems/"+problem_uid,
+			// async:false,
+			data:"",
 			success:function(response){
-				window.location.replace(response.redirect);
-
+				window.location.replace('/solver/'+session.user_uid);
 			},
 
 			error:function(response)
 			{
-				console.log(response)
-				// alert(JSON.parse(response.responseText).message)
-				
+			console.log(response)
+			alert(response.message)
+			window.location.replace(response.redirect);
+
 			}
 		})
-	}
-{% endblock %}
+
+
+
+			});
+		});	
+

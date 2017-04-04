@@ -45,30 +45,19 @@
 	      	 	<a href="/" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
 	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
 	      		<ul class="right hide-on-med-and-down">
-<<<<<<< HEAD
 
-	      		{% if state=='loggedin' %}
-			        <li> <a href="/solver/{{ user_uid}}">User Profile</a>  </li>
-			        {% if role=='admin' %}
-			        <li> <a href="/setter/{{ user_uid}}">Admin Profile</a>  </li>
-=======
 	      		{% if state == 'loggedin' %}
 			        <li> <a href="/solver/{{user_uid}}">User Profile</a>  </li>
 			        {% if role == "admin" %}
 			        	<li> <a href="/setter/{{user_uid}}">Admin Profile</a>  </li>
->>>>>>> 0b5f6a9e6e375ba80dd55f7b69103623a7ecdcb0
 			        {% endif %}
 			    {% endif %}
 			        <li> <a href="/">Problems</a>  </li>
-<<<<<<< HEAD
+			        
 			        <li> <a href="/problems/{{ problem_uid}}">Problem </a>  </li>
 			        
 			        <li> <a href='/comments/23'>Comments </a></li>
 			   
-=======
-			        <li> <a href="/problems/8b4688b29eff96607b1c7f80ded9b25f6b97cca4">Problem </a>  </li>
-			        <li> <a href='/comments/fb1a2104d0242965ea19052e7c89fcdbfcab996b'>Comments </a></li>
->>>>>>> 0b5f6a9e6e375ba80dd55f7b69103623a7ecdcb0
 			   		{% if state=='loggedout' %}
 		        	<li> <a href="/signin">Sign In</a>  </li>
 		        	<li> <a href="/signup">Sign Up</a>  </li>
