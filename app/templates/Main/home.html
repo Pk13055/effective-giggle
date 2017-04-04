@@ -16,6 +16,7 @@
 	<!-- Problems uploaded within the first few days -->
 	<!-- Will Always contain the latest  -->
 	<div class="row">
+	{% if latest_problems | length %}
 		{% for problem in latest_problems %}
 		<!-- Iterate block  -->
 		<div class="col s12 m3 l4">
@@ -44,194 +45,69 @@
 		</div>
 		<!-- End block here  -->
 		{% endfor %}
+	{% else %}
+		<div class="col s12 m12 card-panel">
+			<span class="flow-text"> No New Problems yet! </span>
+		</div>
+	{% endif %}
 	</div>
-
 	<div class="divider"></div>
-
-
 	<div class="row">
 		<h3 class="left-align flow-text"> Other Problems </h3>
 	</div>
-	<!-- Contains the other problems with pagination -->
-
-	<!-- Using normal pagination -->
-			<!-- <div class="row center-align">
-				<div class="col s12 m6 offset-m3">
-					<ul class="pagination">
-						<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-						<li class="waves-effect waves-light" id="li-1"><a href="#tab-1" onclick="change(1);"">1</a></li>	
-						<li class="waves-effect waves-light" id="li-2"><a href="#tab-2" onclick="change(2);">2</a></li>	
-						<li class="waves-effect waves-light" id="li-3"><a href="#tab-3" onclick="change(3);">3</a></li>	
-						<li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-					</ul>
+	<div class="row">
+	{% if current_page | length %}
+		{% for problem in current_page %}
+		<div class="col s12 m3 l4">
+			<div class="card small">
+				<div class="card-content">
+					<h5 class="flow-text card-title activator"> Problem {{ problem.id }} - {{ problem.title }} </h5>
+					<a class="waves-effect waves-dark btn grey darken-2" href="/problems/{{ problem.uid }}">
+						<i class="material-icons left"> code </i>
+						Attempt
+					</a>
 				</div>
-				<script>
-					var change = function(current) {
-						var n = 5;
-						for(var i = 1; i <= 3; i++)
-							if(i != current) {
-								$("#li-" + i).removeClass("active");
-								$("#tab-" + i).hide();
-							}
-						$("#tab-" + current).show();
-						$("li-" + current).addClass("active");
-					}
-				</script>
-			</div> -->
-
-			<!-- Using tabs  -->
-			<!-- <div class="row">
-				<ul class="tabs" id="pages">
-					<li class="tab col s4"><a href="#tab-1">1</a></li>	
-					<li class="tab col s4"><a href="#tab-2">2</a></li>	
-					<li class="tab col s4"><a href="#tab-3">3</a></li>	
-				</ul>
-			</div> -->
-
-			<!-- Content  -->
-			<div class="row">
-				<div id="tab-1" class="col s12">
-					{% for problem in current_page %}
-					<!-- Iterate block  -->
-					<div class="col s12 m3 l4">
-						<div class="card small">
-							<div class="card-content">
-								<h5 class="flow-text card-title activator"> Problem {{ problem.id }} - {{ problem.title }} </h5>
-								<a class="waves-effect waves-dark btn grey darken-2" href="/problems/{{ problem.uid }}">
-									<i class="material-icons left"> code </i>
-									Attempt
-								</a>
-							</div>
-							<div class="card-action">
-								{% for tag in problem.tags %}
-								<div class="chip"> {{ tag }} </div>
-								{% endfor %}
-							</div>
-							<div class="card-reveal">
-								<span class="card-title">Problem {{ problem.id }} - {{ problem.title }}</span>
-								<p>{{ problem.abstract }}</p>
-								<a class="waves-effect waves-dark btn grey darken-2" href="/problems/{{ problem.uid }}">
-									<i class="material-icons left"> code </i>
-									Attempt
-								</a>
-							</div>
-						</div>
-					</div>
-					<!-- End block here  -->
+				<div class="card-action">
+					{% for tag in problem.tags %}
+					<div class="chip"> {{ tag }} </div>
 					{% endfor %}
 				</div>
-			</div>
-			<div id="tab-2" class="col s12">
-				<div class="col s12 m3 l4">
-					<div class="card small">
-						<div class="card-content">
-							<h5 class="flow-text card-title activator"> Problem 2 - The First One </h5>
-							<a class="waves-effect waves-dark btn grey darken-2" href="#">
-								<i class="material-icons left"> code </i>
-								Attempt
-							</a>
-						</div>
-						<div class="card-action">
-							<div class="chip"> DP </div>
-							<div class="chip"> Greedy </div>
-							<div class="chip"> Graph </div>
-							<div class="chip"> Shortest Path </div>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title"> Problem 5 - The First One </span>
-							<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
-							<a class="waves-effect waves-dark btn grey darken-2" href="#">
-								<i class="material-icons left"> code </i>
-								Attempt
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col s12 m3 l4">
-					<div class="card small">
-						<div class="card-content">
-							<h5 class="flow-text card-title activator"> Problem 2 - The First One </h5>
-							<a class="waves-effect waves-dark btn grey darken-2" href="#">
-								<i class="material-icons left"> code </i>
-								Attempt
-							</a>
-						</div>
-						<div class="card-action">
-							<div class="chip"> DP </div>
-							<div class="chip"> Greedy </div>
-							<div class="chip"> Graph </div>
-							<div class="chip"> Shortest Path </div>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title"> Problem 5 - The First One </span>
-							<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
-							<a class="waves-effect waves-dark btn grey darken-2" href="#">
-								<i class="material-icons left"> code </i>
-								Attempt
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="tab-3" class="col s12">
-				<div class="col s12 m3 l4">
-					<div class="card small">
-						<div class="card-content">
-							<h5 class="flow-text card-title activator"> Problem 3 - The First One </h5>
-							<a class="waves-effect waves-dark btn grey darken-2" href="#">
-								<i class="material-icons left"> code </i>
-								Attempt
-							</a>
-						</div>
-						<div class="card-action">
-							<div class="chip"> DP </div>
-							<div class="chip"> Greedy </div>
-							<div class="chip"> Graph </div>
-							<div class="chip"> Shortest Path </div>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title"> Problem 5 - The First One </span>
-							<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
-							<a class="waves-effect waves-dark btn grey darken-2" href="#">
-								<i class="material-icons left"> code </i>
-								Attempt
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col s12 m3 l4">
-					<div class="card small">
-						<div class="card-content">
-							<h5 class="flow-text card-title activator"> Problem 3 - The First One </h5>
-							<a class="waves-effect waves-dark btn grey darken-2" href="#">
-								<i class="material-icons left"> code </i>
-								Attempt
-							</a>
-						</div>
-						<div class="card-action">
-							<div class="chip"> DP </div>
-							<div class="chip"> Greedy </div>
-							<div class="chip"> Graph </div>
-							<div class="chip"> Shortest Path </div>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title"> Problem 5 - The First One </span>
-							<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"</p>
-							<a class="waves-effect waves-dark btn grey darken-2" href="#">
-								<i class="material-icons left"> code </i>
-								Attempt
-							</a>
-						</div>
-					</div>
+				<div class="card-reveal">
+					<span class="card-title">Problem {{ problem.id }} - {{ problem.title }}</span>
+					<p>{{ problem.abstract }}</p>
+					<a class="waves-effect waves-dark btn grey darken-2" href="/problems/{{ problem.uid }}">
+						<i class="material-icons left"> code </i>
+						Attempt
+					</a>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<ul class="tabs grey lighten-2" id="pages">
-				<li class="tab col s4"><a href="#tab-1">1</a></li>	
-				<li class="tab col s4"><a href="#tab-2">2</a></li>	
-				<li class="tab col s4"><a href="#tab-3">3</a></li>	
-			</ul>
+		{% endfor %}
+	{% else %}
+		<div class="col s12 m12 card-panel">
+			<span class="flow-text"> Hang tight! Problems will be updated </span>
+		</div>
+	{% endif %}
+	</div>
+		<div class="row card-panel">
+			<div class="col s12 m3 center-align">
+				<a href="/1" class="btn-floating teal darken-3 waves-effect waves-dark"><i class="material-icons">flip_to_back</i></a>
+			</div>
+			
+			<div class="col s12 m2 center-align">
+				<a href="/{{ current_page_number - 1}}" class="btn-floating teal darken-3 waves-effect waves-dark
+				{% if current_page_number == 1 %} disabled {% endif %}"><i class="material-icons">chevron_left</i></a>
+			</div>
+			<div class="col s12 m2 center-align"> 
+				<span><em>Page {{ current_page_number }} of {{  total_pages }}</em></span>
+			</div>
+			
+			<div class="col s12 m2 center-align">
+				<a href="/{{ current_page_number + 1}}" class="btn-floating teal darken-3 waves-effect waves-dark {% if current_page_number == total_pages %} disabled {% endif %}"><i class="material-icons">chevron_right</i></a>
+			</div>
+			<div class="col s12 m3 center-align">
+				<a href="/{{ total_pages }}" class="btn-floating teal darken-3 waves-effect waves-dark"><i class="material-icons">flip_to_front</i></a>
+			</div>
 		</div>
 	</div>
 	{% endblock %}

@@ -1,11 +1,43 @@
 # Project Assignment (DO NOT MERGE WITHOUT REVIEW) 
 
+## How to Run
+
+Run the following command in your terminal
+
+` python2.7 run.py <port> `
+
+(Specify your desired port, or keep blank for the default (8000))
+
+## Generate Database
+
+Run the following files in order 
+
+` python2.7 user_gen.py <no> `
+` python2.7 problem_gen.py <no> `
+` python2.7 comment_gen.py <no> `
+
+* where `<no>` is the number of users/problems/comments you want to generate 
+* you do not need to delete your db copies as they're covered by your =gitignore= 
+
+
+## Templates completed so far:
+
+- Homepage
+- Problem Page
+- Login Page
+- Signup Page
+- Admin Profile
+- User Profile
+- Comments 
+
+
 ## Use materializeCSS throughout the project. Make sure you use these links while making the templates.
-# IT IS ESSENTIAL YOU KNOW THE DIFFERENCE BETWEEN s6 and m6 col widths
+## IT IS ESSENTIAL YOU KNOW THE DIFFERENCE BETWEEN s6 and m6 col widths
 ## Note that the page is divided into a container, which is then divided into 12-columns
 ## s12 => On a small (mobile) display, the content will be full width (12 of 12)
 ## m6 => On a medium (laptop) display, the content will be half width (6 of 12)
 ## Use offset-m<x> to move a div by x units in the specified display size
+
 
 Use materializeCSS throughout the project. Make sure you use these links while making the templates.
 Copy the ` template.html ` onto your PC and work in it to have less issues later on. DO NOT MAKE CHANGES outside of the container
@@ -22,40 +54,8 @@ ICONS : ` <link href="https://fonts.googleapis.com/icon?family=Material+Icons" r
 
 (Materialize has been hosted in the repo itself; use it for convienience; You would still need to include jQuery and Icons for everything to work properly.)
 The structure will be uploaded soon. Fork your own copies and push changes to them and submit a PR for merging into the final project.
-The layouts have been uploaded in the group; template work can be started. 
 
-
-# How to Run
-
-Run the following command in your terminal
-
-` python2.7 run.py <port> `
-
-(Specify your desired port, or keep blank for the default (8000))
-
-# Generate Database
-
-Run the following files in order 
-
-` python2.7 user_gen.py <no> `
-` python2.7 problem_gen.py <no> `
-` python2.7 comment_gen.py <no> `
-
-* where `<no>` is the number of users/problems/comments you want to generate 
-* you do not need to delete your db copies as they're covered by your =gitignore= 
-
-
-# Templates completed so far:
-
-- Homepage
-- Problem Page
-- Login Page
-- Signup Page
-- Admin Profile
-- User Profile
-- Comments 
-
-# Writeup 
+## Writeup 
 - Users:
  - Solver: 
  	- User can browse/search through problems, submit solutions to problems, view his stats, etc.

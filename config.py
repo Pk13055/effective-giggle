@@ -12,11 +12,13 @@ STANDARD_IMAGE = 'kitten.jpeg'
 
 # dirs for uploads
 UPLOAD_FOLDER_SOLUTION_CODE = os.path.abspath(os.path.join(UPLOAD_BASE, 'solution_codes'))
-UPLOAD_FOLDER_IMAGE = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'profile_pics'))
+UPLOAD_FOLDER_IMAGE = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'app','static','images','profile_pics'))
 UPLOAD_FOLDER_TEST = os.path.abspath(os.path.join(os.sep,UPLOAD_BASE, 'large_testcases'))
 UPLOAD_FOLDER_PROBLEM = os.path.abspath(os.path.join(os.sep,UPLOAD_BASE, 'problem_text'))
 UPLOAD_FOLDER_SUBMISSION= os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'user_submissions'))
 UPLOAD_FOLDER_EDITORIAL = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'problem_editorials'))
+# this will be the buffer folder used by the solver API to hold judging files
+UPLOAD_FOLDER_SANDBOX = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, '.sandbox'))
 
 # extensions
 
