@@ -1,25 +1,24 @@
 		$(function () {
-			$("#submit").click(function () {
-		
-		problem_uid=$("#uid").val()
+			problem_uid=$('#problem_uid').val()
+			console.log(problem_uid)
 
-		console.log(email)
+			$("#submit").click(function () {
 
 		$.ajax({
 			type:"POST",
-			url:"/problem/"+problem,
-			async:false,
-			data:{'uid':problem_uid},
+			url:"/problems/"+problem_uid,
+			// async:false,
+			data:"",
 			success:function(response){
-				window.location.replace(response.redirect);
-
+				window.location.replace('/solver/'+session.user_uid);
 			},
 
 			error:function(response)
 			{
-				if(confirm(JSON.parse(response.responseText).message))
-				window.location.replace('/signin');
-				else{}
+			console.log(response)
+			alert(response.message)
+			window.location.replace(response.redirect);
+
 			}
 		})
 

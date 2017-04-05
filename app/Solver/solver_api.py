@@ -26,23 +26,23 @@ languages = {
 				"python 3.5" : "python3.5"
 			}
 
+result = {
+	'user_id' : user_id,
+	'problem_id' : problem_id,
+	'submission_timestamp' : datetime.datetime.today().isoformat(' '),
+	'submission_language' : language,
+	'status' : []
+}
 
 # this function generates AND/OR runs the user code against the input file(s)
 def generateResult(language, solution_location, io_location, user_id, problem_id):
-	result = {
-		'user_id' : user_id,
-		'problem_id' : problem_id,
-		'submission_timestamp' : datetime.datetime.today().isoformat(' '),
-		'submission_language' : language,
-		'status' : "Internal Error"
-	}
 	test_cases = generateLargeIO(io_location)
 	sol_loc = os.path.join(config.UPLOAD_FOLDER_SUBMISSIONS, solution_location)
 	test_buffer = hashlib.sha1(datetime.datetime.today().isoformat(':')).hexdigest() + '.txt'
 	temp_loc = os.path.join(config.UPLOAD_FOLDER_SANDBOX, test_buffer)
 	# create a.out file first
 	if language in ['C', 'C++']:
-		filename = hashlib.sha1(datetime.datetime.today().isoformat(':')).hexdigest()
+		filename = hashlib.sha1(datetime.datetime.today().isoformat(':') + user_id).hexdigest()
 		pass
 	# run with python 
 	else:

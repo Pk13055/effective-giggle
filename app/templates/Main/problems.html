@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
+
+{% set problem_uid=problem.uid %}
+
 {% block heading %} Problem {{ problem.title }} {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
 {% block content %}
 
+<input type="hidden" id="problem_uid" value="{{problem.uid}}">
+
+<input type="hidden" id="user_uid">{{session.user_uid}}
+	<script src="../static/js/problem_submission.js"></script>
 		<div class="container">
 			<div class="row">
 				<h4 class="flow-text"> Problem {{ problem.id }} - {{ problem.title}}</h4>
@@ -80,17 +87,19 @@
 							<div class="file-field input-field">
 	                      		<div class="btn teal darken-2">
 	                        		<span><i class="material-icons">code</i></span>
-	                        		<input type="file">
+	                        		<input type="file" name="file" readonly="true" />
 		                      	</div>
 	                      		<div class="file-path-wrapper">
-	                        		<input class="file-path validate" type="text">
+	                        		<input class="file-path validate" type="text" required="true" />
 	                      		</div>
 	                    	</div>
 						</div>
 						</form>
 					</div>
 					<div class="card-action right-align">
-						<button id="submit"type="submit" class="btn waves-effect waves-light">Submit!</button>
+						<button class="btn waves-effect waves-dark" type="submit" name="submit" id="submit">Submit!
+								<i class="material-icons right">send</i>
+							</button>
 					</div>
 				</div>
 			</div>

@@ -6,6 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 from functools import wraps
 
+
+
 # Define the WSGI application object
 app = Flask(__name__, static_url_path = '/static')
 
@@ -48,3 +50,4 @@ app.register_blueprint(user)
 # Build the database:
 # This will create the database file using SQLAlchemy
 db.create_all()
+

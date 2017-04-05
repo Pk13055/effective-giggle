@@ -100,9 +100,9 @@ def makeData(begin, end, key, PROBLEMS):
 	data['total'] = len(PROBLEMS)/PER_PAGE
 
 def makeHome(page):
-	PROBLEMS = models.Problem.query.with_entities(models.Problem.uid, models.Problem.title, models.Problem.id, models.Problem.tags, models.Problem.editorial_location, models.Problem.uid).order_by(models.Problem.id.desc()).all()
+	PROBLEMS = models.Problem.query.with_entities(models.Problem.uid, models.Problem.title, models.Problem.id, models.Problem.tags, models.Problem.editorial_location).order_by(models.Problem.id.desc()).all()
 	makeData(0, LATEST, 'latest', PROBLEMS)
 	current_beg = LATEST + (int(page) - 1)*PER_PAGE
-	current_end = current_beg + PER_PAGE 
+ 	current_end = min(current_beg + PER_PAGE,db.session.query(models.Problem).count()) 
 	makeData(current_beg, current_end, 'current', PROBLEMS)
 	return data

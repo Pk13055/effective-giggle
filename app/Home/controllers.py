@@ -41,13 +41,16 @@ def signin():
 		elif not user.check_password_hash(password):
 			return jsonify(success = False, message = "Wrong Password"), 401
 		session['user_uid'] = user.uid
-		return redirect(url_for('user.user_route', code = user.uid))
+		session['user_role'] = user.role
+		# return redirect(url_for('user.user_route', code = user.uid))
+		return jsonify(redirect = '/solver/' + user.uid)
 
 # simple logout route
 @home.route('/logout',methods = ['POST','GET'])
 @requires_auth
 def logout():
 	session.pop('user_uid')
+	session.pop('user_role')
 	return redirect('/signin')
 			
 
@@ -57,7 +60,7 @@ def signup():
 	if request.method == 'GET':
 		return render_template('Forms/registration.html')
 	elif request.method == 'POST':
-		result = helper.createmodels.User(request)
+		result = helper.createUser(request)
 		if result is True:
 			return render_template('Forms/loginpage.html')
 		else:

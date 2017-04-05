@@ -149,14 +149,16 @@ class Submission(db.Model):
 	user_id = db.Column(db.String(255), nullable = False)
 	problem_id = db.Column(db.String(255), nullable = False)
 	submission_language = db.Column(db.String(40), nullable = False)
+	submission_location = db.Column(db.String(255),nullable = False)
 
-	def __init__(self,status,user_id,problem_id,submission_language):
+	def __init__(self,status,user_uid,problem_uid,submission_language,location):
 		self.status = status
-		self.user_id = user_id
-		self.problem_id = problem_id
+		self.user_id = user_uid
+		self.problem_id = problem_uid
 		self.submission_language = submission_language
 		self.submission_timestamp = datetime.datetime.today().isoformat(' ')
 		self.uid = hashlib.sha1(self.submission_timestamp).hexdigest()
+		self.submission_location=location
 
 	def __repr__(self):
 		return "<Submission { 'user_id' : %d, 'problem_id' : %d,  'lang' : %s,  'time' : %s } >" % (self.user_id,self.problem_id,self.submission_language,self.submission_timestamp)
