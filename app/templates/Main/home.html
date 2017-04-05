@@ -89,25 +89,27 @@
 		</div>
 	{% endif %}
 	</div>
-		<div class="row card-panel">
-			<div class="col s12 m3 center-align">
-				<a href="/1" class="btn-floating teal darken-3 waves-effect waves-dark"><i class="material-icons">flip_to_back</i></a>
-			</div>
-			
-			<div class="col s12 m2 center-align">
-				<a href="/{{ current_page_number - 1}}" class="btn-floating teal darken-3 waves-effect waves-dark
-				{% if current_page_number == 1 %} disabled {% endif %}"><i class="material-icons">chevron_left</i></a>
-			</div>
-			<div class="col s12 m2 center-align"> 
-				<span><em>Page {{ current_page_number }} of {{  total_pages }}</em></span>
-			</div>
-			
-			<div class="col s12 m2 center-align">
-				<a href="/{{ current_page_number + 1}}" class="btn-floating teal darken-3 waves-effect waves-dark {% if current_page_number == total_pages %} disabled {% endif %}"><i class="material-icons">chevron_right</i></a>
-			</div>
-			<div class="col s12 m3 center-align">
-				<a href="/{{ total_pages }}" class="btn-floating teal darken-3 waves-effect waves-dark"><i class="material-icons">flip_to_front</i></a>
-			</div>
+	{% if total_pages %}
+	<div class="row card-panel">
+		<div class="col s12 m3 center-align">
+			<a href="/1" class="btn-floating teal darken-3 waves-effect waves-dark"><i class="material-icons">flip_to_back</i></a>
 		</div>
+		
+		<div class="col s12 m2 center-align">
+			<a href="/{{ current_page_number - 1}}" class="btn-floating teal darken-3 waves-effect waves-dark
+			{% if current_page_number == 1 %} disabled {% endif %}"><i class="material-icons">chevron_left</i></a>
+		</div>
+		<div class="col s12 m2 center-align"> 
+			<span><em>Page {{ current_page_number }} of {{  total_pages }}</em></span>
+		</div>
+		
+		<div class="col s12 m2 center-align">
+			<a href="/{{ current_page_number + 1}}" class="btn-floating teal darken-3 waves-effect waves-dark {% if current_page_number == total_pages %} disabled {% endif %}"><i class="material-icons">chevron_right</i></a>
+		</div>
+		<div class="col s12 m3 center-align">
+			<a href="/{{ total_pages }}" class="btn-floating teal darken-3 waves-effect waves-dark"><i class="material-icons">flip_to_front</i></a>
+		</div>
+	</div>
+	{% endif %}
 	</div>
 	{% endblock %}
