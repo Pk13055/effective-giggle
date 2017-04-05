@@ -2,13 +2,8 @@
 	{% set state = ' loggedout' %}
 	{% set role = '' %}
 {% else %}
-<<<<<<< HEAD
-	{% set state = 'loggedin' %}
-	{% set role = session.role %}
-=======
-{% set state ='loggedin' %}
-{% set role =session.user_role %}
->>>>>>> 1034f9bb501fd89119799c2e079be770583a795a
+	{% set state ='loggedin' %}
+	{% set role =session.user_role %}
 {% endif %}
 <!DOCTYPE html>
 <html>
@@ -79,16 +74,8 @@
 			    {% endif %}
 
 			        <li> <a href="/">Problems</a>  </li>
-<<<<<<< HEAD
-
-			        <li> <a href="/problems/23">Problem </a>  </li>
-			        
-			        <li> <a href='/comments/23'>Comments </a></li>
-			   
-=======
 			        <li> <a href="/problems/8b4688b29eff96607b1c7f80ded9b25f6b97cca4">Problem </a>  </li>
 			        <li> <a href='/comments/fb1a2104d0242965ea19052e7c89fcdbfcab996b'>Comments </a></li>
->>>>>>> 0b5f6a9e6e375ba80dd55f7b69103623a7ecdcb0
 			   		{% if state=="loggedout"%}
 			        <li> <a href="/signin">Sign In</a>  </li>
 			        <li> <a href="/signup">Sign Up</a>  </li>
