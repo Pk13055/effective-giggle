@@ -54,16 +54,21 @@ def createProblem(form, code, files):
 
 # Admin function to upload the problem assoc files to the server - ADMIN ONLY 
 def uploadFilesAdmin(files):
-	exts = [config.ALLOWED_EXTENSIONS_PROBLEM, config.ALLOWED_EXTENSIONS_TEST, config.ALLOWED_EXTENSIONS_SOLUTION_CODE, config.ALLOWED_EXTENSIONS_EDITORIAL]
-	locs = [config.UPLOAD_FOLDER_PROBLEM, config.UPLOAD_FOLDER_TEST, config.UPLOAD_FOLDER_SOLUTION_CODE, config.UPLOAD_FOLDER_EDITORIAL]
+	exts = [config.ALLOWED_EXTENSIONS_PROBLEM, config.ALLOWED_EXTENSIONS_TEST, config.ALLOWED_EXTENSIONS_TEST, config.ALLOWED_EXTENSIONS_SOLUTION_CODE, config.ALLOWED_EXTENSIONS_EDITORIAL]
+	locs = [config.UPLOAD_FOLDER_PROBLEM, config.UPLOAD_FOLDER_TEST, config.UPLOAD_FOLDER_TEST, config.UPLOAD_FOLDER_SOLUTION_CODE, config.UPLOAD_FOLDER_EDITORIAL]
 	final_paths = []
-	for _ in range(4):
+	for _ in range(5):
 		file = files['file' + str(_)]
 		if file and allowed_file(file.filename, exts[_]):
 	            filename = hashlib.sha1(datetime.datetime.today().isoformat(':')).hexdigest() + '.' + file.filename.rsplit('.', 1)[1].lower()
-	            
-	            final_paths.append(filename)
-	            file.save(os.path.join(locs[_],final_paths[-1]))
+	            file.save(os.path.join(locs[_],filename))
+            	final_paths.append(filename)
+            	if _ == 2:
+	            	ios = open(os.path.join(config.UPLOAD_FOLDER_TEST, final_paths[-2]), 'a+')
+	            	ios.write(open(os.path.join(config.UPLOAD_FOLDER_TEST, filename)).read())
+	            	ios.close()
+	            	os.remove(os.path.join(config.UPLOAD_FOLDER_TEST, filename))
+	            	final_paths = final_paths[:-1]
 	return final_paths
 
 # get the problem data for the tables of admin page
