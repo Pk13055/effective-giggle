@@ -17,8 +17,8 @@ UPLOAD_FOLDER_TEST = os.path.abspath(os.path.join(os.sep,UPLOAD_BASE, 'large_tes
 UPLOAD_FOLDER_PROBLEM = os.path.abspath(os.path.join(os.sep,UPLOAD_BASE, 'problem_text'))
 UPLOAD_FOLDER_SUBMISSION= os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'user_submissions'))
 UPLOAD_FOLDER_EDITORIAL = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'problem_editorials'))
-# this will be the buffer folder used by the solver API to hold judging files
 UPLOAD_FOLDER_SANDBOX = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, '.sandbox'))
+UPLOAD_FOLDER_DATASET = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'Datasets'))
 
 # extensions
 
