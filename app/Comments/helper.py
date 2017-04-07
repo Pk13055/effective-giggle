@@ -32,7 +32,7 @@ def getComments(code):
 	for comment in comments:
 		comment_list.append({
 				'name' : comment.username,
-				'profile_pic' : os.path.join(config.UPLOAD_FOLDER_IMAGE, comment.profile_location),
+				'profile_pic' : comment.profile_location,
 				'timestamp' : comment.comment_timestamp[:-7],
 				'body' : comment.body
 			})

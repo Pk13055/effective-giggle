@@ -8,11 +8,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- <meta charset="utf-8"/> -->
 	{% block title %}
 		<title> {% block heading %} {% endblock %} </title>
 	{% endblock %}
-<input type="hidden" id="state">{{state}} 
+	<input type="hidden" id="state" value="{{state}}"> 
 
 
 	<meta charset="utf-8">
@@ -45,44 +44,42 @@
 	      	 	<a href="/" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
 	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
 	      		<ul class="right hide-on-med-and-down">
-
-	      		{% if state == 'loggedin' %}
-			        <li> <a href="/solver/{{user_uid}}">User Profile</a>  </li>
-			        {% if role == "admin" %}
-			        	<li> <a href="/setter/{{user_uid}}">Admin Profile</a>  </li>
-			        {% endif %}
-			    {% endif %}
 			        <li> <a href="/">Problems</a>  </li>
-			        
-			        <li> <a href="/problems/{{ problem_uid}}">Problem </a>  </li>
-			        
-			        <li> <a href='/comments/23'>Comments </a></li>
-			   
-			   		{% if state=='loggedout' %}
-		        	<li> <a href="/signin">Sign In</a>  </li>
-		        	<li> <a href="/signup">Sign Up</a>  </li>
-					{% elif state=='loggedin' %}
-	      			<li> <a href="/logout"> Logout</a>  </li>
+			        {% if problem_uid %}
+			        	<li> <a href="/problems/{{ problem_uid }}">Problem </a>  </li>
+			        	<li> <a href='/comments/{{ problem_uid }}'>Comments </a></li>
+			        {% endif %}
+	      			{% if state == 'loggedin' %}
+			        	<li> <a href="/solver/{{ session.user_uid }}">User Profile</a>  </li>
+			        	{% if role == "admin" %}
+			        		<li> <a href="/setter/{{ session.user_uid }}">Admin Profile</a>  </li>
+			        	{% endif %}
+			    	{% else %}
+		        		<li> <a href="/signin">Sign In</a>  </li>
+		        		<li> <a href="/signup">Sign Up</a>  </li>
+				    {% endif %}
+					{% if state=='loggedin' %}
+	      				<li> <a href="/logout"> Logout</a>  </li>
 	      			{% endif %}
 	      		</ul>
 		    	<ul class="side-nav" id="mobile-display">
-				{% if state == "loggedin" %}
-			        <li> <a href="/solver/{{ user_uid}}">User Profile</a>  </li>
-			        {% if role =="admin" %}
-			        <li> <a href="/setter/{{ user_uid}}">Admin Profile</a>  </li>
+					<li> <a href="/">Problems</a>  </li>
+			        {% if problem_uid %}
+			        	<li> <a href="/problems/{{ problem_uid }}">Problem </a>  </li>
+			        	<li> <a href='/comments/{{ problem_uid }}'>Comments </a></li>
 			        {% endif %}
-			    {% endif %}
-
-			        <li> <a href="/">Problems</a>  </li>
-			        <li> <a href="/problems/8b4688b29eff96607b1c7f80ded9b25f6b97cca4">Problem </a>  </li>
-			        <li> <a href='/comments/fb1a2104d0242965ea19052e7c89fcdbfcab996b'>Comments </a></li>
-			   		{% if state=="loggedout"%}
-			        <li> <a href="/signin">Sign In</a>  </li>
-			        <li> <a href="/signup">Sign Up</a>  </li>
-					{% elif state=="loggedin"%}
-	      			<li> <a href="/logout"> Logout</a>  </li>
-	      			{% endif%}
-
+	      			{% if state == 'loggedin' %}
+			        	<li> <a href="/solver/{{ session.user_uid }}">User Profile</a>  </li>
+			        	{% if role == "admin" %}
+			        		<li> <a href="/setter/{{ session.user_uid }}">Admin Profile</a>  </li>
+			        	{% endif %}
+			    	{% else %}
+		        		<li> <a href="/signin">Sign In</a>  </li>
+		        		<li> <a href="/signup">Sign Up</a>  </li>
+				    {% endif %}
+					{% if state=='loggedin' %}
+	      				<li> <a href="/logout"> Logout</a>  </li>
+	      			{% endif %}
 		      	</ul>
 	    	</div>
 		</nav>

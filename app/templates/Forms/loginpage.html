@@ -3,8 +3,10 @@
 
 {% block heading %} Login {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
+{% block scripts %}
+	<script src="{{ url_for('static', filename = 'js/login.js') }}"></script>
+{% endblock %}
 {% block content %}
-	<script src="../static/js/login.js"></script>
 		<div class="container">
 			<div class="row card medium">
 				<form class="col s12 m6 offset-m3" method="POST" action="/signin">

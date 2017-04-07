@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% set problem_uid = title %}
 {% block heading %} Comments - {{title}}  {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
 {% block scripts %}
@@ -33,7 +34,7 @@
 			{% if comments | length %}
 				{% for comment in comments %}
 				<a class="collection-item avatar black-text">
-					<img src="{{ comment.profile_pic }}" alt="image" class="circle">
+					<img src="{{ url_for('static', filename = 'images/profile_pics/' + comment.profile_pic) }}" alt="image" class="circle">
 					<span class="title flow-text">{{comment.name}}</span>
 					<p>
 						{{ comment.timestamp }}

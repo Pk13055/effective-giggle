@@ -42,7 +42,7 @@ def signin():
 			return jsonify(success = False, message = "Wrong Password"), 401
 		session['user_uid'] = user.uid
 		session['user_role'] = user.role
-		return jsonify(redirect = '/solver/' + user.uid)
+		return redirect(url_for('user.user_route', code = user.uid))
 
 # simple logout route
 @home.route('/logout',methods = ['POST','GET'])
