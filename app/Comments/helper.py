@@ -5,7 +5,7 @@ from flask import jsonify
 from app.models import Comment, User
 from app import db, models
 import config
-
+import markdown
 # custom imports 
 import os
 
@@ -42,23 +42,30 @@ def getComments(code):
 # modify to make editorial support markdown as well
 def getData(code):
 	data = models.Problem.query.filter(models.Problem.uid == code).with_entities(models.Problem.title, models.Problem.editorial_location).first()
+	#print data
 	try:
+		#print data
 		body = open(os.path.join(config.UPLOAD_FOLDER_EDITORIAL, data.editorial_location)).read()
-		body = getMarkdown(body,data.editorial_location)
-		file_ext= data.editorial_location.rsplit('.',1).lower()
+		#print body
+		print (data.editorial_location.rsplit('.',1))
+		file_ext= data.editorial_location.rsplit('.',1)[1]
+		print (file_ext)
+		body = getMarkdown(body,data.editorial_location,data)
+		#file_ext= data.editorial_location.rsplit('.',1).lower()
 		# file = request.files['file0']
 		# filename = data.editorial_location
-		
-	except:
-		body = "No Editorial available for this problem"
+		#Exception as e: print str(e)
+	except Exception,e:
+		print str(e)
+		body = "No Editorial available for this problem..."
 		file_ext = "txt"
 	return {'title' : code, 'editorial_location' : body, 'check':file_ext}
 
 
-def getMarkdown(body,filename):
-	file_ext= data.editorial_location.rsplit('.',1).lower()
-	if body and '.' in data.editorial_location and data.editorial_location.rsplit('.', 1)[1].lower() in config.ALLOWED_EXTENSIONS_EDITORIAL:
-		if(file_ext=='txt'):
+def getMarkdown(body,filename,data):
+	file_ext= data.editorial_location.rsplit('.',1)[1]
+	if body and '.' in data.editorial_location and data.editorial_location.rsplit('.', 1)[1] in config.ALLOWED_EXTENSIONS_EDITORIAL:
+		if(file_ext=='md'):
 			body=markdown.markdown(body)
 			return body
 		else:
