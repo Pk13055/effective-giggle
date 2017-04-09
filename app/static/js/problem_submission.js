@@ -17,7 +17,7 @@
 			{
 			console.log(response)
 			alert(response.message)
-			window.location.replace(response.redirect);
+			window.location.replace('/problems/'+problem_uid);
 
 			}
 		})

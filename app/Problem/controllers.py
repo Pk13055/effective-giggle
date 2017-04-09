@@ -21,14 +21,14 @@ def problem_render(code):
 		if 'user_uid' not in session:
 			return jsonify(success=False,redirect="/signin",message="you are not logged in")
 		
-		filename=problem_maker.createFile(request.form)
+		filename=problem_maker.createFile(request)
 
 		if filename is None:
-			return jsonify(success=False,message='Wrong Fil')			
+			return jsonify(success=False,message='Wrong File')			
 		
 		# generator api
 
 		if result is True:
 			return jsonify(redirect='/solver/'+request.form['user_uid'])
 		else:
-			return jsonify(success=True)
+			return jsonify(success=True,message="Something is wrong")

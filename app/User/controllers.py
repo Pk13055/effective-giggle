@@ -28,8 +28,10 @@ def admin_route(code):
 def user_route(code):
 	if request.method == 'GET':
 		data=user_maker.getData(code)
+		stats=user_maker.getStats(code)
 		#use this to test jinja page 
 		# problems_submitted=[{'status':"Wrong Answer",'name':'42','time':'1/2/12','lang':'C++'},{'status':"Accepted",'name':'Graph','time':'12/21/12','lang':'Python'}]
 		problems_submitted = user_maker.getProblemSubmitted(code)
 		if data:
-			return render_template('Profiles/profile_user.html',data = data,problems = problems_submitted)	
+			return render_template('Profiles/profile_user.html',data = data,problems = problems_submitted,stats=stats)
+				

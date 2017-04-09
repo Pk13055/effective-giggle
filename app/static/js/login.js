@@ -12,6 +12,7 @@
 			data:{'email':email,'password':password},
 			success:function(response){
 				window.location.replace(response.redirect);
+				// console.log(response)
 
 			},
 
@@ -19,9 +20,9 @@
 			{
 			console.log(response)
 
-				if(confirm(JSON.parse(response.responseText).message))
-				window.location.replace('/signup');
-				else{}
+				alert(JSON.parse(response.responseText).message)
+				if(JSON.parse(response.responseText).message=="Register First")
+					window.location.replace('/signup');
 			}
 		})
 

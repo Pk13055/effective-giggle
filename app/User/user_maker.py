@@ -32,6 +32,18 @@ def getData(code):
 	else:
 		return {}
 
+def getStats(code):
+	user = models.User.query.filter(models.User.uid == code).first()
+	if user:
+		user_stat = {
+		 "accepted":user.accepted,
+		"tle":user.tle,
+		"wrong_answer":user.wrong_answer,
+		}
+		return user_stat
+	else:
+		return {}
+
 # Admin function to create a problem object from the submitted form
 def createProblem(form, code, files):
 	obj = {}
