@@ -12,11 +12,8 @@
 			data:{'email':email,'password':password},
 			success:function(response){
 				window.location.replace(response.redirect);
-<<<<<<< Updated upstream
-				// console.log(response)
+					// console.log(response)
 
-=======
->>>>>>> Stashed changes
 			},
 
 			error:function(response)

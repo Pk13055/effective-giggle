@@ -1,4 +1,4 @@
-$('document').ready(function(){
+    $('document').ready(function(){
 
     stat=($("#stats").val()).replace(/\'/g,'"')
     //json object with stats
