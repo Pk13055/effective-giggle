@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, \
                   flash, g, session, redirect, url_for, jsonify
 from app import db, requires_auth
-
+from app.models import User
 import user_maker
 
 
@@ -34,4 +34,3 @@ def user_route(code):
 		problems_submitted = user_maker.getProblemSubmitted(code)
 		if data:
 			return render_template('Profiles/profile_user.html',data = data,problems = problems_submitted,stats=stats)
-				

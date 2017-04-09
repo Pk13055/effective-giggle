@@ -8,8 +8,13 @@
 
 <input type="hidden" id="problem_uid" value="{{problem.uid}}">
 
+<<<<<<< Updated upstream
 <input type="hidden" id="user_uid" value="{{session.user_uid}}">
 	<script src="../static/js/problem_submission.js"></script>
+=======
+<input type="hidden" id="user_uid">{{session.user_uid}}
+	<!-- <script src="../static/js/problem_submission.js"></script> -->
+>>>>>>> Stashed changes
 		<div class="container">
 			<div class="row">
 				<h4 class="flow-text"> Problem {{ problem.id }} - {{ problem.title}}</h4>
@@ -65,7 +70,7 @@
 				<div class="col s12 card small z-depth-2">
 					<div class="card-content">
 						<h5 class="flow-text"> Upload Solution</h5>
-						<form action="#" enctype="multipart" method="POST">
+						<form action="#" enctype="multipart/form-data" method="POST">
 						<div class="col s12">
 							<input type="hidden" id="user_uid" value="{{session.user_uid}}">
 							<!-- Iterate through languages here  -->
@@ -90,20 +95,23 @@
 							<div class="file-field input-field">
 	                      		<div class="btn teal darken-2">
 	                        		<span><i class="material-icons">code</i></span>
-	                        		<input type="file" name="file" readonly="true" />
+	                        		<input type="file" name="file007" readonly="true" />
 		                      	</div>
 	                      		<div class="file-path-wrapper">
 	                        		<input class="file-path validate" type="text" required="true" />
 	                      		</div>
 	                    	</div>
 						</div>
-						</form>
-					</div>
 					<div class="card-action right-align">
-						<button class="btn waves-effect waves-dark" type="submit" name="submit" id="submit">Submit!
+						<button class="btn waves-effect waves-dark" type="submit" name="submit" id="submit">
+						Submit!
 								<i class="material-icons right">send</i>
 							</button>
 					</div>
+
+						</form>
+					</div>
+
 				</div>
 			</div>
 			{% endif %}

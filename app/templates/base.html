@@ -80,6 +80,23 @@
 					{% if state=='loggedin' %}
 	      				<li> <a href="/logout"> Logout</a>  </li>
 	      			{% endif %}
+				{% if state=="loggedin" %}
+			        <li> <a href="/solver/{{ session.user_uid}}">User Profile</a>  </li>
+			        {% if role=="admin" %}
+			        <li> <a href="/setter/{{ session.user_uid}}">Admin Profile</a>  </li>
+			        {% endif %}
+			    {% endif %}
+
+			        <li> <a href="/">Problems</a>  </li>
+			        <li> <a href="/problems/8b4688b29eff96607b1c7f80ded9b25f6b97cca4">Problem </a>  </li>
+			        <li> <a href='/comments/fb1a2104d0242965ea19052e7c89fcdbfcab996b'>Comments </a></li>
+			   		{% if state=="loggedout" %}
+			        <li> <a href="/signin">Sign In</a>  </li>
+			        <li> <a href="/signup">Sign Up</a>  </li>
+					{% elif state=="loggedin" %}
+	      			<li> <a href="/logout"> Logout</a>  </li>
+	      			{% endif %}
+
 		      	</ul>
 	    	</div>
 		</nav>

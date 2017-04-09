@@ -52,7 +52,6 @@ def logout():
 	session.pop('user_role')
 	return redirect('/signin')
 			
-
 # route for signing up 
 @home.route('/signup', methods = ['POST', 'GET'])
 def signup():

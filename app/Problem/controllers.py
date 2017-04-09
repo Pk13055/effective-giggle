@@ -17,18 +17,16 @@ def problem_render(code):
 		return render_template('Main/problems.html', problem = problem)			
 
 	elif request.method == 'POST':
-		print(request)
 		if 'user_uid' not in session:
 			return jsonify(success=False,redirect="/signin",message="you are not logged in")
 		
 		filename=problem_maker.createFile(request)
-
 		if filename is None:
 			return jsonify(success=False,message='Wrong File')			
 		
 		# generator api
-
+		result=True
 		if result is True:
-			return jsonify(redirect='/solver/'+request.form['user_uid'])
+			return redirect(url_for('user.user_route',code=session['user_uid']))
 		else:
 			return jsonify(success=True,message="Something is wrong")

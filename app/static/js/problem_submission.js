@@ -10,15 +10,14 @@
 			// async:false,
 			data:"",
 			success:function(response){
-				window.location.replace('/solver/'+session.user_uid);
+				window.location.replace('/solver/');
 			},
 
 			error:function(response)
 			{
 			console.log(response)
 			alert(response.message)
-			window.location.replace('/problems/'+problem_uid);
-
+			window.location.replace(response.redirect);
 			}
 		})
 
