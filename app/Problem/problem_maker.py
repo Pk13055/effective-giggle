@@ -26,8 +26,11 @@ def getData(code):
 	# returns the data from each location
 	try:
 		file=open(config.UPLOAD_FOLDER_PROBLEM+"/"+problem.problem_location,"r").read()
+		file=file.decode('utf-8')
+		# print(file)
 	except:
-		file="You dont need the question to answer this"
+		# file="You dont need the question to answer this"
+		file=config.UPLOAD_FOLDER_PROBLEM+"/"+problem.problem_location
 	try:
 		io_file=open(config.UPLOAD_FOLDER_TEST+
 			"/"+problem.io_location,"r")
@@ -49,7 +52,6 @@ def getData(code):
 		return {}
 
 def createFile(request):
-	print(request)
 	file=request.files['file007']
 	filename=file.filename
 	if file and '.' in filename and filename.rsplit('.', 1)[1].lower() in config.ALLOWED_EXTENSIONS_CODE:
