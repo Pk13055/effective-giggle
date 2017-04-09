@@ -25,9 +25,9 @@ UPLOAD_FOLDER_DATASET = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'Datasets
 # for the profile pictue 
 ALLOWED_EXTENSIONS_IMAGE = set(['jpg', 'jpeg', 'png'])  
 # for the code that is submitted by the users
-ALLOWED_EXTENSIONS_CODE  = set(['cpp', 'c', 'py'])  
+ALLOWED_EXTENSIONS_CODE  = set(['cpp', 'c', 'py', 'c++'])  
 # for the code that is uploaded by the admin 
-ALLOWED_EXTENSIONS_SOLUTION_CODE = set(['cpp', 'c'])
+ALLOWED_EXTENSIONS_SOLUTION_CODE = set(['cpp', 'c', 'c++'])
 # for the large test case files 
 ALLOWED_EXTENSIONS_TEST  = set(['txt'])
 # for the question that is uploaded

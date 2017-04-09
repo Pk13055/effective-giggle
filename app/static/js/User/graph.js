@@ -5,7 +5,7 @@ $('document').ready(function(){
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
-            type: 'donut'
+            type: 'pie'
         },
         title: {
             text: 'Efficiency'

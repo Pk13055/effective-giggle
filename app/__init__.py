@@ -44,8 +44,7 @@ app.register_blueprint(comments)
 app.register_blueprint(home)
 app.register_blueprint(problem)
 app.register_blueprint(user)
-# app.register_blueprint(xyz_module)
-# ..
+
 
 # Build the database:
 # This will create the database file using SQLAlchemy
