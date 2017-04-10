@@ -81,10 +81,12 @@ class Solver():
 
 	# this function generates AND/OR runs the user code against the input file(s)
 	def generate_result(self):
+		self._result['status'] = []
 		try:
 			# get JSON from this response
 			test_cases = self._generateLargeIO()
 		except:
+			self._result['added'] = self._createSubmission()
 			return self._result
 
 
@@ -123,18 +125,18 @@ class Solver():
 					inp = open(temp_loc)
 					e = open(error_loc, 'w')
 					try:
-						op = subprocess.check_output(shlex.split(run_query), timeout = time, stderr = e, stdin = inp)
+						op = subprocess.check_output(shlex.split(run_query), stderr = e, stdin = inp)
 						e.close()
 						# if os.path.getsize(error_loc):
 						# 	_result['status'].append("Seg Fault")
 						if op.decode('utf-8').strip('\n') == '\n'.join(j):
-							_result['status'].append("Accepted")	
+							self._result['status'].append("Accepted")	
 						else:
 							self._result['status'].append("Wrong Answer")
 					except subprocess.CalledProcessError as error:
 							self._result['status'].append("Segmentation Fault (ERR_CODE %d)" % (error.returncode))
-					except subprocess.TimeoutExpired:
-							self._result['status'].append("Timelimit exceeded")
+					# except subprocess.TimeoutExpired:
+					# 		self._result['status'].append("Timelimit exceeded")
 
 		# run with python 
 		elif self.language in ['python2', 'python3']:
