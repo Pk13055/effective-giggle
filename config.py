@@ -47,7 +47,7 @@ DATABASE_CONNECT_OPTIONS = {}
 # operations using the other.
 THREADS_PER_PAGE = 2
 
-# Enable protection agains *Cross-site Request Forgery (CSRF)*
+# # Enable protection agains *Cross-site Request Forgery (CSRF)*
 CSRF_ENABLED     = True
 
 # Use a secure, unique and absolutely secret key for

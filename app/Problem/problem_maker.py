@@ -30,7 +30,7 @@ def getData(code):
 		# print(file)
 	except:
 		# file="You dont need the question to answer this"
-		file=config.UPLOAD_FOLDER_PROBLEM+"/"+problem.problem_location
+		file="hello"
 	try:
 		io_file=open(config.UPLOAD_FOLDER_TEST+
 			"/"+problem.io_location,"r")
@@ -53,7 +53,7 @@ def getData(code):
 
 def getLocation(code):
 	problem = models.Problem.query.filter(models.Problem.uid == code).first()
-	locations=[]
+	locations={}
 	locations['io_location']=problem.io_location
 	locations['problem_location']=problem.problem_location
 	return locations

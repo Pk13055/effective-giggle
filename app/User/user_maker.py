@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 # Cross site function that checks if the uploaded file is valid
 # specify the type1 as the set of file extensions to check for
 def allowed_file(filename, type1):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in type1
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in type1
 
 # Admin function to render the dict data for the given admin
 def getData(code):
@@ -29,18 +29,6 @@ def getData(code):
 			'uid':user.uid,
 		}
 		return user_data
-	else:
-		return {}
-
-def getStats(code):
-	user = models.User.query.filter(models.User.uid == code).first()
-	if user:
-		user_stat = {
-		 "accepted":user.accepted,
-		"tle":user.tle,
-		"wrong_answer":user.wrong_answer,
-		}
-		return user_stat
 	else:
 		return {}
 
@@ -72,15 +60,15 @@ def uploadFilesAdmin(files):
 	for _ in range(5):
 		file = files['file' + str(_)]
 		if file and allowed_file(file.filename, exts[_]):
-	            filename = hashlib.sha1(datetime.datetime.today().isoformat(':')).hexdigest() + '.' + file.filename.rsplit('.', 1)[1].lower()
-	            file.save(os.path.join(locs[_],filename))
-            	final_paths.append(filename)
-            	if _ == 2:
-	            	ios = open(os.path.join(config.UPLOAD_FOLDER_TEST, final_paths[-2]), 'a+')
-	            	ios.write(open(os.path.join(config.UPLOAD_FOLDER_TEST, filename)).read())
-	            	ios.close()
-	            	os.remove(os.path.join(config.UPLOAD_FOLDER_TEST, filename))
-	            	final_paths = final_paths[:-1]
+				filename = hashlib.sha1(datetime.datetime.today().isoformat(':')).hexdigest() + '.' + file.filename.rsplit('.', 1)[1].lower()
+				file.save(os.path.join(locs[_],filename))
+				final_paths.append(filename)
+				if _ == 2:
+					ios = open(os.path.join(config.UPLOAD_FOLDER_TEST, final_paths[-2]), 'a+')
+					ios.write(open(os.path.join(config.UPLOAD_FOLDER_TEST, filename)).read())
+					ios.close()
+					os.remove(os.path.join(config.UPLOAD_FOLDER_TEST, filename))
+					final_paths = final_paths[:-1]
 	return final_paths
 
 # get the problem data for the tables of admin page
@@ -111,3 +99,16 @@ def getProblemSubmitted(code):
 			'lang':problem.submission_language,
 			})
 	return problem_list	
+
+
+def getStats(code):
+	user = models.User.query.filter(models.User.uid == code).first()
+	if user:
+		user_stat = {
+		 "accepted":user.accepted,
+		"tle":user.tle,
+		"wrong_answer":user.wrong_answer,
+		}
+		return user_stat
+	else:
+		return {}

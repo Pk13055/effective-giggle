@@ -9,7 +9,6 @@ import os, hashlib, datetime
 from werkzeug.utils import secure_filename
 from app.Solver.solver_api import Solver
 
-
 problem = Blueprint('problem', __name__)
 
 @problem.route('/problems/<code>', methods = ['GET', 'POST'])
@@ -27,11 +26,13 @@ def problem_render(code):
 			return jsonify(success=False,message='Wrong File')			
 
 		# generator api
-		locations = getLocation(code) 
-		result =Solver(request.form['language'],filename,locations['io_location'],session['user_uid'],locations['problem_location'],1.0)
+		locations = problem_maker.getLocation(code) 
+		solver =Solver(request.form['language'],filename,locations['io_location'],session['user_uid'],code,1.0)
+		
+		result=solver.generate_result()
 
-		result=True
-		if result is True:
-			return jsonify(success=True,redirect="/solver/"+session['user_uid'])
+		if result is not None:
+			print(result)
+			return redirect('/solver/'+session['user_uid'])
 		else:
 			return jsonify(success=True,message="Something is wrong")
