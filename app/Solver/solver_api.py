@@ -78,14 +78,6 @@ class Solver():
 				'inputs' : inputs,
 				'outputs' : outputs
 			}
-	_result = {
-		'user_id' : self.user_id,
-		'problem_id' : self.problem_id,
-		'submission_timestamp' : datetime.datetime.today().isoformat(' '),
-		'submission_language' : self.language,
-		'status' : [],
-		'db_add' : False
-	}
 
 	# this function generates AND/OR runs the user code against the input file(s)
 	def generate_result(self):
@@ -151,42 +143,6 @@ class Solver():
 
 		self._result['added'] = self._createSubmission()
 		return self._result
-  
-	# this function gives us a list with the input, output strings 
-	def _generateLargeIO(self):
-
-		data = open(os.path.join(config.UPLOAD_FOLDER_TEST, self.io_location)).read().strip('\n').split('\n')
-		# # comment out after done
-		# data = open('testcase').read().strip('\n').split('\n')
-		
-		inputs = []
-		outputs = []
-		io_begs = [i for i, j in enumerate(data) if 'Input' in j]
-		io_ends = [i for i, j in enumerate(data) if 'Output' in j]
-
-		# in case input file is corrupt
-		if len(io_begs) != len(io_ends):
-			_result['status'].append("I/O Error")
-			raise Exception
-		
-		else:
-			# handle inputs
-			for i, j in enumerate(io_begs):
-				if i == len(io_begs) - 1:
-					inputs.append(data[io_begs[i] + 1:io_ends[0]])
-				else:
-					inputs.append(data[io_begs[i] + 1: io_begs[i + 1]])
-			# handle outputs
-			for i, j in enumerate(io_ends):
-				if i == len(io_ends) - 1:
-					outputs.append(data[io_ends[i] + 1:len(data)])
-				else:
-					outputs.append(data[io_ends[i] + 1: io_ends[i + 1]])
-			return {
-				'inputs' : inputs,
-				'outputs' : outputs
-			}
-
 
 	# this creates a submission object after processing and returns it if successful
 	def _createSubmission(self):
