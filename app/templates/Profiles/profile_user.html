@@ -78,8 +78,8 @@
 									problem.status}}
 								</td>
 
-								{% elif problem.status == "TLE" %}
-								<td class="black-text text-darken-2">
+								{% elif problem.status == "Timelimit exceeded" %}
+								<td class="yellow-text text-darken-2">
 									{{ 
 									problem.status}}
 								</td>
@@ -89,6 +89,11 @@
 								<td class="green-text text-darken-2">
 									{{ 
 									problem.status}}
+								</td>
+
+								{% else %}
+								<td class="black-text text-darken-2">
+									{{ problem.status }}
 								</td>
 								
 								{% endif%}	
