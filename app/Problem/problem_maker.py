@@ -51,6 +51,13 @@ def getData(code):
 	else:
 		return {}
 
+def getLocation(code):
+	problem = models.Problem.query.filter(models.Problem.uid == code).first()
+	locations=[]
+	locations['io_location']=problem.io_location
+	locations['problem_location']=problem.problem_location
+	return locations
+
 def createFile(request):
 	file=request.files['file007']
 	filename=file.filename

@@ -27,6 +27,9 @@ def problem_render(code):
 			return jsonify(success=False,message='Wrong File')			
 
 		# generator api
+		locations = getLocation(code) 
+		result =Solver(request.form['language'],filename,locations['io_location'],session['user_uid'],locations['problem_location'],1.0)
+
 		result=True
 		if result is True:
 			return jsonify(success=True,redirect="/solver/"+session['user_uid'])
