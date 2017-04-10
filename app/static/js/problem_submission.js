@@ -10,7 +10,7 @@
 			// async:false,
 			data:"",
 			success:function(response){
-				window.location.replace('/solver/');
+				window.location.replace(response.redirect);
 			},
 
 			error:function(response)

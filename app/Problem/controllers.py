@@ -7,6 +7,8 @@ import app,config
 import problem_maker 
 import os, hashlib, datetime
 from werkzeug.utils import secure_filename
+from app.Solver.solver_api import Solver
+
 
 problem = Blueprint('problem', __name__)
 
@@ -23,10 +25,10 @@ def problem_render(code):
 		filename=problem_maker.createFile(request)
 		if filename is None:
 			return jsonify(success=False,message='Wrong File')			
-		
+
 		# generator api
 		result=True
 		if result is True:
-			return redirect(url_for('user.user_route',code=session['user_uid']))
+			return jsonify(success=True,redirect="/solver/"+session['user_uid'])
 		else:
 			return jsonify(success=True,message="Something is wrong")

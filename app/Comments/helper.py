@@ -47,16 +47,13 @@ def getData(code):
 		#print data
 		body = open(os.path.join(config.UPLOAD_FOLDER_EDITORIAL, data.editorial_location)).read()
 		#print body
-		print (data.editorial_location.rsplit('.',1))
 		file_ext= data.editorial_location.rsplit('.',1)[1]
-		print (file_ext)
 		body = getMarkdown(body,data.editorial_location,data)
 		#file_ext= data.editorial_location.rsplit('.',1).lower()
 		# file = request.files['file0']
 		# filename = data.editorial_location
 		#Exception as e: print str(e)
-	except Exception,e:
-		print str(e)
+	except Exception, e:
 		body = "No Editorial available for this problem..."
 		file_ext = "txt"
 	return {'title' : code, 'editorial_location' : body, 'check':file_ext}

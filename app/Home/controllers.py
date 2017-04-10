@@ -10,6 +10,7 @@ home = Blueprint('home', __name__)
 # this route is to maintain conformity with homepage nomenclature
 @home.route('/', methods = ['GET'])
 def homie():
+	print(session)
 	return redirect(url_for('home.home_render', page = 1))
 
 # this route renders the main page of the website
@@ -48,9 +49,10 @@ def signin():
 @home.route('/logout',methods = ['POST','GET'])
 @requires_auth
 def logout():
+	print(session)
 	session.pop('user_uid')
 	session.pop('user_role')
-	return redirect('/signin')
+	return redirect(url_for('home.signin'))
 			
 # route for signing up 
 @home.route('/signup', methods = ['POST', 'GET'])
