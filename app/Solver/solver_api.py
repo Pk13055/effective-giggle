@@ -34,11 +34,12 @@ class Solver():
 	}
 
 	_result = {
-		'self.user_id' : self.user_id,
-		'self.problem_id' : self.problem_id,
+		'user_id' : self.user_id,
+		'problem_id' : self.problem_id,
 		'submission_timestamp' : datetime.datetime.today().isoformat(' '),
-		'submission_self.language' : self.language,
+		'submission_language' : self.language,
 		'status' : []
+		'db_add' : False
 	}
 
 	# this function generates AND/OR runs the user code against the input file(s)
@@ -99,15 +100,16 @@ class Solver():
 		elif self.language in ['python2', 'python3']:
 			pass
 		
+
+		_result['added'] = createSubmission()
 		return _result
 
 	# this function gives us a list with the input, output strings 
 	def _generateLargeIO(self):
-		# f524a49ece676d9c5a2883f4ff6b38ae156ffb84.txt
-		data = open(os.path.join(config.UPLOAD_FOLDER_TEST, self.io_location)).read().strip('\n').split('\n')
 
-		# comment out after done
-		data = open('testcase').read().strip('\n').split('\n')
+		data = open(os.path.join(config.UPLOAD_FOLDER_TEST, self.io_location)).read().strip('\n').split('\n')
+		# # comment out after done
+		# data = open('testcase').read().strip('\n').split('\n')
 		
 		inputs = []
 		outputs = []
@@ -141,8 +143,8 @@ class Solver():
 	# this creates a submission object after processing and returns it if successful
 	def createSubmission(self):
 		try:
-			db.session.add(models.Submission(_result['submission_timestamp'], ','.join(_result['status']), _result['self.user_id'], _result['self.problem_id']))
+			db.session.add(models.Submission(','.join(_result['status']), _result['user_id'], _result['problem_id'], self.language, self.solution_location))
 			db.session.commit()
-			return _result
+			return True
 		except:
-			return None
+			return False
