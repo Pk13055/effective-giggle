@@ -50,7 +50,7 @@ def signin():
 @requires_auth
 def logout():
 	print(session)
-	session.pop('user_uid')
+	session.pop('user_uid')	
 	session.pop('user_role')
 	return redirect(url_for('home.signin'))
 			
