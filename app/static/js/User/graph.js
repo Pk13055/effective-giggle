@@ -1,5 +1,10 @@
-$('document').ready(function(){
+    $('document').ready(function(){
 
+    stat=($("#stats").val()).replace(/\'/g,'"')
+    //json object with stats
+    s=JSON.parse(stat)
+
+    if(s.accepted + s.wrong_answer + s.tle !==0){
     Highcharts.chart('container1', {
         chart: {
             plotBackgroundColor: null,
@@ -31,13 +36,13 @@ $('document').ready(function(){
             colorByPoint: true,
             data: [{
                 name: 'TLE',
-                y: 15
+                y: s.tle
             }, {
                 name: 'WA',
-                y: 60
+                y: s.wrong_anwser
             }, {
                 name: 'Accepted',
-                y: 25,
+                y: s.accepted,
                 sliced: true,
                 selected: true
             }]
@@ -100,4 +105,5 @@ $('document').ready(function(){
         }]
 
     });
+}
 });

@@ -145,7 +145,7 @@ class Submission(db.Model):
 	submission_timestamp = db.Column(db.String(255),nullable=False)
 	
 	# basic info about the submission
-	status = db.Column(db.String(50), nullable = False)
+	status = db.Column(db.String(255), nullable = False)
 	user_id = db.Column(db.String(255), nullable = False)
 	problem_id = db.Column(db.String(255), nullable = False)
 	submission_language = db.Column(db.String(40), nullable = False)

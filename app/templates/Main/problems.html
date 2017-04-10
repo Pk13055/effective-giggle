@@ -65,24 +65,24 @@
 				<div class="col s12 card small z-depth-2">
 					<div class="card-content">
 						<h5 class="flow-text"> Upload Solution</h5>
-						<form action="#" enctype="multipart" method="POST">
+						<form action="#" enctype="multipart/form-data" method="POST">
 						<div class="col s12">
 							<input type="hidden" id="user_uid" value="{{session.user_uid}}">
 							<!-- Iterate through languages here  -->
 							<p class="col s12 m3">
-								<input name="language" type="radio" id="C"> 
+								<input name="language" type="radio" id="C" value="C"> 
 								<label for="C"> C</label>
 							</p>
 							<p class="col s12 m3">
-								<input name="language" type="radio" id="Cpp"> 
+								<input name="language" type="radio" id="Cpp" value="C++"> 
 								<label for="Cpp"> C++</label>
 							</p>	
 							<p class="col s12 m3">
-								<input name="language" type="radio" id="python2"> 
+								<input name="language" type="radio" id="python2" value="python 2"> 
 								<label for="python2"> Python2</label>
 							</p>	
 							<p class="col s12 m3">
-								<input name="language" type="radio" id="python3"> 
+								<input name="language" type="radio" id="python3" value="python 3"> 
 								<label for="python3"> Python3</label>
 							</p>
 						</div>
@@ -90,20 +90,23 @@
 							<div class="file-field input-field">
 	                      		<div class="btn teal darken-2">
 	                        		<span><i class="material-icons">code</i></span>
-	                        		<input type="file" name="file" readonly="true" />
+	                        		<input type="file" name="file007" readonly="true" />
 		                      	</div>
 	                      		<div class="file-path-wrapper">
 	                        		<input class="file-path validate" type="text" required="true" />
 	                      		</div>
 	                    	</div>
 						</div>
-						</form>
-					</div>
 					<div class="card-action right-align">
-						<button class="btn waves-effect waves-dark" type="submit" name="submit" id="submit">Submit!
+						<button class="btn waves-effect waves-dark" type="submit" name="submit" id="submit">
+						Submit!
 								<i class="material-icons right">send</i>
 							</button>
 					</div>
+
+						</form>
+					</div>
+
 				</div>
 			</div>
 			{% endif %}
