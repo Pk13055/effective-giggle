@@ -88,10 +88,10 @@ def getProblems(code):
 
 # problems submitted for the user page
 def getProblemSubmitted(code):
-	problems=models.Submission.query.filter(models.Submission.user_id==code).all()
+	problems=models.Submission.query.filter(models.Submission.user_id == code).all()
 	problem_list=[]
 	for problem in problems:
-		problem_name=models.Problem.query.filter(models.Problems.id==problem.uid)
+		problem_name = models.Problem.query.filter(models.Problem.uid == problem.problem_id).with_entities(models.Problem.title).first().title
 		problem_list.append({
 			'status':problem.status,
 			'name':problem_name,
