@@ -45,9 +45,45 @@ def getData(code):
 
 	# returns the data from each location
 	try:
-		file=open(config.BASE_DIR+problem_location,"r").read()
+		# open(config.BASE_DIR+problem_location,"r").read()
+		lines = []
+		introduction = ""
+		constraints = []
+		inputs = []
+		outputs = []
+		with open(config.UPLOAD_FOLDER_PROBLEM+problem_location,"rt") as in_file:
+			for line in in_file:
+				lines.append(line.rstrip('\n'))	
+		n = len(lines)
+		i = 0
+		#print(lines[0])
+		while i < n:
+			#print("yo")
+			if lines[i] == 'Heading': 
+				i += 1
+			if lines[i] == 'Introduction':
+				i += 1
+				while lines[i] != 'Constraints':
+					introduction = introduction + lines[i] + "\n"
+					i += 1			
+			if lines[i] == 'Constraints':
+				i += 1
+				while lines[i] != 'Test Cases':
+					constraints.append(lines[i]) 
+					i += 1
+			if lines[i] == 'Test Cases':
+				i+=1
+				while i < n:
+					if lines[i] == 'Input':
+						i += 1
+						inputs.append(lines[i])
+					if lines[i] == 'Output':
+						i += 1
+						outputs.append(lines[i])
+					i += 1
+
 	except:
-		file="You dont need the question to answer this"
+		introduction = "Please check the upload file format."
 	try:
 		io_file=open(config.UPLOAD_FOLDER_SUBMISSION+io_location,"r")
 		io=io_file.read().split("\n")
@@ -60,7 +96,7 @@ def getData(code):
 			'uid':problem.uid,
 			'title' : problem.title,
 			'tags' : tag,		
-			'problem':file,
+			'problem':introduction,
 			'io':io,
 		}
 		return problem_data
