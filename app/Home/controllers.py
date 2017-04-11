@@ -68,7 +68,10 @@ def signup():
 @home.route('/search',methods=['GET','POST'])
 def search_redirect():
 	val=request.form['search']	
-	return redirect(url_for('home.search', key = 1,val=val))
+	if val == "":
+		return redirect(url_for('home.home_render', page = 1))
+	else:
+		return redirect(url_for('home.search', key = 1,val=val))
 
 @home.route('/search/<key>?val=<val>',methods=['GET','POST'])
 def search(key,val):
