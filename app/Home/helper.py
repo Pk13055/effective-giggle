@@ -10,6 +10,7 @@ from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
 from app.models import User
 import os, hashlib, datetime
+from app.models import Problem
 
 
 # makes a JSON response, use this function for testing purpose
@@ -106,3 +107,68 @@ def makeHome(page):
  	current_end = min(current_beg + PER_PAGE,db.session.query(models.Problem).count()) 
 	makeData(current_beg, current_end, 'current', PROBLEMS)
 	return data
+
+
+# def search_list(val,key):
+def search_list(value,key):
+
+	val=value.split(' ')
+
+	problem_list=[]
+	problem_list_opt=[]
+	# by tag
+	for tag in val:
+		problems=Problem.query.filter(Problem.tags.like("%"+tag+"%")).all()		 
+		print(problems)
+		for problem in problems:
+			dict={}
+			dict['id']=problem.id
+			dict['title']=problem.title
+			dict['uid']=problem.uid
+			dict['tags']=problem.tags.split(',')
+			problem_list.append(dict)
+
+	# by name
+	for value in val:
+		problems=Problem.query.filter(Problem.title.like("%"+value+"%")).all()		 
+
+		for problem in problems:
+			dict={}
+			dict['id']=problem.id
+			dict['title']=problem.title
+			dict['uid']=problem.uid
+			dict['tags']=problem.tags.split(',')
+			problem_list.append(dict)
+
+	# problem_list.sort(key = lambda x : x['title'])
+
+	# by code
+	for code in val:
+		problems=Problem.query.filter(Problem.id.like("%"+code+"%")).all()		 
+		for problem in problems:
+			dict={}
+			dict['id']=problem.id
+			dict['title']=problem.title
+			dict['uid']=problem.uid
+			dict['tags']=problem.tags.split(',')
+			problem_list.append(dict)
+	
+	ran=int(key)*10 - 1 
+
+	problem_list_opt=[]
+	for x in range(ran-10,ran) :
+		try:
+			problem_list_opt.append(problem_list[x])
+		except:
+			break
+
+
+	dict={}
+	dict['list']=problem_list_opt
+	dict['total_pages']=len(problem_list)/10 +1
+	dict['current_page']=key
+	print(dict)
+	return dict
+	# return problem_list
+
+

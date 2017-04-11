@@ -68,4 +68,18 @@ def createFile(request):
 	else: 
 		return None   
 
-		
+def updateProblem(problem_uid,verdict):
+	problem = models.Problem.query.filter(models.Problem.uid == problem_uid).first()
+
+	if verdict == "Accepted":
+		problem.accepted=1 +problem.accepted
+	elif verdict == "Wrong Answer":
+		problem.wrong_answer=1 + problem.wrong_answer
+	elif verdict == "Timelimit exceeded":
+		problem.tle=1+problem.tle
+
+	problem.total_submissions=1 + problem.total_submissions 	
+
+	print(problem.wrong_answer)
+
+	db.session.commit()

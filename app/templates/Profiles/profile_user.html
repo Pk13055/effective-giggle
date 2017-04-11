@@ -16,6 +16,7 @@
 {% block content %}
 
 <input type="hidden" id="stats" value="{{stats}}">
+<input type="hidden" id="problem_attempt" value="{{problems}}">
 
 		<div class="container">
 			<div class="row card">
@@ -69,7 +70,9 @@
 							{% for problem in problems %}
 							<tr>
 								<td>{{ problem.time }}</td>
-								<td>{{ problem.name }}</td>
+								
+								<td><a href="/problems/{{problem.uid}}">{{ problem.name }}</a></td>
+								
 								<td> {{ problem.lang }}</td>
 								
 								{% if problem.status == "Wrong Answer" %}
