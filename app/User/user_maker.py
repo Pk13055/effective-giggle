@@ -8,7 +8,6 @@ import app, config
 import os, hashlib, datetime
 from werkzeug.utils import secure_filename
 
-
 # Cross site function that checks if the uploaded file is valid
 # specify the type1 as the set of file extensions to check for
 def allowed_file(filename, type1):
@@ -92,8 +91,21 @@ def getProblemSubmitted(code):
 	problem_list=[]
 	for problem in problems:
 		problem_name = models.Problem.query.filter(models.Problem.uid == problem.problem_id).with_entities(models.Problem.title).first().title
+		status=problem.status.split(',')
+		i=0
+		
+		while i < len(status):
+			if(status[i] != "Accepted"):
+				verdict=status[i]
+				break;
+			i=i+1	
+
+		if i == len(status):
+			verdict="Accepted"
+
 		problem_list.append({
-			'status':problem.status,
+			'uid':problem.problem_id,
+			'status':verdict,
 			'name':problem_name,
 			'time':problem.submission_timestamp,
 			'lang':problem.submission_language,
@@ -112,3 +124,35 @@ def getStats(code):
 		return user_stat
 	else:
 		return {}
+
+		
+def updateUser(status,user_uid):
+	user=models.User.query.filter(models.User.uid==user_uid).first()
+	# print(user)
+
+	i=0
+	while i < len(status):
+		if(status[i] != "Accepted"):
+			verdict=status[i]
+			break;
+		i=i+1	
+
+	if i == len(status):
+		verdict="Accepted"		
+
+	if verdict == "Accepted":
+		user.rank_value=10+user.rank_value 	
+	else:
+		user.rank_value=user.rank_value-5
+
+	if verdict == "Accepted":
+		user.accepted=1 + user.accepted
+	elif verdict == "Wrong Answer":
+		user.wrong_answer=1 + user.wrong_answer
+	elif verdict == "Timelimit exceeded":
+		user.tle=1+user.tle
+
+	user.total_submissions=1 + user.total_submissions
+
+	db.session.commit()	
+	return verdict

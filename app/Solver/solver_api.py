@@ -100,8 +100,8 @@ class Solver():
 		error_loc = os.path.join(config.UPLOAD_FOLDER_SANDBOX, self.user_id + test_buffer)
 		
 
-		print(sol_loc)
-		print(temp_loc)
+		# print(sol_loc)
+		# print(temp_loc)
 		# create a.out file first
 		if self.language in ['C', 'C++']:
 			# buffer file

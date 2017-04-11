@@ -44,6 +44,13 @@
 	      	 	<a href="/" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
 	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
 	      		<ul class="right hide-on-med-and-down">
+			        <li>
+			        	<form method="POST" action="/search" class="input-field s12 ">
+							<input type="text" max="200" id="search" name="search" placeholder="Search by name, code, tags" class="col s11">
+						
+			        	</form>
+					</li>
+
 			        <li> <a href="/">Problems</a>  </li>
 			        {% if problem_uid %}
 			        	<li> <a href="/problems/{{ problem_uid }}">Problem </a>  </li>

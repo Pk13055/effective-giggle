@@ -48,6 +48,7 @@ def signin():
 @home.route('/logout',methods = ['POST','GET'])
 @requires_auth
 def logout():
+
 	session.pop('user_uid')
 	session.pop('user_role')
 	return redirect(url_for('home.signin'))
@@ -63,3 +64,19 @@ def signup():
 			return render_template('Forms/loginpage.html')
 		else:
 			return result
+
+@home.route('/search',methods=['GET','POST'])
+def search_redirect():
+	val=request.form['search']	
+	if val == "":
+		return redirect(url_for('home.home_render', page = 1))
+	else:
+		return redirect(url_for('home.search', key = 1,val=val))
+
+@home.route('/search/<key>?val=<val>',methods=['GET','POST'])
+def search(key,val):
+	problem_dict={}
+	problem_dict=helper.search_list(val,key)
+
+	# return jsonify(val=val,problems=problem_dict['list'],total_pages=problem_dict['total_pages'],current_page=problem_dict['current_page'])
+	return render_template('Main/search_page.html',val=val,problems=problem_dict['list'],total_pages=int(problem_dict['total_pages']),current_page=int(problem_dict['current_page']))
