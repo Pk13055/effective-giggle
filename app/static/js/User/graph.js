@@ -80,7 +80,7 @@
         heatMapList[ind][2]=1+heatMapList[ind][2]
     }
 
-    console.log(heatMapList[16])
+    // console.log(heatMapList[16]);
 
     Highcharts.chart('container2', {
 

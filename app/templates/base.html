@@ -39,18 +39,22 @@
 	<input type="hidden" name="state" value="{{state}}">
 
 	<header>
-		<nav class="teal darken-4">
+		<nav class="teal darken-4" class="center-align">
 	    	<div class="nav-wrapper">
 	      	 	<a href="/" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
 	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
 	      		<ul class="right hide-on-med-and-down">
-			        <li>
-			        	<form method="POST" action="/search" class="input-field s12 ">
-							<input type="text" max="200" id="search" name="search" placeholder="Search by name, code, tags" class="col s11">
-						
-			        	</form>
-					</li>
-
+	      			<li>
+			        		<form method="POST" action="/search" class="input-field">
+						        <li class="teal darken-4">
+									<input type="text" max="200" id="search" name="search" placeholder="Search by name, code, tags">
+								</li>
+								<li>
+									<button type="submit" style="display: none;" id="sub"></button> 
+										<a class="btn-floating teal darken-3" id="a" onclick="$('#sub').click();"><i class="material-icons">search</i></a>
+								</li>
+			        		</form>		
+      				</li>
 			        <li> <a href="/">Problems</a>  </li>
 			        {% if problem_uid %}
 			        	<li> <a href="/problems/{{ problem_uid }}">Problem </a>  </li>
@@ -93,17 +97,6 @@
 			        <li> <a href="/setter/{{ session.user_uid}}">Admin Profile</a>  </li>
 			        {% endif %}
 			    {% endif %}
-
-			        <li> <a href="/">Problems</a>  </li>
-			        <li> <a href="/problems/8b4688b29eff96607b1c7f80ded9b25f6b97cca4">Problem </a>  </li>
-			        <li> <a href='/comments/fb1a2104d0242965ea19052e7c89fcdbfcab996b'>Comments </a></li>
-			   		{% if state=="loggedout" %}
-			        <li> <a href="/signin">Sign In</a>  </li>
-			        <li> <a href="/signup">Sign Up</a>  </li>
-					{% elif state=="loggedin" %}
-	      			<li> <a href="/logout"> Logout</a>  </li>
-	      			{% endif %}
-
 		      	</ul>
 	    	</div>
 		</nav>
@@ -145,7 +138,7 @@
 					</div>
 					<div class="col s12 m6">
 						<div class="card-panel teal darken-3">
-							<span class="flow-text"> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"</span>
+							<span class="flow-text"> "This is the best coding website I have ever seen!" <br>- Steve Jobs</span>
 						</div>
 					</div>
 				</div>	

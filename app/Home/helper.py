@@ -121,24 +121,24 @@ def search_list(value,key):
 		problems=Problem.query.filter(Problem.tags.like("%"+tag+"%")).all()		 
 		print(problems)
 		for problem in problems:
-			dict={}
-			dict['id']=problem.id
-			dict['title']=problem.title
-			dict['uid']=problem.uid
-			dict['tags']=problem.tags.split(',')
-			problem_list.append(dict)
+			dict1={}
+			dict1['id']=problem.id
+			dict1['title']=problem.title
+			dict1['uid']=problem.uid
+			dict1['tags']=problem.tags.split(',')
+			problem_list.append(dict1)
 
 	# by name
 	for value in val:
 		problems=Problem.query.filter(Problem.title.like("%"+value+"%")).all()		 
 
 		for problem in problems:
-			dict={}
-			dict['id']=problem.id
-			dict['title']=problem.title
-			dict['uid']=problem.uid
-			dict['tags']=problem.tags.split(',')
-			problem_list.append(dict)
+			dict1={}
+			dict1['id']=problem.id
+			dict1['title']=problem.title
+			dict1['uid']=problem.uid
+			dict1['tags']=problem.tags.split(',')
+			problem_list.append(dict1)
 
 	# problem_list.sort(key = lambda x : x['title'])
 
@@ -146,12 +146,12 @@ def search_list(value,key):
 	for code in val:
 		problems=Problem.query.filter(Problem.id.like("%"+code+"%")).all()		 
 		for problem in problems:
-			dict={}
-			dict['id']=problem.id
-			dict['title']=problem.title
-			dict['uid']=problem.uid
-			dict['tags']=problem.tags.split(',')
-			problem_list.append(dict)
+			dict1={}
+			dict1['id']=problem.id
+			dict1['title']=problem.title
+			dict1['uid']=problem.uid
+			dict1['tags']=problem.tags.split(',')
+			problem_list.append(dict1)
 	
 	ran=int(key)*10 - 1 
 
@@ -163,12 +163,12 @@ def search_list(value,key):
 			break
 
 
-	dict={}
-	dict['list']=problem_list_opt
-	dict['total_pages']=len(problem_list)/10 +1
-	dict['current_page']=key
-	print(dict)
-	return dict
+	dict1={}
+	dict1['list']=problem_list_opt
+	dict1['total_pages']=len(problem_list)/10 +1
+	dict1['current_page']=key
+	# print(dict1)
+	return dict1
 	# return problem_list
 
 
