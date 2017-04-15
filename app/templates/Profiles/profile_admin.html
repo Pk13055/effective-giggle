@@ -36,7 +36,7 @@
 	{{ super() }}
 {% endblock %}
 {% block content %}
-		<div class="container">
+		<div class="container" style="width: 90%">
 			<div class="row card-panel">
 				<div class="col s12 m4">
 					<h5 class="flow-text">{{ data.username }}</h5>
@@ -69,7 +69,7 @@
 					<div class="card-title"> Upload Problem</div>
 					<div class="input-field">
 						<label>Problem Title</label>
-						<input type="text" maxlength="100" class="validate" name="title">
+						<input type="text" maxlength="100" class="validate" name="title" required="true">
 					</div>
 					<div class="input-field">
 						<label> Add Tags</label>
@@ -80,7 +80,8 @@
 				<div class="card-tabs">
 					<ul class="tabs tabs-fixed-width">
 						<li class="tab"><a href="#text">Upload Problem Text</a></li>
-						<li class="tab"><a href="#generator">Upload Testcases</a></li>
+						<li class="tab"><a href="#input">Upload Large Input</a></li>
+						<li class="tab"><a href="#output">Upload Large Output</a></li>
 						<li class="tab"><a href="#solution">Upload Problem Solution</a></li>
 						<li class="tab"><a href="#editorial">Upload Problem Editorial</a></li>
 					</ul>	
@@ -132,7 +133,7 @@ Output
                     		</li>
                     	</ul>
 					</div>
-					<div id="generator">
+					<div id="input">
 						<div class="file-field input-field">
 					      	<div class="btn teal darken-3">
 					        	<span>File</span>
@@ -153,14 +154,40 @@ Output
                   					<code>
 Input
 &lt; insert the input &gt;
-Output 
-&lt; insert the output &gt;
 Input
 &lt; insert the input &gt;
-Output 
-&lt; insert the output &gt;
 Input
 &lt; insert the input &gt;
+
+
+                  					</code>
+                  				</pre>
+                  			</li>
+                  		</ul>
+					</div>
+					<div id="output">
+						<div class="file-field input-field">
+					      	<div class="btn teal darken-3">
+					        	<span>File</span>
+					        	<input type="file" name="file2" required="true">
+					      	</div>
+					      	<div class="file-path-wrapper">
+					        	<input class="file-path validate" type="text">
+					      	</div>
+					    </div>
+                      	<div class="divider"></div>
+                  		<span class="flow-text">Guidelines</span>
+                  		<ul class="collection">
+                  			<li class="collection-item">Upload file <strong>strictly</strong> of type <em>.txt</em></li>
+                  			<li class="collection-item">Make sure the file follows the given format</li>
+                  			<li class="collection-item">Make sure the problem given matches the test case handling.</li>
+                  			<li class="collection-item">
+                  				<pre class="grey lighten-3">
+                  					<code>
+Output 
+&lt; insert the output &gt;
+Output 
+&lt; insert the output &gt;
 Output 
 &lt; insert the output &gt;
 
@@ -173,7 +200,7 @@ Output
 						<div class="file-field input-field">
 					      	<div class="btn teal darken-3">
 					        	<span>File</span>
-					        	<input type="file" name="file2" required="true">
+					        	<input type="file" name="file3" required="true">
 					      	</div>
 					      	<div class="file-path-wrapper">
 					        	<input class="file-path validate" type="text">
@@ -202,7 +229,7 @@ Output
 						<div class="file-field input-field">
 					      	<div class="btn teal darken-3">
 					        	<span>File</span>
-					        	<input type="file" name="file3" required="true">
+					        	<input type="file" name="file4">
 					      	</div>
 					      	<div class="file-path-wrapper">
 					        	<input class="file-path validate" type="text">

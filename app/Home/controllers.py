@@ -10,6 +10,7 @@ home = Blueprint('home', __name__)
 # this route is to maintain conformity with homepage nomenclature
 @home.route('/', methods = ['GET'])
 def homie():
+	print(session)
 	return redirect(url_for('home.home_render', page = 1))
 
 # this route renders the main page of the website
@@ -34,7 +35,7 @@ def signin():
 			email = request.form['email']
 			password = request.form['password']
 		except KeyError as e:
-			return jsonify(success = False, message = " %s doesnt exist") % e.args, 400
+			return jsonify(success = False, message = " %s doesnt exist" % e.args) , 400
 		user = models.User.query.filter(models.User.email == email).first()
 		if user is None:
 			return jsonify(success = False, message = "Register First"), 401
@@ -42,15 +43,17 @@ def signin():
 			return jsonify(success = False, message = "Wrong Password"), 401
 		session['user_uid'] = user.uid
 		session['user_role'] = user.role
-		return jsonify(redirect = '/solver/' + user.uid)
+		print(session)
+		return redirect(url_for('user.user_route', code = user.uid))
 
 # simple logout route
 @home.route('/logout',methods = ['POST','GET'])
 @requires_auth
 def logout():
+	print(session)
 	session.pop('user_uid')
 	session.pop('user_role')
-	return redirect('/signin')
+	return redirect(url_for('home.signin'))
 			
 
 # route for signing up 

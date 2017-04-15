@@ -35,9 +35,8 @@ def getData(code):
 	# problems = models.Problem.query.all()
 	# problem=problems[0]
 	# problem=problems[1]
-
 	problem = models.Problem.query.filter(models.Problem.uid == code).first()
-
+	problem_location = problem.problem_location
 	try:
 		tag=problem.tags.split(',')
 	except:
@@ -45,15 +44,12 @@ def getData(code):
 
 	# returns the data from each location
 	try:
-		# open(config.BASE_DIR+problem_location,"r").read()
-		lines = []
+	# open(config.BASE_DIR+problem_location,"r").read()
+		lines = open(os.path.join(config.UPLOAD_FOLDER_PROBLEM, problem_location)).read().strip('\n').split('\n')
 		introduction = ""
 		constraints = []
 		inputs = []
 		outputs = []
-		with open(config.UPLOAD_FOLDER_PROBLEM+problem_location,"rt") as in_file:
-			for line in in_file:
-				lines.append(line.rstrip('\n'))	
 		n = len(lines)
 		i = 0
 		#print(lines[0])
@@ -73,17 +69,22 @@ def getData(code):
 					i += 1
 			if lines[i] == 'Test Cases':
 				i+=1
-				while i < n:
-					if lines[i] == 'Input':
-						i += 1
-						inputs.append(lines[i])
-					if lines[i] == 'Output':
-						i += 1
-						outputs.append(lines[i])
+				if lines[i] == 'Input':
 					i += 1
+					while lines[i] != "Output":
+						inputs.append(lines[i])
+						i += 1
+				if lines[i] == 'Output':
+					i += 1
+					while i < n:	
+						outputs.append(lines[i])
+						i += 1
 
 	except:
-		introduction = "Please check the upload file format."
+	 	introduction = 'you dont need question to solve this problem'
+	 	constraints = []
+	 	inputs = []
+	 	outputs = []
 	try:
 		io_file=open(config.UPLOAD_FOLDER_SUBMISSION+io_location,"r")
 		io=io_file.read().split("\n")
@@ -98,6 +99,9 @@ def getData(code):
 			'tags' : tag,		
 			'problem':introduction,
 			'io':io,
+			'constraints' :constraints,
+			'inputs' : inputs,
+			'outputs' : outputs,
 		}
 		return problem_data
 	else:

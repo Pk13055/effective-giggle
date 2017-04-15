@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% set problem_uid=problem.uid %}
+{% set problem_uid = problem.uid %}
 
 {% block heading %} Problem {{ problem.title }} {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
@@ -8,7 +8,7 @@
 
 <input type="hidden" id="problem_uid" value="{{problem.uid}}">
 
-<input type="hidden" id="user_uid">{{session.user_uid}}
+<input type="hidden" id="user_uid" value="{{session.user_uid}}">
 	<script src="../static/js/problem_submission.js"></script>
 		<div class="container">
 			<div class="row">
@@ -21,15 +21,21 @@
 				{% endfor %}
 			</div>
 			<div class="row">
-				<p> {{ problem.problem}}
-
+				<p> 
+					{{ problem.problem}}
+				</p>
 				<div class="divider"></div>
 				<div class="col s12 card-panel z-depth-2">
 					<h5 class="flow-text"> Constraints </h5>
 					<p class="flow-text">
 						<!-- <code> 1 <= N <= 10<sup>5</sup> </code> <br>
 						<code> 1 <= M <= 5 </code>
- -->					</p>
+ -->					
+ 						{% for constraint in problem.constraints %}
+ 						{{constraint}}
+ 						<br />
+ 						{% endfor %}
+					</p>
 				</div>
 			</div>
 			<div class="row">
@@ -59,12 +65,14 @@
 			<div class="row">
 				<div class="divider"></div>
 			</div>
+			{% if session.user_uid %}
 			<div class="row">
 				<div class="col s12 card small z-depth-2">
 					<div class="card-content">
 						<h5 class="flow-text"> Upload Solution</h5>
 						<form action="#" enctype="multipart" method="POST">
 						<div class="col s12">
+							<input type="hidden" id="user_uid" value="{{session.user_uid}}">
 							<!-- Iterate through languages here  -->
 							<p class="col s12 m3">
 								<input name="language" type="radio" id="C"> 
@@ -103,5 +111,6 @@
 					</div>
 				</div>
 			</div>
+			{% endif %}
 		</div>
 {% endblock %}

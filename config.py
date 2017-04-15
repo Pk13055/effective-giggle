@@ -17,17 +17,17 @@ UPLOAD_FOLDER_TEST = os.path.abspath(os.path.join(os.sep,UPLOAD_BASE, 'large_tes
 UPLOAD_FOLDER_PROBLEM = os.path.abspath(os.path.join(os.sep,UPLOAD_BASE, 'problem_text'))
 UPLOAD_FOLDER_SUBMISSION= os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'user_submissions'))
 UPLOAD_FOLDER_EDITORIAL = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, 'problem_editorials'))
-# this will be the buffer folder used by the solver API to hold judging files
 UPLOAD_FOLDER_SANDBOX = os.path.abspath(os.path.join(os.sep, UPLOAD_BASE, '.sandbox'))
+UPLOAD_FOLDER_DATASET = os.path.abspath(os.path.join(os.sep, BASE_DIR, 'Datasets'))
 
 # extensions
 
 # for the profile pictue 
 ALLOWED_EXTENSIONS_IMAGE = set(['jpg', 'jpeg', 'png'])  
 # for the code that is submitted by the users
-ALLOWED_EXTENSIONS_CODE  = set(['cpp', 'c', 'py'])  
+ALLOWED_EXTENSIONS_CODE  = set(['cpp', 'c', 'py', 'c++'])  
 # for the code that is uploaded by the admin 
-ALLOWED_EXTENSIONS_SOLUTION_CODE = set(['cpp', 'c'])
+ALLOWED_EXTENSIONS_SOLUTION_CODE = set(['cpp', 'c', 'c++'])
 # for the large test case files 
 ALLOWED_EXTENSIONS_TEST  = set(['txt'])
 # for the question that is uploaded
