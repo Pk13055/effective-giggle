@@ -15,9 +15,8 @@ def getData(code):
 	# problems = models.Problem.query.all()
 	# problem=problems[0]
 	# problem=problems[1]
-
 	problem = models.Problem.query.filter(models.Problem.uid == code).first()
-
+	problem_location = problem.problem_location
 	try:
 		tag=problem.tags.split(',')
 	except:
@@ -25,12 +24,54 @@ def getData(code):
 
 	# returns the data from each location
 	try:
-		file=open(config.UPLOAD_FOLDER_PROBLEM+"/"+problem.problem_location,"r").read()
-		file=file.decode('utf-8')
-		# print(file)
+	# open(config.BASE_DIR+problem_location,"r").read()
+		lines = open(os.path.join(config.UPLOAD_FOLDER_PROBLEM, problem_location)).read().strip('\n').split('\n')
+		introduction = ""
+		constraints = []
+		testcases = 0
+		inputs = []
+		outputs = []
+		n = len(lines)
+		i = 0
+		#print(lines[0])
+		while i < n:
+			#print("yo")
+			if lines[i] == 'Heading': 
+				i += 1
+			if lines[i] == 'Introduction':
+				i += 1
+				while lines[i] != 'Constraints':
+					introduction = introduction + lines[i] + "\n"
+					i += 1			
+			if lines[i] == 'Constraints':
+				i += 1
+				while lines[i] != 'Test Cases':
+					constraints.append(lines[i]) 
+					i += 1
+			if lines[i] == 'Test Cases':
+				i+=1
+			if lines[i] == 'Input':
+				i += 1
+				testcases += 1
+				while lines[i] != "Output":
+					inputs.append(lines[i])
+					i += 1
+			if lines[i] == 'Output':
+				i += 1
+				while (i < n and lines[i] != 'Input'):	
+					outputs.append(lines[i])
+					i += 1
+		il = len(inputs)/testcases
+		ol = len(outputs)/testcases	 	
+	
 	except:
-		# file="You dont need the question to answer this"
-		file="hello"
+	 	introduction = 'you dont need question to solve this problem'
+	 	constraints = []
+	 	inputs = []
+	 	outputs = []
+	 	testcases = 0
+	 	il = 0
+	 	ol = 0
 	try:
 		io_file=open(config.UPLOAD_FOLDER_TEST+
 			"/"+problem.io_location,"r")
@@ -44,8 +85,14 @@ def getData(code):
 			'uid':problem.uid,
 			'title' : problem.title,
 			'tags' : tag,		
-			'problem':file,
+			'problem':introduction,
 			'io':io,
+			'constraints' :constraints,
+			'inputs' : inputs,
+			'outputs' : outputs,
+			'testcases' : testcases,
+			'inputlength' : il,
+			'outputlength' : ol,
 		}
 		return problem_data
 	else:
