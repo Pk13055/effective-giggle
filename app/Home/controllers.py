@@ -10,7 +10,6 @@ home = Blueprint('home', __name__)
 # this route is to maintain conformity with homepage nomenclature
 @home.route('/', methods = ['GET'])
 def homie():
-	print(session)
 	return redirect(url_for('home.home_render', page = 1))
 
 # this route renders the main page of the website
@@ -43,19 +42,17 @@ def signin():
 			return jsonify(success = False, message = "Wrong Password"), 401
 		session['user_uid'] = user.uid
 		session['user_role'] = user.role
-		print(session)
-		return redirect(url_for('user.user_route', code = user.uid))
+		return jsonify(success=True,redirect='/solver/'+user.uid)
 
 # simple logout route
 @home.route('/logout',methods = ['POST','GET'])
 @requires_auth
 def logout():
-	print(session)
+
 	session.pop('user_uid')
 	session.pop('user_role')
 	return redirect(url_for('home.signin'))
 			
-
 # route for signing up 
 @home.route('/signup', methods = ['POST', 'GET'])
 def signup():
@@ -67,3 +64,19 @@ def signup():
 			return render_template('Forms/loginpage.html')
 		else:
 			return result
+
+@home.route('/search',methods = ['GET','POST'])
+def search_redirect():
+	val=request.form['search']	
+	if val == "":
+		return redirect(url_for('home.home_render', page = 1))
+	else:
+		return redirect(url_for('home.search', key = 1, val = val))
+
+@home.route('/search/<key>?val=<val>',methods=['GET','POST'])
+def search(key,val):
+	problem_dict={}
+	problem_dict=helper.search_list(val,key)
+
+	# return jsonify(val=val,problems=problem_dict['list'],total_pages=problem_dict['total_pages'],current_page=problem_dict['current_page'])
+	return render_template('Main/search_page.html',val=val,problems=problem_dict['list'],total_pages=int(problem_dict['total_pages']),current_page=int(problem_dict['current_page']))

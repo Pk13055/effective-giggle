@@ -8,13 +8,15 @@
 	<script src="{{ url_for('static', filename = 'js/User/highcharts.js') }}"></script>
 	<script src="{{ url_for('static', filename = 'js/User/heatmap.js') }}"></script>
 	<script src="{{ url_for('static', filename = 'js/User/exporting.js') }}"></script>
+
+	<script src="{{ url_for('static', filename = 'js/User/graph.js') }}"></script>
 	{{ super() }}
 {% endblock %}
-{% block body_scripts %}
-	<script src="{{ url_for('static', filename = 'js/graph.js') }}"></script>
-	{{super()}}
-{% endblock %}
+
 {% block content %}
+
+<input type="hidden" id="stats" value="{{stats}}">
+<input type="hidden" id="problem_attempt" value="{{problems}}">
 
 		<div class="container">
 			<div class="row card">
@@ -68,7 +70,9 @@
 							{% for problem in problems %}
 							<tr>
 								<td>{{ problem.time }}</td>
-								<td>{{ problem.name }}</td>
+								
+								<td><a href="/problems/{{problem.uid}}">{{ problem.name }}</a></td>
+								
 								<td> {{ problem.lang }}</td>
 								
 								{% if problem.status == "Wrong Answer" %}
@@ -77,8 +81,8 @@
 									problem.status}}
 								</td>
 
-								{% elif problem.status == "TLE" %}
-								<td class="black-text text-darken-2">
+								{% elif problem.status == "Timelimit exceeded" %}
+								<td class="yellow-text text-darken-2">
 									{{ 
 									problem.status}}
 								</td>
@@ -88,6 +92,11 @@
 								<td class="green-text text-darken-2">
 									{{ 
 									problem.status}}
+								</td>
+
+								{% else %}
+								<td class="black-text text-darken-2">
+									{{ problem.status }}
 								</td>
 								
 								{% endif%}	

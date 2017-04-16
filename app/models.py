@@ -145,7 +145,7 @@ class Submission(db.Model):
 	submission_timestamp = db.Column(db.String(255),nullable=False)
 	
 	# basic info about the submission
-	status = db.Column(db.String(50), nullable = False)
+	status = db.Column(db.String(255), nullable = False)
 	user_id = db.Column(db.String(255), nullable = False)
 	problem_id = db.Column(db.String(255), nullable = False)
 	submission_language = db.Column(db.String(40), nullable = False)
@@ -161,7 +161,7 @@ class Submission(db.Model):
 		self.submission_location=location
 
 	def __repr__(self):
-		return "<Submission { 'user_id' : %d, 'problem_id' : %d,  'lang' : %s,  'time' : %s } >" % (self.user_id,self.problem_id,self.submission_language,self.submission_timestamp)
+		return "<Submission { 'user_id' : %s, 'problem_id' : %s,  'lang' : %s,  'time' : %s } >" % (self.user_id,self.problem_id,self.submission_language,self.submission_timestamp)
 	
 	def getIdentifiers(self):
 		return { 'user_id' : self.user_id, 'problem_id' : self.problem_id,}

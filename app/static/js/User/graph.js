@@ -1,5 +1,11 @@
-$('document').ready(function(){
+    $('document').ready(function(){
 
+    // getting stats from html page
+    stat=($("#stats").val()).replace(/\'/g,'"')
+    //json object with stats
+    s=JSON.parse(stat)
+
+    if(s.accepted + s.wrong_answer + s.tle !==0){
     Highcharts.chart('container1', {
         chart: {
             plotBackgroundColor: null,
@@ -31,18 +37,50 @@ $('document').ready(function(){
             colorByPoint: true,
             data: [{
                 name: 'TLE',
-                y: 15
+                y: s.tle
             }, {
                 name: 'WA',
-                y: 60
+                y: s.wrong_answer
             }, {
                 name: 'Accepted',
-                y: 25,
+                y: s.accepted,
                 sliced: true,
                 selected: true
             }]
         }]
     });
+
+    // calculation for the heat map
+    attempt=($("#problem_attempt").val()).replace(/\'/g,'"').replace(/u"/g,'"')
+    a=JSON.parse(attempt) 
+    
+    // date is a array of dicts storing month and week for  each submission 
+
+    var date=[]
+
+    for(var i=0;i<a.length;i++){
+        var x=[]
+        x=a[i].time.split("-"); 
+        dict={}
+        dict['month']=parseInt(x[1])
+        dict['week']=Math.floor(parseInt(x[2].split(' ')[0])/7)
+        date.push(dict)
+        }
+
+    //storing the number of attempts per week per month using a 2d list
+    var heatMapList=[]
+    for(var i=0;i<12;i++) 
+        for(var j=0;j<5;j++)
+        heatMapList.push([i,j,0])
+    
+
+    for(var i=0;i<date.length;i++)
+    {
+        var ind=(date[i]['month']-1)*5 +date[i]['week']
+        heatMapList[ind][2]=1+heatMapList[ind][2]
+    }
+
+    // console.log(heatMapList[16]);
 
     Highcharts.chart('container2', {
 
@@ -92,12 +130,13 @@ $('document').ready(function(){
         series: [{
             name: 'Problems per week per month',
             borderWidth: 1,
-            data: [[0, 0, 10], [0, 1, 19], [0, 2, 8], [0, 3, 24], [0, 4, 67], [1, 0, 92], [1, 1, 58], [1, 2, 78], [1, 3, 117], [1, 4, 48], [2, 0, 35], [2, 1, 15], [2, 2, 123], [2, 3, 64], [2, 4, 52], [3, 0, 72], [3, 1, 132], [3, 2, 114], [3, 3, 19], [3, 4, 16], [4, 0, 38], [4, 1, 5], [4, 2, 8], [4, 3, 117], [4, 4, 115], [5, 0, 88], [5, 1, 32], [5, 2, 12], [5, 3, 6], [5, 4, 120], [6, 0, 13], [6, 1, 44], [6, 2, 88], [6, 3, 98], [6, 4, 96], [7, 0, 31], [7, 1, 1], [7, 2, 82], [7, 3, 32], [7, 4, 30], [8, 0, 85], [8, 1, 97], [8, 2, 123], [8, 3, 64], [8, 4, 84], [9, 0, 47], [9, 1, 114], [9, 2, 31], [9, 3, 48], [9, 4, 91],[10, 0, 1], [10, 1, 2], [10, 2, 3], [10, 3, 4], [10, 4, 5],[11, 0, 43], [11, 1, 33], [11, 2, 23], [11, 3, 14], [11, 4, 5]],
+            data: heatMapList, 
             dataLabels: {
-                enabled: true,
+                // enabled: true,
                 color: '#000000'
             }
         }]
 
     });
+}
 });

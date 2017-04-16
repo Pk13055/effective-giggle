@@ -53,7 +53,7 @@ def getData(code):
 		# file = request.files['file0']
 		# filename = data.editorial_location
 		#Exception as e: print str(e)
-	except Exception, e:
+	except Exception as e:
 		body = "No Editorial available for this problem..."
 		file_ext = "txt"
 	return {'title' : code, 'editorial_location' : body, 'check':file_ext}
