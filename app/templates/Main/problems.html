@@ -21,15 +21,20 @@
 				{% endfor %}
 			</div>
 			<div class="row">
-				<p> 
+				<p class = "flow-text"> 
 					{{ problem.problem}}
 				</p>
 				<div class="divider"></div>
 				<div class="col s12 card-panel z-depth-2">
 					<h5 class="flow-text"> Constraints </h5>
 					<p class="flow-text">
-						<code> 1 <= N <= 10<sup>5</sup> </code> <br>
+						<!-- <code> 1 <= N <= 10<sup>5</sup> </code> <br>
 						<code> 1 <= M <= 5 </code>
+ -->					
+ 						{% for constraint in problem.constraints %}
+ 						{{constraint}}
+ 						<br />
+ 						{% endfor %}
 					</p>
 				</div>
 			</div>
@@ -42,17 +47,22 @@
 			<div class="row">
 			<h5 class="flow-text"> Test Cases</h5>
 
-			{% for i in range(3) %}
+			{% for i in range(problem.testcases) %}
 				<div class="col s12 m4 card-panel">
-				{% for line in problem.io %}			{% if line =="Input"%}
-								<h6 class="flow-text"> Input </h6>
-						{% elif line=="Output" %}
-								<h6 class="flow-text"> Output </h6>
-						{% else %}
-							<pre> {{ line }} </pre>
-						{% endif %}
-				{% endfor %}
-
+					<h5 class="flow-text"> Input </h5>
+					<p class = "flow-text">	
+						{% for j in range(problem.inputlength) %}
+							{{problem.inputs[j]}}
+							<br />
+						{% endfor %}
+					</p>	
+					<h5 class="flow-text"> Output </h5>
+					<p class = "flow-text">	
+						{% for j in range(problem.outputlength) %}
+							{{problem.outputs[j]}}
+							<br />
+						{% endfor %}
+					</p>
 				</div>
 			{% endfor %}
 			</div>
