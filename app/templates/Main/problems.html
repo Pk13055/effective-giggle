@@ -46,23 +46,32 @@
 			<!-- </div> -->
 			<div class="row">
 			<h5 class="flow-text"> Test Cases</h5>
-
+			{% set ilength = [0] %}
+			{% set olength = [0] %}
 			{% for i in range(problem.testcases) %}
-				<div class="col s12 m4 card-panel">
+				{% if (problem.maxlen > 7) %}
+				<div class="col s12 m4 card large">
+				{% else %}	
+				<div class="col s12 m4 card medium">
+				{% endif %}	
+					<div class ="card-content">
 					<h5 class="flow-text"> Input </h5>
-					<p class = "flow-text">	
-						{% for j in range(problem.inputlength) %}
-							{{problem.inputs[j]}}
+					<p class = "flow-text">
+						{% if ilength.append(ilength.pop() + problem.inputlength[i]) %} {% endif %}
+						{% for j in range(problem.inputlength[i+1]) %}
+							{{ problem.inputs[j + ilength[0]] }}
 							<br />
 						{% endfor %}
 					</p>	
 					<h5 class="flow-text"> Output </h5>
-					<p class = "flow-text">	
-						{% for j in range(problem.outputlength) %}
-							{{problem.outputs[j]}}
+					<p class = "flow-text">
+						{% if olength.append(olength.pop() + problem.outputlength[i]) %} {% endif %}
+						{% for j in range(problem.outputlength[i+1]) %}
+							{{problem.outputs[j + olength[0] ]}}
 							<br />
 						{% endfor %}
 					</p>
+				</div>
 				</div>
 			{% endfor %}
 			</div>

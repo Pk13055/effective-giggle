@@ -31,11 +31,15 @@ def getData(code):
 		testcases = 0
 		inputs = []
 		outputs = []
+		il = []
+		ol = []
+		il.append(0)
+		ol.append(0)
 		n = len(lines)
 		i = 0
 		#print(lines[0])
 		while i < n:
-			#print("yo")
+		#print("yo")
 			if lines[i] == 'Heading': 
 				i += 1
 			if lines[i] == 'Introduction':
@@ -53,16 +57,21 @@ def getData(code):
 			if lines[i] == 'Input':
 				i += 1
 				testcases += 1
-				while lines[i] != "Output":
+				il.append(0)
+				print(testcases)
+				while lines[i] != 'Output':
 					inputs.append(lines[i])
 					i += 1
+					il[testcases] += 1
 			if lines[i] == 'Output':
 				i += 1
-				while (i < n and lines[i] != 'Input'):	
+				ol.append(0)
+				while (i < n and lines[i] != 'Input'):
 					outputs.append(lines[i])
 					i += 1
-		il = len(inputs)/testcases
-		ol = len(outputs)/testcases	 	
+					ol[testcases] += 1
+		maxlen = max(il) + max(ol)			
+			 	
 	
 	except:
 	 	introduction = 'you dont need question to solve this problem'
@@ -70,8 +79,9 @@ def getData(code):
 	 	inputs = []
 	 	outputs = []
 	 	testcases = 0
-	 	il = 0
-	 	ol = 0
+	 	il = []
+	 	ol = []
+	 	maxlen = 0
 	try:
 		io_file=open(config.UPLOAD_FOLDER_TEST+
 			"/"+problem.io_location,"r")
@@ -93,6 +103,7 @@ def getData(code):
 			'testcases' : testcases,
 			'inputlength' : il,
 			'outputlength' : ol,
+			'maxlen' : maxlen,
 		}
 		return problem_data
 	else:

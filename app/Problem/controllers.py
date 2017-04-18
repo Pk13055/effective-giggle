@@ -16,8 +16,8 @@ problem = Blueprint('problem', __name__)
 def problem_render(code):
 	problem=problem_maker.getData(code)
 	if request.method == 'GET':
-		return render_template('Main/problems.html', problem = problem)			
-
+		 return render_template('Main/problems.html', problem = problem)			
+		# return jsonify(problem = problem)	
 	elif request.method == 'POST':
 		if 'user_uid' not in session:
 			return jsonify(success=False,redirect="/signin",message="you are not logged in")
