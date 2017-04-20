@@ -64,6 +64,7 @@
 			{% endif %}
 		</div>
 	</div>
+	{% if user_id %}
 	<div class="row card teal lighten-5">
 		<form action="/comments/{{ code }}" method = "POST">
 			<div class="card-content">
@@ -83,5 +84,6 @@
 			</div>
 		</form>
 	</div>
+	{% endif %}
 </div>
 {% endblock %}

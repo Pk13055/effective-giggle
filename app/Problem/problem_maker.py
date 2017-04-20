@@ -41,7 +41,7 @@ def getData(code):
 		while i < n:
 		#print("yo")
 			if lines[i] == 'Heading': 
-				i += 1
+				i += 2
 			if lines[i] == 'Introduction':
 				i += 1
 				while lines[i] != 'Constraints':
@@ -138,6 +138,6 @@ def updateProblem(problem_uid,verdict):
 
 	problem.total_submissions=1 + problem.total_submissions 	
 
-	print(problem.wrong_answer)
+	# print(problem.wrong_answer)
 
 	db.session.commit()
