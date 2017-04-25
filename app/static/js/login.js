@@ -2,6 +2,7 @@
 			$("#submit").click(function () {
 		password=$("#password").val()
 		email=$('#email').val()
+		
 
 		console.log(email)
 
