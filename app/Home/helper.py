@@ -61,7 +61,7 @@ def createUser(request):
 	try:
 		db.session.commit()
 	except IntegrityError as e:
-		return jsonify(success=False, message="This email already exists"), 400		
+		return jsonify(success=False, message="This email or username already exists"), 400		
 	return True
 
 

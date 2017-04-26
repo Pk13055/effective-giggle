@@ -64,8 +64,12 @@
 			{% endif %}
 		</div>
 	</div>
+	{% if user_id %}
 	<div class="row card teal lighten-5">
 		<form action="/comments/{{ code }}" method = "POST">
+			
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
 			<div class="card-content">
 				<div class="card-title span-text">Add Comment</div>
 				<div class="divider"></div><br>
@@ -83,5 +87,6 @@
 			</div>
 		</form>
 	</div>
+	{% endif %}
 </div>
 {% endblock %}

@@ -65,6 +65,9 @@
 			</div>
 			<div class="row card">
 				<form method="POST" action="/setter/{{admin}}" enctype="multipart/form-data">
+				
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+				
 				<div class="card-content">
 					<div class="card-title"> Upload Problem</div>
 					<div class="input-field">

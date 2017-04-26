@@ -10,8 +10,10 @@
 		<div class="container">
 			<div class="row card medium">
 				<form class="col s12 m6 offset-m3" method="POST" action="/signin">
-<!-- 					<input id="" name=_csrf_token type=hidden value="{{ csrf_token() }}">
- -->					<div class="card-content">
+					
+					<meta name="csrf-token" content="{{ csrf_token() }}">
+					
+ 					<div class="card-content">
 						<div class="row">
 							<h5 class=" card-title flow-text"> Login </h5>
 						</div>

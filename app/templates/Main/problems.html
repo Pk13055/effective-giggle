@@ -8,8 +8,7 @@
 
 <input type="hidden" id="problem_uid" value="{{problem.uid}}">
 
-<input type="hidden" id="user_uid" value="{{session.user_uid}}">
-	<script src="../static/js/problem_submission.js"></script>
+<input type="hidden" id="user_uid" value="{{session.user_uid}}">	
 		<div class="container">
 			<div class="row">
 				<h4 class="flow-text"> Problem {{ problem.id }} - {{ problem.title}}</h4>
@@ -28,9 +27,7 @@
 				<div class="col s12 card-panel z-depth-2">
 					<h5 class="flow-text"> Constraints </h5>
 					<p class="flow-text">
-						<!-- <code> 1 <= N <= 10<sup>5</sup> </code> <br>
-						<code> 1 <= M <= 5 </code>
- -->					
+						
  						{% for constraint in problem.constraints %}
  						{{constraint}}
  						<br />
@@ -46,23 +43,32 @@
 			<!-- </div> -->
 			<div class="row">
 			<h5 class="flow-text"> Test Cases</h5>
-
+			{% set ilength = [0] %}
+			{% set olength = [0] %}
 			{% for i in range(problem.testcases) %}
-				<div class="col s12 m4 card-panel">
+				{% if (problem.maxlen > 7) %}
+				<div class="col s12 m4 card large">
+				{% else %}	
+				<div class="col s12 m4 card medium">
+				{% endif %}	
+					<div class ="card-content">
 					<h5 class="flow-text"> Input </h5>
-					<p class = "flow-text">	
-						{% for j in range(problem.inputlength) %}
-							{{problem.inputs[j]}}
+					<p class = "flow-text">
+						{% if ilength.append(ilength.pop() + problem.inputlength[i]) %} {% endif %}
+						{% for j in range(problem.inputlength[i+1]) %}
+							{{ problem.inputs[j + ilength[0]] }}
 							<br />
 						{% endfor %}
 					</p>	
 					<h5 class="flow-text"> Output </h5>
-					<p class = "flow-text">	
-						{% for j in range(problem.outputlength) %}
-							{{problem.outputs[j]}}
+					<p class = "flow-text">
+						{% if olength.append(olength.pop() + problem.outputlength[i]) %} {% endif %}
+						{% for j in range(problem.outputlength[i+1]) %}
+							{{problem.outputs[j + olength[0] ]}}
 							<br />
 						{% endfor %}
 					</p>
+				</div>
 				</div>
 			{% endfor %}
 			</div>
@@ -75,7 +81,12 @@
 				<div class="col s12 card small z-depth-2">
 					<div class="card-content">
 						<h5 class="flow-text"> Upload Solution</h5>
-						<form action="#" enctype="multipart/form-data" method="POST">
+						<form action="/problems/{{ problem_uid }}" enctype="multipart/form-data" method="POST">
+						
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+						<meta name="csrf-token" content="{{ csrf_token() }}">
+
+
 						<div class="col s12">
 							<input type="hidden" id="user_uid" value="{{session.user_uid}}">
 							<!-- Iterate through languages here  -->
@@ -88,11 +99,11 @@
 								<label for="Cpp"> C++</label>
 							</p>	
 							<p class="col s12 m3">
-								<input name="language" type="radio" id="python2" value="python 2"> 
+								<input name="language" type="radio" id="python2" value="python 2" class="disabled" disabled="true"> 
 								<label for="python2"> Python2</label>
 							</p>	
 							<p class="col s12 m3">
-								<input name="language" type="radio" id="python3" value="python 3"> 
+								<input name="language" type="radio" id="python3" value="python 3" class="disabled" disabled="true"> 
 								<label for="python3"> Python3</label>
 							</p>
 						</div>

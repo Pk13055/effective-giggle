@@ -4,6 +4,7 @@ from flask import Flask, render_template,session, blueprints,jsonify
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
+from flask_wtf.csrf import CSRFProtect,CSRFError
 
 from functools import wraps
 
@@ -17,8 +18,12 @@ app.config.from_object('config')
 # by modules and controllers
 db = SQLAlchemy(app)
 
-#csrf protection
-# CsrfProtect(app)
+# csrf protection
+csrf=CSRFProtect(app)
+@app.errorhandler(CSRFError)
+def csrf_error(reason):
+    # return jsonify(success=True,error=reason)
+    return render_template('error.html', error=reason), 400
 
 # HTTP error handling route
 @app.errorhandler(404)

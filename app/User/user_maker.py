@@ -4,6 +4,8 @@ from flask import jsonify
 from app import db, models
 import app, config 
 
+from app.models import Submission
+
 # modules to help across different functions
 import os, hashlib, datetime
 from werkzeug.utils import secure_filename
@@ -26,6 +28,8 @@ def getData(code):
 			'profile_pic' : os.path.join('images', 'profile_pics', user.profile_location),
 			'role':user.role,
 			'uid':user.uid,
+			'ranking':user.ranking,
+			'rank_value':user.rank_value
 		}
 		return user_data
 	else:
@@ -104,13 +108,15 @@ def getProblemSubmitted(code):
 			verdict="Accepted"
 
 		problem_list.append({
+			'sub_uid':problem.uid,
 			'uid':problem.problem_id,
+			'largeStatus':problem.status,
 			'status':verdict,
 			'name':problem_name,
 			'time':problem.submission_timestamp,
 			'lang':problem.submission_language,
 			})
-	return problem_list	
+	return problem_list[::-1]
 
 
 def getStats(code):
@@ -141,7 +147,7 @@ def updateUser(status,user_uid):
 		verdict="Accepted"		
 
 	if verdict == "Accepted":
-		user.rank_value=10+user.rank_value 	
+		user.rank_value=20+user.rank_value 	
 	else:
 		user.rank_value=user.rank_value-5
 
@@ -152,7 +158,30 @@ def updateUser(status,user_uid):
 	elif verdict == "Timelimit exceeded":
 		user.tle=1+user.tle
 
+	if user.rank_value < 1000:
+		user.ranking = "Lost"
+
+	elif user.rank_value < 1500 :
+		user.ranking = "Newbie"
+
+	elif user.rank_value < 1700 :
+		user.ranking ="Warrior"
+	
+	else:
+		user.ranking ="Legend"
+
 	user.total_submissions=1 + user.total_submissions
 
 	db.session.commit()	
 	return verdict
+
+def getUserSubmission(uid):
+	submission=models.Submission.query.filter(models.Submission.uid==uid).first()
+	if submission is None :
+		return "No such submission"
+	else:
+		return submission
+
+def getSubFile(name):
+	file = open(os.path.join(config.UPLOAD_FOLDER_SUBMISSION,name)).read()
+	return file

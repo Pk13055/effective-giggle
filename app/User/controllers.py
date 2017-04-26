@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template, \
-                  flash, g, session, redirect, url_for, jsonify
+				  flash, g, session, redirect, url_for, jsonify
 from app import db, requires_auth
 from app.models import User
 import user_maker
@@ -34,3 +34,11 @@ def user_route(code):
 		problems_submitted = user_maker.getProblemSubmitted(code)
 		if data:
 			return render_template('Profiles/profile_user.html',data = data,problems = problems_submitted,stats=stats)
+
+@user.route('/solver/submission', methods = ['GET', 'POST'])
+@requires_auth
+def user_submission():
+	if request.method == 'GET':
+		data=user_maker.getUserSubmission(request.args['uid'])
+		file=user_maker.getSubFile(data.submission_location)
+		return render_template('Profiles/user_submission.html',data=data,file=file)

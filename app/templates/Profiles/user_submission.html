@@ -1,0 +1,19 @@
+{% block content %}
+	<div class="card m12 s12">
+		<div class="card-content">
+			{{ file }}
+		</div>
+	</div>	 
+	
+	<div class="divider"></div>
+	
+	<h5 class="flow-text">Details</h5>
+	<div class="card m12 s12">
+		<ul class="collection">
+			{% for verdict in data.status.split('\n') %}
+			<li class="collection-item"> {{ verdict }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+{% endblock %}
