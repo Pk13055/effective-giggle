@@ -8,8 +8,7 @@
 
 <input type="hidden" id="problem_uid" value="{{problem.uid}}">
 
-<input type="hidden" id="user_uid" value="{{session.user_uid}}">
-	<script src="../static/js/problem_submission.js"></script>
+<input type="hidden" id="user_uid" value="{{session.user_uid}}">	
 		<div class="container">
 			<div class="row">
 				<h4 class="flow-text"> Problem {{ problem.id }} - {{ problem.title}}</h4>
@@ -28,9 +27,7 @@
 				<div class="col s12 card-panel z-depth-2">
 					<h5 class="flow-text"> Constraints </h5>
 					<p class="flow-text">
-						<!-- <code> 1 <= N <= 10<sup>5</sup> </code> <br>
-						<code> 1 <= M <= 5 </code>
- -->					
+						
  						{% for constraint in problem.constraints %}
  						{{constraint}}
  						<br />
@@ -84,7 +81,12 @@
 				<div class="col s12 card small z-depth-2">
 					<div class="card-content">
 						<h5 class="flow-text"> Upload Solution</h5>
-						<form action="#" enctype="multipart/form-data" method="POST">
+						<form action="/problems/{{ problem_uid }}" enctype="multipart/form-data" method="POST">
+						
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+						<meta name="csrf-token" content="{{ csrf_token() }}">
+
+
 						<div class="col s12">
 							<input type="hidden" id="user_uid" value="{{session.user_uid}}">
 							<!-- Iterate through languages here  -->

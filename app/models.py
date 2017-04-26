@@ -161,7 +161,7 @@ class Submission(db.Model):
 		self.submission_location=location
 
 	def __repr__(self):
-		return "<Submission { 'user_id' : %s, 'problem_id' : %s,  'lang' : %s,  'time' : %s } >" % (self.user_id,self.problem_id,self.submission_language,self.submission_timestamp)
+		return "{'user_id' : %s,'problem_id':%s,'status':%s'lang':%s,'time':%s}" % (self.user_id,self.problem_id,self.status,self.submission_language,self.submission_timestamp)
 	
 	def getIdentifiers(self):
 		return { 'user_id' : self.user_id, 'problem_id' : self.problem_id,}

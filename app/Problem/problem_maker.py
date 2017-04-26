@@ -38,8 +38,10 @@ def getData(code):
 		n = len(lines)
 		i = 0
 		#print(lines[0])
-		while i < n:
+		count = 0
+		while i < n and count < 1000:
 		#print("yo")
+			count = count +1
 			if lines[i] == 'Heading': 
 				i += 2
 			if lines[i] == 'Introduction':

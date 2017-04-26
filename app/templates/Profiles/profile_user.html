@@ -15,21 +15,39 @@
 
 {% block content %}
 
+<input type="hidden" id="user" value="{{ data.uid }}">
 <input type="hidden" id="stats" value="{{stats}}">
 <input type="hidden" id="problem_attempt" value="{{problems}}">
+
+<script src="{{ url_for('static', filename = 'js/User/problemgen.js') }}"></script>
 
 		<div class="container">
 			<div class="row card">
 				<div class="card-content">
 					<div class="col s12 m4">
-					<img src="{{ url_for('static', filename = data.profile_pic) }}" alt="{{ data.username }}" class="circle responsive-img">
+					<img src="{{ url_for('static', filename = data.profile_pic) }}" alt="{{ data.username }}" class="responsive-img">
 					</div>
 					<div class="col s12 m8">
 						<ul class="collection">
+
 					    <li class="collection-item center-align">
 					      <span class="title flow-text">{{ data.username }}</span>
 					    </li>
+
+					    <li class="collection-item avatar">
+					      <i class="material-icons circle blue">stars</i>
+					      <span class="flow-text title">Ranking</span>
+					      <p>{{ data.ranking }}
+					      </p>
+					    </li>
 					    
+					    <li class="collection-item avatar">
+					      <i class="material-icons circle green">assessment</i>
+					      <span class="flow-text title">Rating</span>
+					      <p>{{ data.rank_value }}
+					      </p>
+					    </li>
+
 					    <li class="collection-item avatar">
 					      <i class="material-icons circle red">email</i>
 					      <span class="flow-text title">Email</span>
@@ -53,6 +71,14 @@
 					</div>
 				</div>
 			</div>
+			<div class="row card z-depth-2 hide-on-small-and-down">
+	 			<div class="card-content">
+	 			<h3 class="card-title">User Statistics</h3>
+	 			<div class="divider"></div>
+					<div id="container1" class="col m6 s12 " style="height: 400px; min-width: 400px; max-width: 800px; margin: 0 auto"></div>
+					<div id="container2" class="col m6 s12 " style="height: 400px; min-width: 400px; max-width: 800px; margin: 0 auto"></div>
+	 			</div>
+			</div>
 			<div class="card row z-depth-2"> 
 				<div class="card-content">
 					<h3 class="card-title">Problem Statistics</h3>
@@ -64,6 +90,7 @@
 								<th>Problem</th>
 								<th>Language</th>
 								<th>Verdict</th>
+								<th>View Code</th>
 							</tr>
 						</thead>				
 						<tbody>
@@ -94,6 +121,10 @@
 									problem.status}}
 								</td>
 
+								{% elif problem.status=="" %}
+								<td class="black-text text-darken-2">Unable to locate the error
+								</td>
+
 								{% else %}
 								<td class="black-text text-darken-2">
 									{{ problem.status }}
@@ -101,6 +132,12 @@
 								
 								{% endif%}	
 
+								<td class="blue-text text-darken-2"> 
+								<form action="#" >
+									<button type="button" class="btn waves-effect waves-dark" onclick="getCodeFunction('{{problem.sub_uid}}')">click</button>
+								</form>	
+								</td>	
+					
 							{% endfor %}
 								
 							</tr>
@@ -121,13 +158,14 @@
 					</ul>
 				</div>
 			</div>
-	 		<div class="row card z-depth-2 hide-on-small-and-down">
-	 			<div class="card-content">
-	 			<h3 class="card-title">User Statistics</h3>
-	 			<div class="divider"></div>
-					<div id="container1" class="col m6 s12 " style="height: 400px; min-width: 400px; max-width: 800px; margin: 0 auto"></div>
-					<div id="container2" class="col m6 s12 " style="height: 400px; min-width: 400px; max-width: 800px; margin: 0 auto"></div>
-	 			</div>
-			</div>
+	 		
 			</div>	
+			
+			<div class="modal" id="getCode-modal">
+				<div class="modal-content">
+					<h5 class="flow-text">Code</h5>
+					<div class="divider"></div>
+					<div id="code_model"></div>
+				</div>		
+			</div>
 {% endblock %}

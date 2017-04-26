@@ -14,6 +14,7 @@ problem = Blueprint('problem', __name__)
 
 @problem.route('/problems/<code>', methods = ['GET', 'POST'])
 def problem_render(code):
+	print(code)
 	problem=problem_maker.getData(code)
 	if request.method == 'GET':
 		 return render_template('Main/problems.html', problem = problem)			
