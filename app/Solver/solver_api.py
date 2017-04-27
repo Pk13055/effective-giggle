@@ -1,7 +1,7 @@
 # def imports required for routing etc
 from flask import Blueprint, request, render_template, \
                   flash, g, session, redirect, url_for, jsonify
-from app import db, models
+from app import db, models, sanitize
 import config
 
 # custom imports to handle files
@@ -48,8 +48,7 @@ class Solver():
 	def _generateLargeIO(self):
 
 		data = open(os.path.join(config.UPLOAD_FOLDER_TEST, self.io_location)).read().strip('\n').split('\n')
-		# # comment out after done
-		# data = open('testcase').read().strip('\n').split('\n')
+		data = sanitize(data)
 		
 		inputs = []
 		outputs = []

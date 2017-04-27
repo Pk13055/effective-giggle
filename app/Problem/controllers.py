@@ -14,11 +14,11 @@ problem = Blueprint('problem', __name__)
 
 @problem.route('/problems/<code>', methods = ['GET', 'POST'])
 def problem_render(code):
-	print(code)
-	problem=problem_maker.getData(code)
+	
 	if request.method == 'GET':
-		 return render_template('Main/problems.html', problem = problem)			
-		# return jsonify(problem = problem)	
+		problem = problem_maker.getData(code)
+		return render_template('Main/problems.html', problem = problem)			
+	
 	elif request.method == 'POST':
 		if 'user_uid' not in session:
 			return jsonify(success=False,redirect="/signin",message="you are not logged in")
