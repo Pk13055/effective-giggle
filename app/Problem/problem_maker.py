@@ -29,9 +29,10 @@ def getData(code):
 		'constraints' : [],
 		'testcases' : []
 	}
+
 	# in case the problem does not exist or cannot be parsed
 	data = ["This problem does not have a question"]
-	
+
 	try:
 		data = open(os.path.join(config.UPLOAD_FOLDER_PROBLEM, filename)).read().strip('\n').split('\n')
 		data = sanitize(data)
