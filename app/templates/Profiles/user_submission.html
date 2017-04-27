@@ -10,8 +10,30 @@
 	<h5 class="flow-text">Details</h5>
 	<div class="card m12 s12">
 		<ul class="collection">
-			{% for verdict in data.status.split('\n') %}
-			<li class="collection-item"> {{ verdict }}</li>
+			{% for verdict in data.status.split(',') %}
+				
+
+			{% if verdict == "Wrong Answer" %}
+			<li class="red-text text-darken-2 collection-item"> {{ verdict }}</li>
+			
+			{% elif verdict == "Timelimit exceeded" %}
+			<li class="black-text text-darken-2 collection-item"> {{ verdict }}</li>
+			
+
+			{% elif verdict == "Accepted" %}
+			<li class="green-text text-darken-2 collection-item"> {{ verdict }}</li>
+		
+			{% elif verdict == "" %}
+			<li class="black-text text-darken-2 collection-item"> unable to find the error </li>
+		
+			{% else %}
+			<li class="black-text text-darken-2">
+				{{ verdict }}
+			</li>
+			
+			{% endif%}	
+
+
 			{% endfor %}
 		</ul>
 	</div>

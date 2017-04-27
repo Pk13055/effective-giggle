@@ -1,8 +1,47 @@
-# Project Assignment (DO NOT MERGE WITHOUT REVIEW) 
+# Project Assignment-DOJE(Online Judge) 
 
 ## How to Run
+1.	change permissions of effective-giggle 
+	change permissions of /var/run 
 
-Run the following command in your terminal
+2. update /etc/nginx/site-available/default
+with:-
+server {
+    listen 5000;
+	listen 443 ssl;
+	ssl_certificate /etc/nginx/ssl/nginx.crt;
+	ssl_certificate_key /etc/nginx/ssl/nginx.key;
+
+	server_name 0.0.0.0;
+
+	location = /favicon.ico { access_log off; log_not_found off; }
+
+    location /static/ {
+		alias /home/shubh/Major_Project/effective-giggle/app/;
+		}
+    
+	 location /media/ {
+        alias /home/shubh/Major_Project/effective-giggle/app/static/images;
+    }
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:///var/run/project.sock;
+	}
+    
+	
+}
+
+3. update the location path of socket in uwsgi.ini and /etc/nginx/site-available/default
+3.1 make sure your directory path has no " "(spaces)  
+
+4. Run the following command in your terminal to start 	  the server
+
+	uwsgi --ini uwsgi.ini
+	sudo service nginx restart
+
+##	To stop nginx
+	sudo service nginx stop 
 
 ` python2.7 run.py <port> `
 
@@ -19,28 +58,7 @@ Run the following files in order
 * where `<no>` is the number of users/problems/comments you want to generate 
 * you do not need to delete your db copies as they're covered by your =gitignore= 
 
-
-## Templates completed so far:
-
-- Homepage
-- Problem Page
-- Login Page
-- Signup Page
-- Admin Profile
-- User Profile
-- Comments 
-
-
-## Use materializeCSS throughout the project. Make sure you use these links while making the templates.
-## IT IS ESSENTIAL YOU KNOW THE DIFFERENCE BETWEEN s6 and m6 col widths
-## Note that the page is divided into a container, which is then divided into 12-columns
-## s12 => On a small (mobile) display, the content will be full width (12 of 12)
-## m6 => On a medium (laptop) display, the content will be half width (6 of 12)
-## Use offset-m<x> to move a div by x units in the specified display size
-
-
-Use materializeCSS throughout the project. Make sure you use these links while making the templates.
-Copy the ` template.html ` onto your PC and work in it to have less issues later on. DO NOT MAKE CHANGES outside of the container
+## Used materializeCSS throughout the project.
 
 CSS : https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css
 ` <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet" type="text/css"> `

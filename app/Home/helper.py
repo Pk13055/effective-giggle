@@ -119,7 +119,7 @@ def search_list(value,key):
 	# by tag
 	for tag in val:
 		problems=Problem.query.filter(Problem.tags.like("%"+tag+"%")).all()		 
-		print(problems)
+		# print(problems)
 		for problem in problems:
 			dict1={}
 			dict1['id']=problem.id
