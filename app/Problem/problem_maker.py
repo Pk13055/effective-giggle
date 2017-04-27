@@ -1,7 +1,7 @@
 # Methods to implement the various route validations and other helper
 
 from flask import jsonify,session
-from app import db, models
+from app import db, models, sanitize
 import app
 
 # modules to help across different functions
@@ -9,6 +9,75 @@ from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
 import os,hashlib,config,datetime
 
+# this function is responsible for rendering the problem page
+# it returns a JSON with the required fields and if the file is not readable it returns an empty dataset
+def getData(code):
+	
+	problem_data = models.Problem.query.filter(models.Problem.uid == code).first()
+	filename = problem_data.problem_location
+	tags = problem_data.tags.split(',')
+	tags = sanitize(tags)
+	
+	return_obj = {
+		'id':problem_data.id,
+		'uid':problem_data.uid,
+		'title' : problem_data.title,
+		'tags' : tags,
+		'status' : [],
+		'heading' : [],
+		'introduction' : [],
+		'constraints' : [],
+		'testcases' : []
+	}
+	
+	data = []
+	
+	try:
+		data = open(os.path.join(config.UPLOAD_FOLDER_PROBLEM, filename)).read().strip('\n').split('\n')
+		data = sanitize(data)
+	except:
+		pass
+	
+	if data:
+		markers = []
+		data_headers = ['Introduction', 'Heading', 'Constraints', 'Test Cases']
+		for i, j in enumerate(data):
+			if j.strip(' ') in data_headers:
+				markers.append(i)
+		if len(markers) != len(data_headers):
+			return_obj['heading'] = data
+		else:
+			# this stores the final data as a LOFL
+			dataset = []
+			for i, j in enumerate(markers):
+				try:
+					dataset.append(data[markers[i] + 1: markers[i + 1]])
+				except:
+					dataset.append(data[markers[i] + 1:])
+			fillers = ['heading', 'introduction', 'constraints', 'testcases']
+			
+			# this loop fills the given dataset values into the return object
+			for i,j in enumerate(fillers):
+				return_obj[j] = dataset[i]
+			
+			test_cases = []
+			io_pos = [i for i, j in enumerate(return_obj['testcases']) if "Input" in j]
+			for i, j in enumerate(io_pos):
+				try:
+					test_cases.append(return_obj['testcases'][j : io_pos[i + 1]])
+				except:
+					test_cases.append(return_obj['testcases'][j :])
+
+			return_obj['testcases'] = test_cases
+			return_obj['status'].append("Data Parsed")
+	
+	else:
+		return_obj['status'] = data
+	
+	return return_obj
+
+
+'''		
 def getData(code):
 	#for testing purpose 
 	
@@ -110,6 +179,7 @@ def getData(code):
 		return problem_data
 	else:
 		return {}
+'''
 
 def getLocation(code):
 	problem = models.Problem.query.filter(models.Problem.uid == code).first()
