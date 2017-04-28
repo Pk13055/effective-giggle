@@ -8,7 +8,7 @@ def main():
 		port = int(sys.argv[1])
 	except:
 		pass
-	app.run(debug = True, host = '127.0.0.1', port = port)
+	app.run(debug = True, host = '10.2.131.64', port = port)
 
 if __name__ == '__main__':
 	main()	
