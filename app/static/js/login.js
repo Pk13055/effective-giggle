@@ -30,10 +30,9 @@
 			error:function(response)
 			{
 			// console.log(response)
-
-				alert(JSON.parse(response.responseText).message)
-				if(JSON.parse(response.responseText).message=="Register First")
-					window.location.replace('/signup');
+				Materialize.toast(JSON.parse(response.responseText).message, 4000)
+				// if(JSON.parse(response.responseText).message=="Register First")
+					// window.location.replace('/signup');
 			}
 		})
 

@@ -29,11 +29,11 @@ def user_route(code):
 	if request.method == 'GET':
 		data=user_maker.getData(code)
 		stats=user_maker.getStats(code)
-		#use this to test jinja page 
-		# problems_submitted=[{'status':"Wrong Answer",'name':'42','time':'1/2/12','lang':'C++'},{'status':"Accepted",'name':'Graph','time':'12/21/12','lang':'Python'}]
 		problems_submitted = user_maker.getProblemSubmitted(code)
 		if data:
 			return render_template('Profiles/profile_user.html',data = data,problems = problems_submitted,stats=stats)
+		else:
+			return render_template('error.html',error="View did not return response")	
 
 @user.route('/solver/submission', methods = ['GET', 'POST'])
 @requires_auth
@@ -42,3 +42,10 @@ def user_submission():
 		data=user_maker.getUserSubmission(request.args['uid'])
 		file=user_maker.getSubFile(data.submission_location)
 		return render_template('Profiles/user_submission.html',data=data,file=file)
+
+@user.route('/userlist/<code>', methods = ['GET', 'POST'])
+def userlist(code):
+	if request.method == 'GET':
+		data=user_maker.getUsers(code)
+		length=User.query.count()
+		return render_template('Profiles/userlist.html',users = data,length=length)

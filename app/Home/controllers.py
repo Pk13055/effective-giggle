@@ -17,7 +17,11 @@ def homie():
 def home_render(page):
 	if request.method == 'GET':
 		data = helper.makeHome(page)
-		return render_template('Main/home.html', latest_problems = data['latest'], current_page = data['current'], total_pages = data['total'], current_page_number = int(page))
+		try:
+			return render_template('Main/home.html', latest_problems = data['latest'], current_page = data['current'], total_pages = data['total'], current_page_number = int(page))
+		except:
+			return render_template('Main/home.html', latest_problems = data['latest'], current_page = data['current'], total_pages = data['total'], current_page_number = 1)
+				
 		# return jsonify(helper.makeHome(page))
 	elif request.method == 'POST':
 		# add the search functionality here
@@ -46,7 +50,6 @@ def signin():
 
 # simple logout route
 @home.route('/logout',methods = ['POST','GET'])
-@requires_auth
 def logout():
 
 	session.pop('user_uid')
@@ -64,6 +67,7 @@ def signup():
 			return render_template('Forms/loginpage.html')
 		else:
 			return result
+
 
 @home.route('/search',methods=['GET','POST'])
 def search_redirect():

@@ -35,6 +35,10 @@ def getData(code):
 	else:
 		return {}
 
+def getUsers(length):
+	users=models.User.query.order_by(models.User.rank_value.desc()).limit(length)
+	return users
+
 # Admin function to create a problem object from the submitted form
 def createProblem(form, code, files):
 	obj = {}
@@ -183,5 +187,5 @@ def getUserSubmission(uid):
 		return submission
 
 def getSubFile(name):
-	file = open(os.path.join(config.UPLOAD_FOLDER_SUBMISSION,name)).read()
+	file = open(os.path.join(config.UPLOAD_FOLDER_SUBMISSION,name)).read().strip('\n').split('\n')
 	return file
