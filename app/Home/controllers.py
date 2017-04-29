@@ -68,7 +68,6 @@ def signup():
 		else:
 			return result
 
-
 @home.route('/search',methods=['GET','POST'])
 def search_redirect():
 	val=request.form['search']	

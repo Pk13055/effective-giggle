@@ -4,8 +4,6 @@
 		email=$('#email').val()
 		
 
-		// console.log(email)
-
 	var csrftoken = $('meta[name=csrf-token]').attr('content')
 
 		$.ajaxSetup({

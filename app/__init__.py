@@ -39,6 +39,11 @@ def requires_auth(f):
 		return f(*args, **kwargs)
 	return decorated
 
+# this function is responsible for cleaning up data parsed from file
+def sanitize(data):
+	return filter(lambda x: x != '', data)
+
+
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.Comments.controllers import comments
 from app.Home.controllers import home

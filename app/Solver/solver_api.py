@@ -1,7 +1,7 @@
 # def imports required for routing etc
 from flask import Blueprint, request, render_template, \
                   flash, g, session, redirect, url_for, jsonify
-from app import db, models
+from app import db, models, sanitize
 import config
 
 # custom imports to handle files
@@ -9,6 +9,7 @@ import subprocess, os, shlex
 import hashlib, random,datetime
 import time, threading
 import re
+from timeit import default_timer
 
 # title, tags, uploader, problem_location, self.io_location, solution_self.language, self.solution_location, editorial_location
 # encapsulated body wherein you only have to create an object and call generateself._result
@@ -48,8 +49,7 @@ class Solver():
 	def _generateLargeIO(self):
 
 		data = open(os.path.join(config.UPLOAD_FOLDER_TEST, self.io_location)).read().strip('\n').split('\n')
-		# # comment out after done
-		# data = open('testcase').read().strip('\n').split('\n')
+		data = sanitize(data)
 		
 		inputs = []
 		outputs = []
@@ -125,7 +125,11 @@ class Solver():
 					inp = open(temp_loc)
 					e = open(error_loc, 'w')
 					try:
+						start_point = default_timer()
 						op = subprocess.check_output(shlex.split(run_query), stderr = e, stdin = inp)
+						duration = default_timer() - start_point
+						if duration > self.timelimit:
+							raise Exception
 						e.close()
 						# if os.path.getsize(error_loc):
 						# 	_result['status'].append("Seg Fault")
@@ -135,8 +139,8 @@ class Solver():
 							self._result['status'].append("Wrong Answer")
 					except subprocess.CalledProcessError as error:
 							self._result['status'].append("Segmentation Fault (ERR_CODE %d)" % (error.returncode))
-					# except subprocess.TimeoutExpired:
-					# 		self._result['status'].append("Timelimit exceeded")
+					except:
+							self._result['status'].append("Timelimit exceeded")
 
 		# run with python 
 		elif self.language in ['python2', 'python3']:
