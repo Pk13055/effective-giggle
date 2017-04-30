@@ -1,0 +1,3 @@
+gcc: error: /home/shubh/Major: No such file or directory
+gcc: error: Project/effective-giggle/uploads/user_submissions/25ae3965f685d182cd785ab144bd4499a1d5a3fb.c: No such file or directory
+gcc: error: Project/effective-giggle/uploads/.sandbox/96554c5af8014a2a0811e9f52c0eb4fb77d54fa1: No such file or directory
