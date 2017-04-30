@@ -130,7 +130,7 @@ def getData(code):
 				i += 1
 				testcases += 1
 				il.append(0)
-				print(testcases)
+				# print(testcases)
 				while lines[i] != 'Output':
 					inputs.append(lines[i])
 					i += 1

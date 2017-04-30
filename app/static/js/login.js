@@ -4,8 +4,6 @@
 		email=$('#email').val()
 		
 
-		console.log(email)
-
 	var csrftoken = $('meta[name=csrf-token]').attr('content')
 
 		$.ajaxSetup({
@@ -29,11 +27,10 @@
 
 			error:function(response)
 			{
-			console.log(response)
-
-				alert(JSON.parse(response.responseText).message)
-				if(JSON.parse(response.responseText).message=="Register First")
-					window.location.replace('/signup');
+			// console.log(response)
+				Materialize.toast(JSON.parse(response.responseText).message, 4000)
+				// if(JSON.parse(response.responseText).message=="Register First")
+					// window.location.replace('/signup');
 			}
 		})
 

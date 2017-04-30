@@ -1,3 +1,4 @@
+
 import sys
 from flask import Flask, render_template, jsonify
 from app import app
@@ -8,7 +9,7 @@ def main():
 		port = int(sys.argv[1])
 	except:
 		pass
-	app.run(debug = True, host = '10.2.131.64', port = port)
+	app.run(debug = True, host = '0.0.0.0', port = port)
 
 if __name__ == '__main__':
 	main()	

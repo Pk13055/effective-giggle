@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% set state = 'loggedin' %}
+
+{% block heading %} User List {% endblock %}
+{% block title %} {{ super() }} {% endblock %}
+{% block scripts %}
+	<script src="{{ url_for('static', filename = 'js/User/highcharts.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/User/heatmap.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/User/exporting.js') }}"></script>
+
+	<script src="{{ url_for('static', filename = 'js/User/graph.js') }}"></script>
+	{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="card row z-depth-2"> 
+	<div class="card-content">
+		<h2 class="black-text center-align flow-text card-title">Users-By Rating</h2>
+		
+		<a class="right dropdown-button btn" href="#" data-activates='length'>Show</a>
+
+		<table class="bordered striped highlight responsive-table centered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>User</th>
+					<th>Rating</th>
+					<th>Accepted</th>
+					<th>Efficiency</th>
+				</tr>
+			</thead>				
+			<tbody>
+				{% for user in users %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					
+					<td><a href="/solver/{{user.uid}}">{{ user.username }}</a></td>
+					
+					<td> {{ user.rank_value }}</td>
+					
+					<td class="black-text text-darken-2">
+						{{ user.accepted }}
+					</td>
+					
+
+					{% if user.total_submissions == 0 %}
+						<td class="black-text text-darken-2">0
+					</td>
+					{% else %}
+						<td class="black-text text-darken-2">{{ user.accepted/user.total_submissions }}
+						</td>
+					{% endif %}
+		
+				{% endfor %}					
+				</tr>
+			</tbody>	
+		</table>
+	</div>
+</div>
+
+<ul id='length' class='dropdown-content'>
+    {% for number in range(length//50) %} 
+    <li><a href="/userlist/{{ (number+1)*50 }}">{{ (number+1)*50 }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

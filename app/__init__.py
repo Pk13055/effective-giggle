@@ -49,13 +49,14 @@ from app.Comments.controllers import comments
 from app.Home.controllers import home
 from app.Problem.controllers import problem
 from app.User.controllers import user
+from app.Checks.controllers import check
 
 # Register blueprint(s)
 app.register_blueprint(comments)
 app.register_blueprint(home)
 app.register_blueprint(problem)
 app.register_blueprint(user)
-
+app.register_blueprint(check)
 
 # Build the database:
 # This will create the database file using SQLAlchemy
