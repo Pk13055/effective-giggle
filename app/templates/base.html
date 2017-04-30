@@ -1,15 +1,16 @@
+
 {% if session.user_uid is not defined %}
-	{% set state = ' loggedout' %}
-	{% set role = '' %}
+{% set state = ' loggedout' %}
+{% set role = '' %}
 {% else %}
-	{% set state ='loggedin' %}
-	{% set role =session.user_role %}
+{% set state ='loggedin' %}
+{% set role =session.user_role %}
 {% endif %}
 <!DOCTYPE html>
 <html>
 <head>
 	{% block title %}
-		<title> {% block heading %} {% endblock %} </title>
+	<title> {% block heading %} {% endblock %} </title>
 	{% endblock %}
 	<input type="hidden" id="state" value="{{state}}"> 
 
@@ -19,136 +20,190 @@
 	<script src="{{ url_for('static', filename = 'jQuery/tmp/jquery.js') }}"></script>
 	<script src="{{ url_for('static', filename = 'materialize/js/materialize.min.js') }}"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script>
+		$(document).ready(function() {
+			$('.modal').modal();
+			$('.tooltipped').tooltip({delay: 50});
+		
+			$(window).load(function () {
+				$('.preloader-wrapper').delay().fadeOut();
+			})
+
+		});
+
+	</script>
+<script src="{{ url_for('static', filename = 'js/login.js') }}"></script>
+		
 	{% block scripts %}
 	{% endblock %}
 	{% block style %}
 	{% endblock %}
 	<style>
-	  body {
-	    display: flex;
-	    min-height: 100vh;
-	    flex-direction: column;
-	  }
+		body {
+			display: flex;
+			min-height: 100vh;
+			flex-direction: column;
+		}
 
-	  main {
-	    flex: 1 0 auto;
-	  }
+		main {
+			flex: 1 0 auto;
+		}
 	</style>
 </head>
+
+        
+
 <body class="{% block color %}{% endblock %}">
 	<input type="hidden" name="state" value="{{state}}">
 
+
 	<header>
+		<div class="navbar-fixed">
 		<nav class="teal darken-4" class="center-align">
-	    	<div class="nav-wrapper">
-	      	 	<a href="/" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
-	      		<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
-	      		<ul class="right hide-on-med-and-down">
-	      			<li>
-			        		<form method="POST" action="/search" class="input-field">
-						        <li class="teal darken-4">
-									<input type="text" max="200" id="search" name="search" placeholder="Search by name, code, tags">
-								</li>
-								<li>
-									<button type="submit" style="display: none;" id="sub"></button> 
-										<a class="btn-floating teal darken-3" id="a" onclick="$('#sub').click();"><i class="material-icons">search</i></a>
-								</li>
-			        		</form>		
-      				</li>
-			        <li> <a href="/">Problems</a>  </li>
-			        {% if problem_uid %}
-			        	<li> <a href="/problems/{{ problem_uid }}">Problem </a>  </li>
-			        	<li> <a href='/comments/{{ problem_uid }}'>Comments </a></li>
-			        {% endif %}
-	      			{% if state == 'loggedin' %}
-			        	<li> <a href="/solver/{{ session.user_uid }}">User Profile</a>  </li>
-			        	{% if role == "admin" %}
-			        		<li> <a href="/setter/{{ session.user_uid }}">Admin Profile</a>  </li>
-			        	{% endif %}
-			    	{% else %}
-		        		<li> <a href="/signin">Sign In</a>  </li>
-		        		<li> <a href="/signup">Sign Up</a>  </li>
-				    {% endif %}
-					{% if state=='loggedin' %}
-	      				<li> <a href="/logout"> Logout</a>  </li>
-	      			{% endif %}
-	      		</ul>
-		    	<ul class="side-nav" id="mobile-display">
+			<div class="nav-wrapper">
+				<a href="/" class="brand-logo"><i class="material-icons">code</i><span class="flow-text">WebSite Name</span></a>
+				<a href="#" data-activates="mobile-display" class="button-collapse"><i class="material-icons">menu</i></a>
+				<ul class="right hide-on-med-and-down">
+					<li>
+						<form method="POST" action="/search" class="input-field">
+										
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+														
+							<li class="teal darken-4">
+								<input type="text" class="tooltipped" data-position="bottom" max="200" id="search" name="search" data-tooltip="Search problems by name, code, tags"
+								placeholder="Search Problems">
+							</li>
+							<li>
+								<button type="submit" style="display: none;" id="sub"></button> 
+								<a class="btn-floating teal darken-3" id="a" onclick="$('#sub').click();"><i class="material-icons">search</i></a>
+							</li>
+						</form>		
+					</li>
 					<li> <a href="/">Problems</a>  </li>
-			        {% if problem_uid %}
-			        	<li> <a href="/problems/{{ problem_uid }}">Problem </a>  </li>
-			        	<li> <a href='/comments/{{ problem_uid }}'>Comments </a></li>
-			        {% endif %}
-	      			{% if state == 'loggedin' %}
-			        	<li> <a href="/solver/{{ session.user_uid }}">User Profile</a>  </li>
-			        	{% if role == "admin" %}
-			        		<li> <a href="/setter/{{ session.user_uid }}">Admin Profile</a>  </li>
-			        	{% endif %}
-			    	{% else %}
-		        		<li> <a href="/signin">Sign In</a>  </li>
-		        		<li> <a href="/signup">Sign Up</a>  </li>
-				    {% endif %}
+
+					<li> <a href="/userlist/50">Users</a>  </li>
+
+					{% if problem_uid %}
+					<li> <a href="/problems/{{ problem_uid }}">Problem </a>  </li>
+					<li> <a href='/comments/{{ problem_uid }}'>Comments </a></li>
+					{% endif %}
+					{% if state == 'loggedin' %}
+					<li> <a href="/solver/{{ session.user_uid }}">User Profile</a>  </li>
+					{% if role == "admin" %}
+					<li> <a href="/setter/{{ session.user_uid }}">Admin Profile</a>  </li>
+					{% endif %}
+					{% else %}
+					<li> <a class="waves-effect waves-dark" onclick="$('#login-modal').modal('open');">Sign In</a>  </li>
+					<li> <a href="/signup">Sign Up</a>  </li>
+					{% endif %}
 					{% if state=='loggedin' %}
-	      				<li> <a href="/logout"> Logout</a>  </li>
-	      			{% endif %}
-				{% if state=="loggedin" %}
-			        <li> <a href="/solver/{{ session.user_uid}}">User Profile</a>  </li>
-			        {% if role=="admin" %}
-			        <li> <a href="/setter/{{ session.user_uid}}">Admin Profile</a>  </li>
-			        {% endif %}
-			    {% endif %}
-		      	</ul>
-	    	</div>
+					<li> <a href="/logout"> Logout</a>  </li>
+					{% endif %}
+				</ul>
+				<ul class="side-nav" id="mobile-display">
+					<li> <a href="/">Problems</a>  </li>
+					{% if problem_uid %}
+					<li> <a href="/problems/{{ problem_uid }}">Problem </a>  </li>
+					<li> <a href='/comments/{{ problem_uid }}'>Comments </a></li>
+					{% endif %}
+					{% if state == 'loggedin' %}
+					<li> <a href="/solver/{{ session.user_uid }}">User Profile</a>  </li>
+					{% if role == "admin" %}
+					<li> <a href="/setter/{{ session.user_uid }}">Admin Profile</a>  </li>
+					{% endif %}
+					{% else %}
+					<li> <a class="waves-effect waves-dark" onclick="$('#login-modal').modal('open');">Sign In</a>  </li>
+					<li> <a href="/signup">Sign Up</a>  </li>
+					{% endif %}
+					{% if state=='loggedin' %}
+					<li> <a href="/logout"> Logout</a>  </li>
+					{% endif %}
+					{% if state=="loggedin" %}
+					<li> <a href="/solver/{{ session.user_uid}}">User Profile</a>  </li>
+					{% if role=="admin" %}
+					<li> <a href="/setter/{{ session.user_uid}}">Admin Profile</a>  </li>
+					{% endif %}
+					{% endif %}
+				</ul>
+			</div>
 		</nav>
+		</div>
 	</header>
+
 	<main class="teal lighten-2">
-	{% block body_scripts %}
-	{% endblock %}
-	{% block content %}
-	{% endblock %}
+		{% block body_scripts %}
+		{% endblock %}
+			
+		{% block content %}
+		{% endblock %}
+		<div class="modal" id="login-modal">
+		
+			<form action="/signin" method="POST">
+				<meta name="csrf-token" content="{{ csrf_token() }}">
+
+				<div class="modal-content">
+					<h5 class="flow-text">Login</h5>
+					<div class="divider"></div>
+					<div class="input-field">
+						<i class="material-icons prefix">account_circle</i>
+						<input id="email" type="email" class="validate" name="email">
+						<label for="icon_prefix">Email</label>
+					</div>
+					<div class="input-field">	
+						<i class="material-icons prefix">https</i>
+						<input id="password" type="password" class="validate" required="true" name="password">
+						<label for="https">Password</label>
+					</div>
+					<input type="hidden" value="1" name="token">
+				</div>
+				<div class="modal-footer">
+					<button id="submit" class="btn waves-effect waves-dark teal lighten-2" type="button" name="action">Login<i class="material-icons right">send</i></button>
+				</div>
+			</form>
+		</div>
 	</main>
 	<footer class="page-footer teal darken-4">
-			<div class="container hide-on-med-and-down" style="width:100%">
-				<div class="row">
-					<div class="col s12 m6">
-						<div class="row">
-							<h4 class="flow-text white-text">Founders</h4>
+		<div class="container hide-on-med-and-down" style="width:100%">
+			<div class="row">
+				<div class="col s12 m6">
+					<div class="row">
+						<h4 class="flow-text white-text">Founders</h4>
+					</div>
+					<div class="row">
+						<div class="divider"></div>
+					</div>
+					<div class="row">
+						<div class="chip">
+							<img src="{{ url_for('static', filename = 'images/founders/neha.jpeg')}}">
+							Neha M.
 						</div>
-						<div class="row">
-							<div class="divider"></div>
+						<div class="chip">
+							<img src="{{ url_for('static', filename = 'images/founders/shubh.jpeg')}}">
+							Shubh M.
 						</div>
-						<div class="row">
-					  		<div class="chip">
-					  			<img src="{{ url_for('static', filename = 'images/founders/neha.jpeg')}}">
-					  			Neha M.
-					  		</div>
-					  		<div class="chip">
-					  			<img src="{{ url_for('static', filename = 'images/founders/shubh.jpeg')}}">
-					  			Shubh M.
-					  		</div>
-					  		<div class="chip">
-					  			<img src="{{ url_for('static', filename = 'images/founders/pranay.jpeg')}}">
-					  			Pranay G.
-					  		</div>
-					  		<div class="chip">
-					  			<img src="{{ url_for('static', filename = 'images/founders/pratik.jpeg')}}">
-					  			Pratik K.
-					  		</div>
+						<div class="chip">
+							<img src="{{ url_for('static', filename = 'images/founders/pranay.jpeg')}}">
+							Pranay G.
+						</div>
+						<div class="chip">
+							<img src="{{ url_for('static', filename = 'images/founders/pratik.jpeg')}}">
+							Pratik K.
 						</div>
 					</div>
-					<div class="col s12 m6">
-						<div class="card-panel teal darken-3">
-							<span class="flow-text"> "This is the best coding website I have ever seen!" <br>- Steve Jobs</span>
-						</div>
-					</div>
-				</div>	
-			</div>
-			<div class="footer-copyright">
-				<div class="container">
-					<span class="left flow-text"> Copyright &copy; 2017</span>
-					<span class="right flow-text">WebSite Name </span>
 				</div>
+				<div class="col s12 m6">
+					<div class="card-panel teal darken-3">
+						<span class="flow-text"> "This is the best coding website I have ever seen!" <br>- Steve Jobs</span>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				<span class="left flow-text"> Copyright &copy; 2017</span>
+				<span class="right flow-text">WebSite Name </span>
 			</div>
+		</div>
 	</footer>
 </body>
 </html>

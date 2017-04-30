@@ -61,7 +61,7 @@ def createUser(request):
 	try:
 		db.session.commit()
 	except IntegrityError as e:
-		return jsonify(success=False, message="This email already exists"), 400		
+		return jsonify(success=False, message="This email or username already exists"), 400		
 	return True
 
 
@@ -103,7 +103,8 @@ def makeData(begin, end, key, PROBLEMS):
 def makeHome(page):
 	PROBLEMS = models.Problem.query.with_entities(models.Problem.uid, models.Problem.title, models.Problem.id, models.Problem.tags, models.Problem.editorial_location).order_by(models.Problem.id.desc()).all()
 	makeData(0, LATEST, 'latest', PROBLEMS)
-	current_beg = LATEST + (int(page) - 1)*PER_PAGE
+	# current_beg = LATEST + (int(page) - 1)*PER_PAGE
+ 	current_beg=1
  	current_end = min(current_beg + PER_PAGE,db.session.query(models.Problem).count()) 
 	makeData(current_beg, current_end, 'current', PROBLEMS)
 	return data
@@ -119,7 +120,7 @@ def search_list(value,key):
 	# by tag
 	for tag in val:
 		problems=Problem.query.filter(Problem.tags.like("%"+tag+"%")).all()		 
-		print(problems)
+		# print(problems)
 		for problem in problems:
 			dict1={}
 			dict1['id']=problem.id
@@ -171,4 +172,16 @@ def search_list(value,key):
 	return dict1
 	# return problem_list
 
+def checkuser(username):
+	exists = User.query.filter(User.username==username).count()
+	if count == 0 :
+		return "Go Ahead"
+	else:
+		return "Username exists"
 
+def checkemail(email):
+	exists = User.query.filter(User.email==email).count()
+	if count == 0 :
+		return "Go Ahead"
+	else:
+		return "Email exists"

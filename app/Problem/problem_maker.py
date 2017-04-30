@@ -1,7 +1,7 @@
 # Methods to implement the various route validations and other helper
 
 from flask import jsonify,session
-from app import db, models
+from app import db, models, sanitize
 import app
 
 # modules to help across different functions
@@ -9,6 +9,76 @@ from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
 import os,hashlib,config,datetime
 
+# this function is responsible for rendering the problem page
+# it returns a JSON with the required fields and if the file is not readable it returns an empty dataset
+def getData(code):
+	
+	problem_data = models.Problem.query.filter(models.Problem.uid == code).first()
+	filename = problem_data.problem_location
+	tags = problem_data.tags.split(',')
+	tags = sanitize(tags)
+	
+	return_obj = {
+		'id':problem_data.id,
+		'uid':problem_data.uid,
+		'title' : problem_data.title,
+		'tags' : tags,
+		'status' : [],
+		'heading' : [],
+		'introduction' : [],
+		'constraints' : [],
+		'testcases' : []
+	}
+
+	# in case the problem does not exist or cannot be parsed
+	data = ["This problem does not have a question"]
+
+	try:
+		data = open(os.path.join(config.UPLOAD_FOLDER_PROBLEM, filename)).read().strip('\n').split('\n')
+		data = sanitize(data)
+	except:
+		pass
+	
+	if data:
+		markers = []
+		data_headers = ['Introduction', 'Heading', 'Constraints', 'Test Cases']
+		for i, j in enumerate(data):
+			if j.strip(' ') in data_headers:
+				markers.append(i)
+		if len(markers) != len(data_headers):
+			return_obj['heading'] = data
+		else:
+			# this stores the final data as a LOFL
+			dataset = []
+			for i, j in enumerate(markers):
+				try:
+					dataset.append(data[markers[i] + 1: markers[i + 1]])
+				except:
+					dataset.append(data[markers[i] + 1:])
+			fillers = ['heading', 'introduction', 'constraints', 'testcases']
+			
+			# this loop fills the given dataset values into the return object
+			for i,j in enumerate(fillers):
+				return_obj[j] = dataset[i]
+			
+			test_cases = []
+			io_pos = [i for i, j in enumerate(return_obj['testcases']) if "Input" in j]
+			for i, j in enumerate(io_pos):
+				try:
+					test_cases.append(return_obj['testcases'][j : io_pos[i + 1]])
+				except:
+					test_cases.append(return_obj['testcases'][j :])
+
+			return_obj['testcases'] = test_cases
+			return_obj['status'].append("Data Parsed")
+	
+	else:
+		return_obj['status'] = data
+	
+	return return_obj
+
+
+'''		
 def getData(code):
 	#for testing purpose 
 	
@@ -31,13 +101,19 @@ def getData(code):
 		testcases = 0
 		inputs = []
 		outputs = []
+		il = []
+		ol = []
+		il.append(0)
+		ol.append(0)
 		n = len(lines)
 		i = 0
 		#print(lines[0])
-		while i < n:
-			#print("yo")
+		count = 0
+		while i < n and count < 1000:
+		#print("yo")
+			count = count +1
 			if lines[i] == 'Heading': 
-				i += 1
+				i += 2
 			if lines[i] == 'Introduction':
 				i += 1
 				while lines[i] != 'Constraints':
@@ -53,16 +129,21 @@ def getData(code):
 			if lines[i] == 'Input':
 				i += 1
 				testcases += 1
-				while lines[i] != "Output":
+				il.append(0)
+				# print(testcases)
+				while lines[i] != 'Output':
 					inputs.append(lines[i])
 					i += 1
+					il[testcases] += 1
 			if lines[i] == 'Output':
 				i += 1
-				while (i < n and lines[i] != 'Input'):	
+				ol.append(0)
+				while (i < n and lines[i] != 'Input'):
 					outputs.append(lines[i])
 					i += 1
-		il = len(inputs)/testcases
-		ol = len(outputs)/testcases	 	
+					ol[testcases] += 1
+		maxlen = max(il) + max(ol)			
+			 	
 	
 	except:
 	 	introduction = 'you dont need question to solve this problem'
@@ -70,8 +151,9 @@ def getData(code):
 	 	inputs = []
 	 	outputs = []
 	 	testcases = 0
-	 	il = 0
-	 	ol = 0
+	 	il = []
+	 	ol = []
+	 	maxlen = 0
 	try:
 		io_file=open(config.UPLOAD_FOLDER_TEST+
 			"/"+problem.io_location,"r")
@@ -93,10 +175,12 @@ def getData(code):
 			'testcases' : testcases,
 			'inputlength' : il,
 			'outputlength' : ol,
+			'maxlen' : maxlen,
 		}
 		return problem_data
 	else:
 		return {}
+'''
 
 def getLocation(code):
 	problem = models.Problem.query.filter(models.Problem.uid == code).first()
@@ -127,6 +211,6 @@ def updateProblem(problem_uid,verdict):
 
 	problem.total_submissions=1 + problem.total_submissions 	
 
-	print(problem.wrong_answer)
+	# print(problem.wrong_answer)
 
 	db.session.commit()
