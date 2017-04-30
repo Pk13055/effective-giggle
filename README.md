@@ -1,48 +1,52 @@
 # Project Assignment-DOJE(Online Judge) 
 
-## How to Run
-1.	change permissions of effective-giggle 
-	change permissions of /var/run 
+#Get your  SSL certificate 
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+
+## How to Deploy
+1.	change permissions of effective-giggle to 755
 
 2. update /etc/nginx/site-available/default
 with:-
-server {
+`server {
     listen 5000;
 	listen 443 ssl;
 	ssl_certificate /etc/nginx/ssl/nginx.crt;
 	ssl_certificate_key /etc/nginx/ssl/nginx.key;
 
-	server_name 0.0.0.0;
+    server_name 0.0.0.0;
 
 	location = /favicon.ico { access_log off; log_not_found off; }
 
-    location /static/ {
-		alias /home/shubh/Major_Project/effective-giggle/app/;
-		}
+    location /static {
+		alias $PWD/effective-giggle/app/static;}
     
-	 location /media/ {
-        alias /home/shubh/Major_Project/effective-giggle/app/static/images;
+	 location /media {
+        alias $PWD/effective-giggle/app/static/images;
     }
 
     location / {
         include uwsgi_params;
-        uwsgi_pass unix:///var/run/project.sock;
+        uwsgi_pass unix:///tmp/project.sock;
 	}
     
 	
-}
+}`
 
 3. update the location path of socket in uwsgi.ini and /etc/nginx/site-available/default
-3.1 make sure your directory path has no " "(spaces)  
+	3.1 make sure your directory path has no " "(spaces)  
 
-4. Run the following command in your terminal to start 	  the server
 
+## How to run 
 	uwsgi --ini uwsgi.ini
 	sudo service nginx restart
 
 ##	To stop nginx
 	sudo service nginx stop 
 
+## [Data model Documentation](./datamodel.md)
+
+## How to run (debugging)
 ` python2.7 run.py <port> `
 
 (Specify your desired port, or keep blank for the default (8000))
