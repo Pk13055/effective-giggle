@@ -1,0 +1,109 @@
+{% extends 'base.html.j2' %}
+{% set state = "loggedout" %}
+
+{% block heading %} Signup {% endblock %}
+{% block title %} {{ super() }} {% endblock %}
+{% block scripts %}
+<script>
+	$(document).ready(function() {
+		$('select').material_select();
+	});
+</script>
+
+<script src="{{ url_for('static', filename = 'js/register.js') }}"></script>
+
+{{ super() }}
+{% endblock %}
+{% block color %} white {{ super() }} {% endblock %}
+{% block content %}
+<div class="container white">
+	<div class="row">
+		<div class="col s12 m6 offset-m3 offset-s3">
+			<h2 class="header center-on-small-only">Sign Up</h2>
+			<h4 class ="light teal-text text-lighten-3 center-on-small-only">It won't take long.</h4>
+		</div>
+	</div>
+	<div class="row">
+		<form class="col s12 m6 offset-m3" method="POST" action="/signup" enctype = "multipart/form-data">
+			
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+			<div class="row">
+				<div class="input-field">
+					<i id="user_logo" class="material-icons prefix">account_circle</i>
+					<input type="text" id="user" class="validate" maxlength="25" required="true" name="username" 
+					onkeyup="check('user')">
+					<label for="icon_prefix">User Name</label>
+				</div>
+			</div>	
+			<div class="row">	
+				<div class="input-field">
+					<i id="email_logo" class="material-icons prefix">email</i>
+					<input id="email" type="email" class="validate" name="email" required="true" onkeyup="check('email')">
+					<label for="email">Email ID</label>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="input-field">
+					<i id="password1_logo" class="material-icons prefix">https</i>
+					<input id="https1" type="password" class="" name="password" required="true">
+					<label for="https1">Password</label>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="input-field">
+					<i id="password2_logo" class="material-icons prefix">https</i>
+					<input id="https2" type="password" class="" name="password_2" required="true" onkeyup="check('password')">
+					<label for="https2">Confirm Password</label>
+				</div>
+			</div>
+			<div class="row">
+				<span class="flow-text red-text" id="error"></span>
+			</div>
+			<div class="row">
+				<div class="input-field">
+					<i id="org_logo" class="material-icons prefix">functions</i>
+					<input id="business" type="text" class="validate" name="institute" onkeyup="check('org')">
+					<label for="business">Institute/Organization</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field">
+					<i id="location_logo" class="material-icons prefix">location_on</i>
+					<input id="location" type="text" class="validate" name="location" onkeyup="check('location')">
+					<label for="location">Location</label>
+				</div>
+			</div>
+			<div class ="row">
+				<label>Please upload a photo</label>
+				<div class="file-field input-field">
+					<div class="btn">
+						<input type="file" name="file0">
+						<span>UPLOAD</span>
+					</div>
+					<div class="file-path-wrapper">
+						<input class="file-path validate" type="text" >
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<label for="role"> Register As </label>
+				<div class="input-field">
+					<select id="role" name="role" required="true">
+						<option value="admin"> Admin 
+						</option>
+						<option value="user"> User </option>
+					</select>
+				</div>
+			</div>
+			<div class ="row">
+				<div class="button-field right">
+					<button class="btn waves-effect waves-dark" type="submit" name="submit" id="submit_registration">Register
+						<i class="material-icons right">send</i>
+					</button>
+				</div>		
+			</div>
+		</form>	
+	</div>	
+</div>	
+{% endblock %}

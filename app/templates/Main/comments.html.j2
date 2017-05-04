@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html.j2' %}
 {% set problem_uid = title %}
 {% block heading %} Comments - {{title}}  {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
@@ -20,9 +20,9 @@
 		<div class="divider"></div>
 		<p>
 			{% if check == 'md' %}
-				{{ editorial | safe }}
+			{{ editorial | safe }}
 			{% else %}
-				{{ editorial }}
+			{{ editorial }}
 			{% endif %}
 		</p>
 	</div>
@@ -31,7 +31,7 @@
 			<div class="card-title flow-text">Comments</div>
 			<div class="divider"></div>
 			<div class="collection">
-			{% if comments | length %}
+				{% if comments | length %}
 				{% for comment in comments %}
 				<a class="collection-item avatar black-text">
 					<img src="{{ url_for('static', filename = 'images/profile_pics/' + comment.profile_pic) }}" alt="image" class="circle">
@@ -43,11 +43,11 @@
 					</p>
 				</a>
 				{% endfor %}
-			{% else %}
+				{% else %}
 				<div class="collection-item black-text">
 					<p class="flow-text"> No comments yet! </p>
 				</div>
-			{% endif %}
+				{% endif %}
 			</div>
 		</div>
 		<div class="card-action center-align">

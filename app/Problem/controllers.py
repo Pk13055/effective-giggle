@@ -17,7 +17,7 @@ def problem_render(code):
 	
 	if request.method == 'GET':
 		problem = problem_maker.getData(code)
-		return render_template('Main/problems.html', problem = problem)			
+		return render_template('Main/problems.html.j2', problem = problem)			
 	
 	elif request.method == 'POST':
 		if 'user_uid' not in session:

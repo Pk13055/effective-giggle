@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html.j2" %}
 {% block heading %} Homepage {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
 {% block content %}
@@ -16,7 +16,7 @@
 	<!-- Problems uploaded within the first few days -->
 	<!-- Will Always contain the latest  -->
 	<div class="row">
-	{% if latest_problems | length %}
+		{% if latest_problems | length %}
 		{% for problem in latest_problems %}
 		<!-- Iterate block  -->
 		<div class="col s12 m3 l4">
@@ -45,18 +45,18 @@
 		</div>
 		<!-- End block here  -->
 		{% endfor %}
-	{% else %}
+		{% else %}
 		<div class="col s12 m12 card-panel">
 			<span class="flow-text"> No New Problems yet! </span>
 		</div>
-	{% endif %}
+		{% endif %}
 	</div>
 	<div class="divider"></div>
 	<div class="row">
 		<h3 class="left-align flow-text"> Other Problems </h3>
 	</div>
 	<div class="row">
-	{% if current_page | length %}
+		{% if current_page | length %}
 		{% for problem in current_page %}
 		<div class="col s12 m3 l4">
 			<div class="card small">
@@ -83,11 +83,11 @@
 			</div>
 		</div>
 		{% endfor %}
-	{% else %}
+		{% else %}
 		<div class="col s12 m12 card-panel">
 			<span class="flow-text"> Hang tight! Problems will be updated </span>
 		</div>
-	{% endif %}
+		{% endif %}
 	</div>
 	{% if total_pages %}
 	<div class="row card-panel">
@@ -111,5 +111,5 @@
 		</div>
 	</div>
 	{% endif %}
-	</div>
-	{% endblock %}
+</div>
+{% endblock %}

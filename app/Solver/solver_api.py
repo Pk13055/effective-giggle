@@ -57,7 +57,7 @@ class Solver():
 		io_ends = [i for i, j in enumerate(data) if 'Output' in j]
 
 		# in case input file is corrupt
-		if len(io_begs) != len(io_ends):
+		if len(io_begs) != len(io_ends) or len(io_begs) == 0 or len(io_ends) == 0:
 			self._result['status'].append("I/O Error")
 			raise Exception
 		

@@ -1,0 +1,129 @@
+{% extends 'base.html.j2' %}
+
+{% set problem_uid = problem.uid %}
+
+{% block heading %} Problem {{ problem.title }} {% endblock %}
+{% block title %} {{ super() }} {% endblock %}
+{% block content %}
+
+<input type="hidden" id="problem_uid" value="{{problem.uid}}">
+<input type="hidden" id="user_uid" value="{{session.user_uid}}">	
+
+<div class="container">
+	<div class="row">
+		<h4 class="flow-text"> Problem {{ problem.id }} - {{ problem.title}}</h4>
+		<div class="divider"></div>
+	</div>
+	<div class="row">
+		{% for tag in problem.tags %}
+		<div class="chip"> {{ tag }}</div>
+		{% endfor %}
+	</div>
+	{% if problem.status %}
+	<div class="row">
+		<p class = "flow-text"> 
+			{% for line in problem.introduction %}
+			{{ line }}
+			{% endfor %}
+		</p>
+		<div class="divider"></div>
+		<div class="col s12 card-panel z-depth-2">
+			<h5 class="flow-text"> Constraints </h5>
+			<p class="flow-text">
+				{% for line in problem.constraints %}
+				{{ line }} <br>
+				{% endfor %}
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="divider"></div>
+	</div>
+	<div class="row">
+		<h5 class="flow-text"> Test Cases</h5>
+		{% for testcase in problem.testcases %}
+		<div clas="col s12 m4">
+			<div class="card ">
+				<div class ="card-content">
+					{% for line in testcase %}
+					{% if line == 'Input' or line == 'Output' %}
+					<h5 class="flow-text">{{ line }}</h5>
+					{% else %}
+					<p class="truncate">{{ line }}</p>
+					{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	{% elif problem.heading %}
+	<div class="row">
+		<div class="card-panel">
+			{% for line in problem.heading %}
+			{{ line }}
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+	<div class="row">
+		<div class="divider"></div>
+	</div>
+
+	{% if session.user_uid %}
+	<div class="row">
+		<div class="col s12 card small z-depth-2">
+			<div class="card-content">
+				<h5 class="flow-text"> Upload Solution</h5>
+				<form action="/problems/{{ problem_uid }}" enctype="multipart/form-data" method="POST">
+
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+					<meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+					<div class="col s12">
+						<input type="hidden" id="user_uid" value="{{session.user_uid}}">
+						<!-- Iterate through languages here  -->
+						<p class="col s12 m3">
+							<input name="language" type="radio" id="C" value="C"> 
+							<label for="C"> C</label>
+						</p>
+						<p class="col s12 m3">
+							<input name="language" type="radio" id="Cpp" value="C++"> 
+							<label for="Cpp"> C++</label>
+						</p>	
+						<p class="col s12 m3">
+							<input name="language" type="radio" id="python2" value="python 2" class="disabled" disabled="true"> 
+							<label for="python2"> Python2</label>
+						</p>	
+						<p class="col s12 m3">
+							<input name="language" type="radio" id="python3" value="python 3" class="disabled" disabled="true"> 
+							<label for="python3"> Python3</label>
+						</p>
+					</div>
+					<div class="col s12">
+						<div class="file-field input-field">
+							<div class="btn teal darken-2">
+								<span><i class="material-icons">code</i></span>
+								<input type="file" name="file007" readonly="true" />
+							</div>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text" required="true" />
+							</div>
+						</div>
+					</div>
+					<div class="card-action right-align">
+						<button class="btn waves-effect waves-dark" type="submit" name="submit" id="submit">
+							Submit!
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+	{% endif %}
+</div>
+{% endblock %}

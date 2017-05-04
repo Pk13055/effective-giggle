@@ -14,7 +14,7 @@ def admin_route(code):
 		data = user_maker.getData(code)
 		if data:
 			problems = user_maker.getProblems(code)
-			return render_template('Profiles/profile_admin.html', admin = code, data = data, problems = problems)
+			return render_template('Profiles/profile_admin.html.j2', admin = code, data = data, problems = problems)
 		else:
 			redirect("/", code = 404)
 	elif request.method == 'POST':
@@ -31,9 +31,9 @@ def user_route(code):
 		stats=user_maker.getStats(code)
 		problems_submitted = user_maker.getProblemSubmitted(code)
 		if data:
-			return render_template('Profiles/profile_user.html',data = data,problems = problems_submitted,stats=stats)
+			return render_template('Profiles/profile_user.html.j2',data = data,problems = problems_submitted,stats=stats)
 		else:
-			return render_template('error.html',error="View did not return response")	
+			return render_template('error.html.j2',error="View did not return response")	
 
 @user.route('/solver/submission', methods = ['GET', 'POST'])
 @requires_auth
@@ -41,11 +41,11 @@ def user_submission():
 	if request.method == 'GET':
 		data=user_maker.getUserSubmission(request.args['uid'])
 		file=user_maker.getSubFile(data.submission_location)
-		return render_template('Profiles/user_submission.html',data=data,file=file)
+		return render_template('Profiles/user_submission.html.j2',data=data,file=file)
 
 @user.route('/userlist/<code>', methods = ['GET', 'POST'])
 def userlist(code):
 	if request.method == 'GET':
 		data=user_maker.getUsers(code)
 		length=User.query.count()
-		return render_template('Profiles/userlist.html',users = data,length=length)
+		return render_template('Profiles/userlist.html.j2',users = data,length=length)

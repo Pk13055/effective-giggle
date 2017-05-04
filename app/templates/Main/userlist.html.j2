@@ -1,16 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'base.html.j2' %}
 {% set user_uid = data.uid %}
 {% set state = 'loggedin' %}
 
 {% block heading %} User List {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
 {% block scripts %}
-	<script src="{{ url_for('static', filename = 'js/User/highcharts.js') }}"></script>
-	<script src="{{ url_for('static', filename = 'js/User/heatmap.js') }}"></script>
-	<script src="{{ url_for('static', filename = 'js/User/exporting.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/User/highcharts.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/User/heatmap.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/User/exporting.js') }}"></script>
 
-	<script src="{{ url_for('static', filename = 'js/User/graph.js') }}"></script>
-	{{ super() }}
+<script src="{{ url_for('static', filename = 'js/User/graph.js') }}"></script>
+{{ super() }}
 {% endblock %}
 
 {% block content %}
@@ -47,12 +47,12 @@
 					<td class="black-text text-darken-2">
 						{{ user.accepted/user.total_submissions }}
 					</td>
-		
+					
 				</tr>
 				{% endfor %}
-									
+				
 			</tbody>	
 		</table>
 	</div>
 
-{% endblock}
+	{% endblock}

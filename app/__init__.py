@@ -40,8 +40,8 @@ def requires_auth(f):
 	return decorated
 
 # this function is responsible for cleaning up data parsed from file
-def sanitize(data):
-	return filter(lambda x: x != '', data)
+def sanitize(data, filter_char = ''):
+	return filter(lambda x: x != filter_char, data)
 
 
 # Import a module / component using its blueprint handler variable (mod_auth)

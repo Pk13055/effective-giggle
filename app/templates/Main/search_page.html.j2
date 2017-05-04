@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html.j2" %}
 {% block heading %} Search results {% endblock %}
 {% block title %} {{ super() }} {% endblock %}
 {% block content %}
@@ -9,7 +9,7 @@
 	</div>
 	
 	<div class="row">
-	{% if problems | length %}
+		{% if problems | length %}
 		{% for problem in problems %}
 		<div class="col s12 m12 l12 card">
 			<div class="card-content">
@@ -27,11 +27,11 @@
 		</div>
 		{% endfor %}
 		
-	{% else %}
+		{% else %}
 		<div class="col s12 m12 card-panel">
 			<span class="flow-text"> Search again!! </span>
 		</div>
-	{% endif %}
+		{% endif %}
 	</div>
 
 	{% if problems | length %}

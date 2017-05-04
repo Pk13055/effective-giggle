@@ -18,9 +18,9 @@ def home_render(page):
 	if request.method == 'GET':
 		data = helper.makeHome(page)
 		try:
-			return render_template('Main/home.html', latest_problems = data['latest'], current_page = data['current'], total_pages = data['total'], current_page_number = int(page))
+			return render_template('Main/home.html.j2', latest_problems = data['latest'], current_page = data['current'], total_pages = data['total'], current_page_number = int(page))
 		except:
-			return render_template('Main/home.html', latest_problems = data['latest'], current_page = data['current'], total_pages = data['total'], current_page_number = 1)
+			return render_template('Main/home.html.j2', latest_problems = data['latest'], current_page = data['current'], total_pages = data['total'], current_page_number = 1)
 				
 		# return jsonify(helper.makeHome(page))
 	elif request.method == 'POST':
@@ -32,7 +32,7 @@ def home_render(page):
 @home.route('/signin', methods = ['POST','GET'])
 def signin():
 	if request.method == 'GET':
-		return render_template('Forms/loginpage.html')
+		return render_template('Forms/loginpage.html.j2')
 	elif request.method == 'POST':
 		try:
 			email = request.form['email']
@@ -60,11 +60,11 @@ def logout():
 @home.route('/signup', methods = ['POST', 'GET'])
 def signup():
 	if request.method == 'GET':
-		return render_template('Forms/registration.html')
+		return render_template('Forms/registration.html.j2')
 	elif request.method == 'POST':
 		result = helper.createUser(request)
 		if result is True:
-			return render_template('Forms/loginpage.html')
+			return render_template('Forms/loginpage.html.j2')
 		else:
 			return result
 
@@ -82,4 +82,4 @@ def search(key,val):
 	problem_dict=helper.search_list(val,key)
 
 	# return jsonify(val=val,problems=problem_dict['list'],total_pages=problem_dict['total_pages'],current_page=problem_dict['current_page'])
-	return render_template('Main/search_page.html',val=val,problems=problem_dict['list'],total_pages=int(problem_dict['total_pages']),current_page=int(problem_dict['current_page']))
+	return render_template('Main/search_page.html.j2',val=val,problems=problem_dict['list'],total_pages=int(problem_dict['total_pages']),current_page=int(problem_dict['current_page']))
