@@ -9,7 +9,7 @@ def main():
 		port = int(sys.argv[1])
 	except:
 		pass
-	app.run(debug = True, host = '0.0.0.0', port = port)
+	app.run(debug = True, host = '192.168.43.215', port = port)
 
 if __name__ == '__main__':
 	main()	
