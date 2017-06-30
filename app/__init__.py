@@ -5,6 +5,9 @@ from flask import Flask, render_template,session, blueprints,jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 from flask_wtf.csrf import CSRFProtect,CSRFError
+# For Central Authentication
+from app.flask_cas import CAS
+from app.flask_cas import login_required
 
 from functools import wraps
 
@@ -17,6 +20,12 @@ app.config.from_object('config')
 # Define the database object which is imported
 # by modules and controllers
 db = SQLAlchemy(app)
+
+# For CAS we do 
+CAS(app)
+app.config['CAS_SERVER'] = 'https://login.iiit.ac.in/cas/login' 
+app.config['CAS_AFTER_LOGIN'] = 'https://www.google.co.in/'
+
 
 # csrf protection
 csrf=CSRFProtect(app)
@@ -33,6 +42,7 @@ def not_found(error):
 # authorization for the logged in state
 def requires_auth(f):
 	@wraps(f)
+	@login_required
 	def decorated(*args, **kwargs):
 		if 'user_uid' not in session:
 			return jsonify(success=False, message="Unauthorized entry. Login First"), 400
