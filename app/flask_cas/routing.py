@@ -1,3 +1,4 @@
+import sys
 import ssl
 import flask
 from xmltodict import parse
@@ -6,9 +7,13 @@ from .cas_urls import create_cas_login_url
 from .cas_urls import create_cas_logout_url
 from .cas_urls import create_cas_validate_url
 
+from flask import redirect, url_for
+
 # for proxy
 import urllib2
-
+from .proxy_support import ConnectHTTPHandler
+from .proxy_support import ConnectHTTPSHandler
+ 
 try:
 	from urllib import urlopen
 except ImportError:
@@ -55,7 +60,6 @@ def login():
 			del flask.session[cas_token_session_key]
 
 	current_app.logger.debug('Redirecting to: {0}'.format(redirect_url))
-
 	return flask.redirect(redirect_url)
 
 
@@ -85,7 +89,9 @@ def logout():
 			current_app.config['CAS_LOGOUT_ROUTE'])
 
 	current_app.logger.debug('Redirecting to: {0}'.format(redirect_url))
-	return flask.redirect(redirect_url)
+
+	return redirect(url_for('home.signout'))		
+	# return flask.redirect(redirect_url)
 
 
 def validate(ticket):
@@ -116,10 +122,16 @@ def validate(ticket):
 
 	try:
 
-		# currently no for IIIT proxy
-		# proxies = {"http":"http://proxy.iiit.ac.in:8080","https":"https://proxy.iiit.ac.in:8080","no_proxy":"localhost, 127.0.0.1, iiit.ac.in, .iiit.ac.in, iiit.net, .iiit.net, 172.16.0.0/12, 192.168.0.0/16, 10.0.0.0/8"}
+		IIITproxy="proxy.iiit.ac.in:8080"
+		opener = urllib2.build_opener(ConnectHTTPHandler(proxy=IIITproxy),ConnectHTTPSHandler(proxy=IIITproxy))
+		urllib2.install_opener(opener)
 
-		context = ssl._create_unverified_context()
+		# currently no for IIIT proxy
+		# proxies = {"http":("http://"+IIITproxy),"https":("https://"+IIITproxy),"no_proxy":"localhost, 127.0.0.1, iiit.ac.in, .iiit.ac.in, iiit.net, .iiit.net, 172.16.0.0/12, 192.168.0.0/16, 10.0.0.0/8"}
+		# proxy_support = urllib.request.ProxyHandler(proxies)
+		# opener = urllib.request.build_opener(proxy_support)
+		# urllib.request.install_opener(opener)
+		context = ssl._create_unverified_context()		
 		xmldump = urlopen(cas_validate_url, context=context).read().strip().decode('utf-8', 'ignore')
 		print ("xmldump :%s",xmldump)
 		xml_from_dict = parse(xmldump)

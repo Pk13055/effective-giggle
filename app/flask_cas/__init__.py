@@ -53,7 +53,7 @@ class CAS(object):
         app.config.setdefault('CAS_LOGOUT_ROUTE', '/cas/logout')
         app.config.setdefault('CAS_VALIDATE_ROUTE', '/cas/serviceValidate')
         # Requires CAS 2.0
-        app.config.setdefault('CAS_AFTER_LOGOUT', None)
+        app.config.setdefault('CAS_AFTER_LOGOUT','home.homie')
         # Register Blueprint
         app.register_blueprint(routing.blueprint, url_prefix=url_prefix)
 
