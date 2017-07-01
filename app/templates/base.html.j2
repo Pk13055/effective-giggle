@@ -20,20 +20,9 @@
 	<script src="{{ url_for('static', filename = 'jQuery/tmp/jquery.js') }}"></script>
 	<script src="{{ url_for('static', filename = 'materialize/js/materialize.min.js') }}"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<script>
-		$(document).ready(function() {
-			$('.button-collapse').sideNav();
-			$('.modal').modal();
-			$('.tooltipped').tooltip({delay: 50});
-		
-			$(window).load(function () {
-				$('.preloader-wrapper').delay().fadeOut();
-			})
+	<script src="{{ url_for('static', filename = 'js/main.js') }}"></script>
 
-		});
-
-	</script>
-<script src="{{ url_for('static', filename = 'js/login.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/login.js') }}"></script>
 		
 	{% block scripts %}
 	{% endblock %}
@@ -52,11 +41,8 @@
 	</style>
 </head>
 
-        
-
 <body class="{% block color %}{% endblock %}">
 	<input type="hidden" name="state" value="{{state}}">
-
 
 	<header>
 		<div class="navbar-fixed">
@@ -103,34 +89,36 @@
 					<li> <a href="/logout"> Logout</a>  </li>
 					{% endif %}
 				</ul>
-				<ul class="side-nav" id="mobile-display">
-					<li> <a href="/">Problems</a>  </li>
-					{% if problem_uid %}
-					<li> <a href="/problems/{{ problem_uid }}">Problem </a>  </li>
-					<li> <a href='/comments/{{ problem_uid }}'>Comments </a></li>
-					{% endif %}
-					{% if state == 'loggedin' %}
-					<li> <a href="/solver/{{ session.user_uid }}">User Profile</a>  </li>
-					{% if role == "admin" %}
-					<li> <a href="/setter/{{ session.user_uid }}">Admin Profile</a>  </li>
-					{% endif %}
-					{% else %}
-					<li> <a class="waves-effect waves-dark" onclick="$('#login-modal').modal('open');">Sign In</a>  </li>
-					<li> <a href="/signup">Sign Up</a>  </li>
-					{% endif %}
-					{% if state=='loggedin' %}
-					<li> <a href="/logout"> Logout</a>  </li>
-					{% endif %}
-					{% if state=="loggedin" %}
-					<li> <a href="/solver/{{ session.user_uid}}">User Profile</a>  </li>
-					{% if role=="admin" %}
-					<li> <a href="/setter/{{ session.user_uid}}">Admin Profile</a>  </li>
-					{% endif %}
-					{% endif %}
-				</ul>
+				
 			</div>
 		</nav>
 		</div>
+
+		<ul class="side-nav" id="mobile-display">
+			<li> <a href="/">Problems</a>  </li>
+
+			<li> <a href="/userlist/50">Users</a>  </li>
+
+			{% if problem_uid %}
+				<li> <a href="/problems/{{ problem_uid }}">Problem </a>  </li>
+				<li> <a href='/comments/{{ problem_uid }}'>Comments </a></li>
+			{% endif %}
+		
+			{% if state == 'loggedin' %}
+				<li> <a href="/solver/{{ session.user_uid }}">User Profile</a>  </li>
+			{% if role == "admin" %}
+				<li> <a href="/setter/{{ session.user_uid }}">Admin Profile</a>  </li>
+			{% endif %}
+			{% else %}
+				<li> <a class="waves-effect waves-dark" onclick="$('#login-modal').modal('open');">Sign In</a>  </li>
+				<li> <a href="/signup">Sign Up</a>  </li>
+			{% endif %}
+			{% if state=='loggedin' %}
+				<li> <a href="/logout"> Logout</a>  </li>
+			{% endif %}
+		</ul>
+
+
 	</header>
 
 	<main class="teal lighten-2">
