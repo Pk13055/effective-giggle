@@ -66,7 +66,7 @@ python-apt==1.1.0b1
 python-dateutil==2.6.0
 python-debian==0.1.27
 pyxdg==0.25
-PyYAML==3.12
+PyYAML==5.4
 requests==2.9.1
 rpm-python==4.12.0.1
 rsa==3.4.2
@@ -154,7 +154,7 @@ python-apt==1.1.0b1
 python-dateutil==2.6.0
 python-debian==0.1.27
 pyxdg==0.25
-PyYAML==3.12
+PyYAML==5.4
 requests==2.9.1
 rpm-python==4.12.0.1
 rsa==3.4.2
