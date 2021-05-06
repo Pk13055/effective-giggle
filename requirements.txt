@@ -21,7 +21,7 @@ docutils==0.13.1
 duplicity==0.7.6
 enum34==1.1.2
 Flask==0.12
-Flask-Cors==3.0.2
+Flask-Cors==3.0.9
 Flask-SQLAlchemy==2.2
 futures==3.0.5
 gyp==0.1
@@ -109,7 +109,7 @@ docutils==0.13.1
 duplicity==0.7.6
 enum34==1.1.2
 Flask==0.12
-Flask-Cors==3.0.2
+Flask-Cors==3.0.9
 Flask-SQLAlchemy==2.2
 futures==3.0.5
 gyp==0.1
