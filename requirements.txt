@@ -25,7 +25,7 @@ Flask-Cors==3.0.2
 Flask-SQLAlchemy==2.2
 futures==3.0.5
 gyp==0.1
-html5lib==0.999
+html5lib==0.999999999
 httplib2==0.9.1
 idna==2.0
 ipaddr==2.1.11
@@ -113,7 +113,7 @@ Flask-Cors==3.0.2
 Flask-SQLAlchemy==2.2
 futures==3.0.5
 gyp==0.1
-html5lib==0.999
+html5lib==0.999999999
 httplib2==0.9.1
 idna==2.0
 ipaddr==2.1.11
